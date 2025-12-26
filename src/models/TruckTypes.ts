@@ -528,6 +528,26 @@ export interface ExcavatorSpecification {
   certifications?: string;          // Chứng nhận
 }
 
+// Chi tiết về xe nâng hàng
+export interface ForkliftSpecification {
+  liftCapacity?: string;            // Tải trọng nâng
+  maxLiftHeight?: string;           // Chiều cao nâng tối đa
+  freeLift?: string;                // Chiều cao tự do
+  forkLength?: string;              // Chiều dài càng
+  mastType?: string;                // Loại khung nâng
+  tiltAngle?: string;               // Góc nghiêng
+  liftSpeedLoaded?: string;         // Tốc độ nâng có tải
+  travelSpeedLoaded?: string;       // Tốc độ di chuyển có tải
+  gradability?: string;             // Khả năng leo dốc
+  turningRadius?: string;           // Bán kính quay
+  aisleWidth?: string;              // Chiều rộng lối đi
+  fuelConsumption?: string;         // Tiêu hao nhiên liệu
+  counterweight?: string;           // Đối trọng
+  safetySystem?: string;            // Hệ thống an toàn
+  attachments?: string;             // Phụ kiện
+  certifications?: string;          // Chứng nhận
+}
+
 export interface Truck {
   id: string;
   name: string;
@@ -595,6 +615,7 @@ export interface Truck {
   fireFightingSpec?: FireFightingSpecification; // Xe chữa cháy cứu hỏa
   bitumenTankSpec?: BitumenTankSpecification; // Xe bồn chở nhựa đường nóng
   excavatorSpec?: ExcavatorSpecification; // Máy xúc đào
+  forkliftSpec?: ForkliftSpecification; // Xe nâng hàng
 
   // Thông số kỹ thuật phổ biến
   engineType?: string;
