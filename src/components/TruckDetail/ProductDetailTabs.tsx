@@ -3025,6 +3025,125 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
             </>
           )}
+
+          {/* Thông số máy xúc đào */}
+          {truck.excavatorSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hiệu suất đào</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.excavatorSpec.bucketCapacity && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích gầu</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.excavatorSpec.bucketCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.maxDigDepth && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều sâu đào tối đa</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.excavatorSpec.maxDigDepth}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.maxReach && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tầm với tối đa</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.excavatorSpec.maxReach}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.maxDigHeight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao đào tối đa</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.maxDigHeight}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.bucketDiggingForce && (
+                    <tr className="border-b bg-red-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lực đào gầu</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.excavatorSpec.bucketDiggingForce}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.armDiggingForce && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lực đào tay cần</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.armDiggingForce}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.swingSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ quay toa</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.swingSpeed}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Bộ công tác & Di chuyển</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.excavatorSpec.boomLength && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều dài cần (Boom)</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.boomLength}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.armLength && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều dài tay cần (Arm)</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.armLength}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.trackShoeWidth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều rộng xích</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.trackShoeWidth}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.travelSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ di chuyển</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.travelSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.groundPressure && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Áp suất mặt đất</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.groundPressure}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hệ thống thủy lực</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.excavatorSpec.hydraulicFlowRate && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lưu lượng thủy lực</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.excavatorSpec.hydraulicFlowRate}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.hydraulicPressure && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Áp suất thủy lực</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.hydraulicPressure}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.workModes && (
+                    <tr className="border-b bg-purple-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chế độ làm việc</td>
+                      <td className="py-2 px-3 font-medium text-purple-700">{truck.excavatorSpec.workModes}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.fuelTankCapacity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Bình nhiên liệu</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.fuelTankCapacity}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       </TabsContent>
 

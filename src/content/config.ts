@@ -191,6 +191,7 @@ const productsCollection = defineCollection({
     armRollSpec: z.record(z.any()).optional(),
     fireFightingSpec: z.record(z.any()).optional(),
     bitumenTankSpec: z.record(z.any()).optional(),
+    excavatorSpec: z.record(z.any()).optional(),
 
     // Additional specs
     specifications: z.record(z.any()).optional(),

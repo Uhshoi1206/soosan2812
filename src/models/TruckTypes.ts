@@ -503,6 +503,31 @@ export interface BitumenTankSpecification {
   certifications?: string;          // Chứng nhận
 }
 
+// Chi tiết về máy xúc đào
+export interface ExcavatorSpecification {
+  operatingWeight?: string;         // Trọng lượng vận hành
+  bucketCapacity?: string;          // Dung tích gầu
+  maxDigDepth?: string;             // Chiều sâu đào tối đa
+  maxReach?: string;                // Tầm với tối đa
+  maxDigHeight?: string;            // Chiều cao đào tối đa
+  maxDumpHeight?: string;           // Chiều cao xả tối đa
+  bucketDiggingForce?: string;      // Lực đào gầu
+  armDiggingForce?: string;         // Lực đào tay cần
+  swingSpeed?: string;              // Tốc độ quay toa
+  boomLength?: string;              // Chiều dài cần
+  armLength?: string;               // Chiều dài tay cần
+  trackShoeWidth?: string;          // Chiều rộng xích
+  travelSpeed?: string;             // Tốc độ di chuyển
+  groundPressure?: string;          // Áp suất mặt đất
+  fuelTankCapacity?: string;        // Dung tích bình nhiên liệu
+  hydraulicFlowRate?: string;       // Lưu lượng thủy lực
+  hydraulicPressure?: string;       // Áp suất thủy lực
+  workModes?: string;               // Chế độ làm việc
+  cabinType?: string;               // Loại cabin
+  attachments?: string;             // Phụ kiện
+  certifications?: string;          // Chứng nhận
+}
+
 export interface Truck {
   id: string;
   name: string;
@@ -569,6 +594,7 @@ export interface Truck {
   armRollSpec?: ArmRollSpecification;   // Xe arm roll hook lift
   fireFightingSpec?: FireFightingSpecification; // Xe chữa cháy cứu hỏa
   bitumenTankSpec?: BitumenTankSpecification; // Xe bồn chở nhựa đường nóng
+  excavatorSpec?: ExcavatorSpecification; // Máy xúc đào
 
   // Thông số kỹ thuật phổ biến
   engineType?: string;
