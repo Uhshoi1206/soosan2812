@@ -2256,6 +2256,137 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
             </>
           )}
+
+          {/* Thông số xe nâng đầu chở máy công trình */}
+          {truck.tiltDeckSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Thông số sàn nâng đầu</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.tiltDeckSpec.deckLength && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều dài sàn</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.deckLength}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.deckWidth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều rộng sàn</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.deckWidth}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.deckCapacity && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tải trọng sàn</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.tiltDeckSpec.deckCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.deckMaterial && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Vật liệu sàn</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.deckMaterial}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.deckFrame && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Khung sàn</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.deckFrame}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.tiltAngle && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Góc nâng đầu</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.tiltDeckSpec.tiltAngle}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.tiltCylinder && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Xi lanh nâng</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.tiltCylinder}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.hydraulicPressure && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Áp suất thủy lực</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.hydraulicPressure}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.hydraulicPump && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Bơm thủy lực</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.hydraulicPump}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Cầu lên & Tời kéo</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.tiltDeckSpec.rampLength && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều dài cầu lên</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.rampLength}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.rampWidth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều rộng cầu lên</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.rampWidth}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.rampCapacity && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tải trọng cầu lên</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.tiltDeckSpec.rampCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.rampAngle && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Góc nghiêng cầu</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.rampAngle}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.winchCapacity && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lực kéo tời</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.tiltDeckSpec.winchCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.winchCableSpec && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Cáp tời</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.winchCableSpec}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.winchSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ kéo</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.winchSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.winchControl && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Điều khiển tời</td>
+                      <td className="py-2 px-3 font-medium">{truck.tiltDeckSpec.winchControl}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.tieDownPoints && (
+                    <tr className="border-b bg-amber-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chốt neo cố định</td>
+                      <td className="py-2 px-3 font-medium text-amber-700">{truck.tiltDeckSpec.tieDownPoints}</td>
+                    </tr>
+                  )}
+                  {truck.tiltDeckSpec.safetyFeatures && (
+                    <tr className="border-b bg-red-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tính năng an toàn</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.tiltDeckSpec.safetyFeatures}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       </TabsContent>
 

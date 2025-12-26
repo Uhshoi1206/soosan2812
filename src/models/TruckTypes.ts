@@ -364,6 +364,29 @@ export interface VacuumSystemSpec {
   hoseReel?: string;           // Tời cuộn ống
 }
 
+// Chi tiết về xe nâng đầu chở máy công trình
+export interface TiltDeckSpecification {
+  deckLength?: string;            // Chiều dài sàn
+  deckWidth?: string;             // Chiều rộng sàn
+  deckCapacity?: string;          // Tải trọng sàn
+  deckMaterial?: string;          // Vật liệu sàn
+  deckFrame?: string;             // Khung sàn
+  tiltAngle?: string;             // Góc nâng đầu
+  tiltCylinder?: string;          // Xi lanh nâng
+  hydraulicPressure?: string;     // Áp suất thủy lực
+  hydraulicPump?: string;         // Bơm thủy lực
+  rampLength?: string;            // Chiều dài cầu lên
+  rampWidth?: string;             // Chiều rộng cầu lên
+  rampCapacity?: string;          // Tải trọng cầu lên
+  rampAngle?: string;             // Góc nghiêng cầu
+  winchCapacity?: string;         // Lực kéo tời
+  winchCableSpec?: string;        // Thông số cáp tời
+  winchSpeed?: string;            // Tốc độ tời
+  winchControl?: string;          // Điều khiển tời
+  tieDownPoints?: string;         // Chốt neo cố định
+  safetyFeatures?: string;        // Tính năng an toàn
+}
+
 export interface Truck {
   id: string;
   name: string;
@@ -425,6 +448,7 @@ export interface Truck {
   vacuumSystem?: VacuumSystemSpec;          // Xe hút bụi công nghiệp
   glassRackSpec?: GlassRackSpecification;   // Xe chở kính giá chữ A
   manBasketSpec?: ManBasketSpecification;   // Giỏ nâng người gắn cẩu
+  tiltDeckSpec?: TiltDeckSpecification;     // Xe nâng đầu chở máy công trình
 
   // Thông số kỹ thuật phổ biến
   engineType?: string;
