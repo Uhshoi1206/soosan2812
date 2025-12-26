@@ -2572,6 +2572,167 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
             </>
           )}
+
+          {/* Thông số xe arm roll hook lift */}
+          {truck.armRollSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Thùng rời</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.armRollSpec.binCapacity && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích thùng</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.armRollSpec.binCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.binDimension && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước thùng</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.binDimension}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.binMaterial && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Vật liệu thùng</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.binMaterial}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.binFloor && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Đáy thùng</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.binFloor}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.hookType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Móc hook</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.hookType}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Cánh tay Arm Roll</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.armRollSpec.armFrame && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Khung cánh tay</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.armFrame}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.pivotShaft && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Trục bản lề</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.pivotShaft}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.tailRoller && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Con lăn đuôi</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.tailRoller}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.liftAngle && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Góc nâng</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.armRollSpec.liftAngle}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.tiltAngle && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Góc nghiêng (đổ)</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.armRollSpec.tiltAngle}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.binLock && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Khóa thùng</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.binLock}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hệ thống thủy lực</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.armRollSpec.cylinderCount && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Số xi lanh</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.cylinderCount}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.cylinderDimension && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước xi lanh</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.cylinderDimension}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.hydraulicPressure && (
+                    <tr className="border-b bg-red-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Áp suất thủy lực</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.armRollSpec.hydraulicPressure}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.liftingForce && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lực nâng</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.armRollSpec.liftingForce}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.cylinderOrigin && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Xuất xứ xi lanh</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.cylinderOrigin}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.hydraulicPump && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Bơm thủy lực</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.hydraulicPump}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.oilTankCapacity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thùng dầu</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.oilTankCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.safetyValve && (
+                    <tr className="border-b bg-amber-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Van an toàn</td>
+                      <td className="py-2 px-3 font-medium text-amber-700">{truck.armRollSpec.safetyValve}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hiệu suất & Điều khiển</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.armRollSpec.liftingTime && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thời gian nâng</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.armRollSpec.liftingTime}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.loweringTime && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thời gian hạ</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.loweringTime}</td>
+                    </tr>
+                  )}
+                  {truck.armRollSpec.controlSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống điều khiển</td>
+                      <td className="py-2 px-3 font-medium">{truck.armRollSpec.controlSystem}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       </TabsContent>
 

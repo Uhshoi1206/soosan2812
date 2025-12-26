@@ -416,6 +416,34 @@ export interface StreetSweeperSpecification {
   safetyFeatures?: string;          // Tính năng an toàn
 }
 
+// Chi tiết về xe arm roll hook lift
+export interface ArmRollSpecification {
+  binCapacity?: string;             // Dung tích thùng
+  binDimension?: string;            // Kích thước thùng
+  binMaterial?: string;             // Vật liệu thùng
+  binFloor?: string;                // Đáy thùng
+  hookType?: string;                // Loại móc
+  armFrame?: string;                // Khung cánh tay
+  pivotShaft?: string;              // Trục bản lề
+  tailRoller?: string;              // Con lăn đuôi
+  liftAngle?: string;               // Góc nâng
+  tiltAngle?: string;               // Góc nghiêng (chức năng ben)
+  cylinderCount?: string;           // Số xi lanh
+  cylinderDimension?: string;       // Kích thước xi lanh
+  hydraulicPressure?: string;       // Áp suất thủy lực
+  liftingForce?: string;            // Lực nâng
+  cylinderOrigin?: string;          // Xuất xứ xi lanh
+  hydraulicPump?: string;           // Bơm thủy lực
+  oilTankCapacity?: string;         // Dung tích thùng dầu
+  oilFilter?: string;               // Lọc dầu
+  hydraulicOil?: string;            // Loại dầu thủy lực
+  liftingTime?: string;             // Thời gian nâng
+  loweringTime?: string;            // Thời gian hạ
+  controlSystem?: string;           // Hệ thống điều khiển
+  binLock?: string;                 // Khóa thùng
+  safetyValve?: string;             // Van an toàn
+}
+
 export interface Truck {
   id: string;
   name: string;
@@ -479,6 +507,7 @@ export interface Truck {
   manBasketSpec?: ManBasketSpecification;   // Giỏ nâng người gắn cẩu
   tiltDeckSpec?: TiltDeckSpecification;     // Xe nâng đầu chở máy công trình
   streetSweeperSpec?: StreetSweeperSpecification; // Xe quét rửa đường
+  armRollSpec?: ArmRollSpecification;   // Xe arm roll hook lift
 
   // Thông số kỹ thuật phổ biến
   engineType?: string;

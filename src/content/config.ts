@@ -188,6 +188,7 @@ const productsCollection = defineCollection({
     manBasketSpec: z.record(z.any()).optional(),
     tiltDeckSpec: z.record(z.any()).optional(),
     streetSweeperSpec: z.record(z.any()).optional(),
+    armRollSpec: z.record(z.any()).optional(),
 
     // Additional specs
     specifications: z.record(z.any()).optional(),
