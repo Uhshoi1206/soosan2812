@@ -2900,6 +2900,131 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
             </>
           )}
+
+          {/* Thông số xe bồn nhựa đường nóng */}
+          {truck.bitumenTankSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Bồn chứa nhựa đường</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.bitumenTankSpec.capacity && (
+                    <tr className="border-b bg-yellow-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích</td>
+                      <td className="py-2 px-3 font-medium text-yellow-700">{truck.bitumenTankSpec.capacity}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.tankDimension && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước bồn</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.tankDimension}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.innerMaterial && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Vật liệu bồn trong</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.innerMaterial}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.insulationMaterial && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Vật liệu bảo ôn</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.bitumenTankSpec.insulationMaterial}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.workingTemperature && (
+                    <tr className="border-b bg-red-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Nhiệt độ làm việc</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.bitumenTankSpec.workingTemperature}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.heatRetention && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Khả năng giữ nhiệt</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.heatRetention}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hệ thống gia nhiệt</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.bitumenTankSpec.heatingType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại gia nhiệt</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.heatingType}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.burnerType && (
+                    <tr className="border-b bg-red-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lò đốt</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.bitumenTankSpec.burnerType}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.burnerPower && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Công suất lò đốt</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.burnerPower}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.heatTransferOil && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dầu tải nhiệt</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.heatTransferOil}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.heatingCoil && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Ống xoắn gia nhiệt</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.heatingCoil}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Bơm & Giàn phun</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.bitumenTankSpec.bitumenPumpType && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại bơm</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.bitumenTankSpec.bitumenPumpType}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.pumpFlowRate && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lưu lượng bơm</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.bitumenTankSpec.pumpFlowRate}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.sprayBarWidth && (
+                    <tr className="border-b bg-purple-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều rộng giàn phun</td>
+                      <td className="py-2 px-3 font-medium text-purple-700">{truck.bitumenTankSpec.sprayBarWidth}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.nozzleCount && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Số vòi phun</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.nozzleCount}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.sprayDensity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Mật độ phun</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.sprayDensity}</td>
+                    </tr>
+                  )}
+                  {truck.bitumenTankSpec.handSprayGun && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Súng phun tay</td>
+                      <td className="py-2 px-3 font-medium">{truck.bitumenTankSpec.handSprayGun}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       </TabsContent>
 

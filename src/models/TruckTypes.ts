@@ -476,6 +476,33 @@ export interface FireFightingSpecification {
   certifications?: string;          // Chứng nhận
 }
 
+// Chi tiết về xe bồn chở nhựa đường nóng
+export interface BitumenTankSpecification {
+  capacity?: string;                // Dung tích
+  tankDimension?: string;           // Kích thước bồn
+  innerMaterial?: string;           // Vật liệu bồn trong
+  insulationMaterial?: string;      // Vật liệu bảo ôn
+  outerShell?: string;              // Vỏ bọc ngoài
+  workingTemperature?: string;      // Nhiệt độ làm việc
+  heatRetention?: string;           // Khả năng giữ nhiệt
+  heatingType?: string;             // Loại gia nhiệt
+  burnerType?: string;              // Loại lò đốt
+  burnerPower?: string;             // Công suất lò đốt
+  heatTransferOil?: string;         // Dầu tải nhiệt
+  heatingCoil?: string;             // Ống xoắn gia nhiệt
+  bitumenPumpType?: string;         // Loại bơm nhựa
+  pumpFlowRate?: string;            // Lưu lượng bơm
+  pumpPressure?: string;            // Áp suất bơm
+  sprayBarWidth?: string;           // Chiều rộng giàn phun
+  nozzleCount?: string;             // Số vòi phun
+  nozzleControl?: string;           // Điều khiển vòi
+  sprayDensity?: string;            // Mật độ phun
+  handSprayGun?: string;            // Súng phun tay
+  displaySystem?: string;           // Hệ thống hiển thị
+  safetySystem?: string;            // Hệ thống an toàn
+  certifications?: string;          // Chứng nhận
+}
+
 export interface Truck {
   id: string;
   name: string;
@@ -541,6 +568,7 @@ export interface Truck {
   streetSweeperSpec?: StreetSweeperSpecification; // Xe quét rửa đường
   armRollSpec?: ArmRollSpecification;   // Xe arm roll hook lift
   fireFightingSpec?: FireFightingSpecification; // Xe chữa cháy cứu hỏa
+  bitumenTankSpec?: BitumenTankSpecification; // Xe bồn chở nhựa đường nóng
 
   // Thông số kỹ thuật phổ biến
   engineType?: string;
