@@ -702,6 +702,8 @@ export function getBoxTypeName(type?: string): string {
       return 'Xe Chuyên Dùng';
     case 'xe-tải-gắn-cẩu':
       return 'Xe Tải Gắn Cẩu';
+    case 'máy-xúc-đào':
+      return 'Máy Xúc Đào';
     default:
       return '';
   }
