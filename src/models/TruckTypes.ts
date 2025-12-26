@@ -494,8 +494,8 @@ export function getVehicleTypeName(type: VehicleType): string {
       return 'Xe Nâng Người';
     case 'xe-nang':
       return 'Xe Nâng';
-    case 'may-cong-trinh':
-      return 'Máy Công Trình';
+    case 'may-moc-thiet-bi':
+      return 'Máy Móc & Thiết Bị';
   }
   const pretty = String(type || '')
     .split('-')
