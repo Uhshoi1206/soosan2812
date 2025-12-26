@@ -2733,6 +2733,173 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
             </>
           )}
+
+          {/* Thông số xe chữa cháy cứu hỏa */}
+          {truck.fireFightingSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Bồn chứa nước & Foam</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.fireFightingSpec.waterTankCapacity && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích bồn nước</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.fireFightingSpec.waterTankCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.waterTankMaterial && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Vật liệu bồn nước</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.waterTankMaterial}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.foamTankCapacity && (
+                    <tr className="border-b bg-yellow-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích bồn foam</td>
+                      <td className="py-2 px-3 font-medium text-yellow-700">{truck.fireFightingSpec.foamTankCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.foamType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại foam</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.foamType}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.foamMixingSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống trộn foam</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.foamMixingSystem}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hệ thống bơm chữa cháy</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.fireFightingSpec.pumpType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại bơm</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.pumpType}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.pumpFlowRate && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lưu lượng bơm</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.fireFightingSpec.pumpFlowRate}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.pumpPressure && (
+                    <tr className="border-b bg-red-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Áp suất bơm</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.fireFightingSpec.pumpPressure}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.pumpDrive && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dẫn động</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.pumpDrive}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.suctionDepth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Độ sâu hút</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.suctionDepth}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hệ thống phun & Vòi</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.fireFightingSpec.monitorGun && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Súng monitor</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.fireFightingSpec.monitorGun}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.monitorRange && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tầm phun</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.monitorRange}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.dischargeOutlets && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Cửa xả</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.dischargeOutlets}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.hosereels && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Cuộn vòi nhanh</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.hosereels}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.fireHoseD65 && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Vòi D65</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.fireHoseD65}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.nozzleTypeA && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lăng phun A</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.nozzleTypeA}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Thiết bị cứu nạn</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.fireFightingSpec.ladder3Section && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thang 3 đoạn</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.ladder3Section}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.hookLadder && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thang móc</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.hookLadder}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.fireProofSuit && (
+                    <tr className="border-b bg-red-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Quần áo chống cháy</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.fireFightingSpec.fireProofSuit}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.scbaSet && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Bình thở SCBA</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.fireFightingSpec.scbaSet}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.lightTower && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Cột đèn</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.lightTower}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.siren && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Còi hú</td>
+                      <td className="py-2 px-3 font-medium">{truck.fireFightingSpec.siren}</td>
+                    </tr>
+                  )}
+                  {truck.fireFightingSpec.certifications && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tiêu chuẩn</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.fireFightingSpec.certifications}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       </TabsContent>
 

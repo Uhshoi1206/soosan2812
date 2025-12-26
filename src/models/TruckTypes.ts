@@ -444,6 +444,38 @@ export interface ArmRollSpecification {
   safetyValve?: string;             // Van an toàn
 }
 
+// Chi tiết về xe chữa cháy cứu hỏa
+export interface FireFightingSpecification {
+  waterTankCapacity?: string;       // Dung tích bồn nước
+  waterTankMaterial?: string;       // Vật liệu bồn nước
+  foamTankCapacity?: string;        // Dung tích bồn foam
+  foamTankMaterial?: string;        // Vật liệu bồn foam
+  foamType?: string;                // Loại foam (AFFF/AR-AFFF)
+  foamMixingSystem?: string;        // Hệ thống trộn foam
+  pumpType?: string;                // Loại bơm
+  pumpFlowRate?: string;            // Lưu lượng bơm
+  pumpPressure?: string;            // Áp suất bơm
+  pumpDrive?: string;               // Dẫn động bơm
+  suctionDepth?: string;            // Độ sâu hút
+  monitorGun?: string;              // Súng monitor
+  monitorRange?: string;            // Tầm phun
+  dischargeOutlets?: string;        // Cửa xả
+  hosereels?: string;               // Cuộn vòi nhanh
+  fireHoseD65?: string;             // Vòi D65
+  fireHoseD50?: string;             // Vòi D50
+  nozzleTypeA?: string;             // Lăng phun A
+  nozzleTypeB?: string;             // Lăng phun B
+  foamNozzle?: string;              // Lăng phun bọt
+  ladder3Section?: string;          // Thang 3 đoạn
+  hookLadder?: string;              // Thang móc
+  fireProofSuit?: string;           // Quần áo chống cháy
+  scbaSet?: string;                 // Bình thở SCBA
+  lightTower?: string;              // Cột đèn
+  siren?: string;                   // Còi hú
+  warningLights?: string;           // Đèn cảnh báo
+  certifications?: string;          // Chứng nhận
+}
+
 export interface Truck {
   id: string;
   name: string;
@@ -508,6 +540,7 @@ export interface Truck {
   tiltDeckSpec?: TiltDeckSpecification;     // Xe nâng đầu chở máy công trình
   streetSweeperSpec?: StreetSweeperSpecification; // Xe quét rửa đường
   armRollSpec?: ArmRollSpecification;   // Xe arm roll hook lift
+  fireFightingSpec?: FireFightingSpecification; // Xe chữa cháy cứu hỏa
 
   // Thông số kỹ thuật phổ biến
   engineType?: string;
