@@ -2387,6 +2387,191 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
             </>
           )}
+
+          {/* Thông số xe quét rửa đường */}
+          {truck.streetSweeperSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Bồn chứa rác & nước</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.streetSweeperSpec.garbageTankCapacity && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích bồn rác</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.streetSweeperSpec.garbageTankCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.waterTankCapacity && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích bồn nước</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.streetSweeperSpec.waterTankCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.tankMaterial && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Vật liệu bồn</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.tankMaterial}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.dumpingSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống xả rác</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.dumpingSystem}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hệ thống chổi quét</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.streetSweeperSpec.mainBrushDiameter && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chổi chính</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.mainBrushDiameter}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.sideBrushDiameter && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chổi bên</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.sideBrushDiameter}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.sweepingWidth && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều rộng quét</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.streetSweeperSpec.sweepingWidth}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.brushDrive && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dẫn động chổi</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.brushDrive}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.brushPressure && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Áp lực chổi</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.brushPressure}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hệ thống hút chân không</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.streetSweeperSpec.vacuumPumpType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại bơm hút</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.vacuumPumpType}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.vacuumAirFlow && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lưu lượng hút</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.streetSweeperSpec.vacuumAirFlow}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.vacuumLevel && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Độ chân không</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.vacuumLevel}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.suctionNozzleWidth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Miệng hút</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.suctionNozzleWidth}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.filterSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống lọc</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.filterSystem}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.filterCleaning && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Làm sạch bộ lọc</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.filterCleaning}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hệ thống phun nước</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.streetSweeperSpec.dustSprayPressure && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Phun dập bụi</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.dustSprayPressure}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.dustSprayFlow && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lưu lượng phun</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.dustSprayFlow}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.highPressurePump && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Bơm áp lực cao</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.streetSweeperSpec.highPressurePump}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.highPressureFlow && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lưu lượng cao áp</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.highPressureFlow}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.sprayGunHoseLength && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Súng phun tay</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.sprayGunHoseLength}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.waterPumpType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Bơm cấp nước</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.waterPumpType}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hiệu suất & Điều khiển</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.streetSweeperSpec.sweepingSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ quét</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.sweepingSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.sweepingProductivity && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Năng suất quét</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.streetSweeperSpec.sweepingProductivity}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.controlSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống điều khiển</td>
+                      <td className="py-2 px-3 font-medium">{truck.streetSweeperSpec.controlSystem}</td>
+                    </tr>
+                  )}
+                  {truck.streetSweeperSpec.safetyFeatures && (
+                    <tr className="border-b bg-red-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tính năng an toàn</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.streetSweeperSpec.safetyFeatures}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       </TabsContent>
 

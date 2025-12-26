@@ -387,6 +387,35 @@ export interface TiltDeckSpecification {
   safetyFeatures?: string;        // Tính năng an toàn
 }
 
+// Chi tiết về xe quét rửa đường
+export interface StreetSweeperSpecification {
+  garbageTankCapacity?: string;     // Dung tích bồn rác
+  waterTankCapacity?: string;       // Dung tích bồn nước
+  tankMaterial?: string;            // Vật liệu bồn
+  mainBrushDiameter?: string;       // Đường kính chổi chính
+  sideBrushDiameter?: string;       // Đường kính chổi bên
+  sweepingWidth?: string;           // Chiều rộng quét
+  brushDrive?: string;              // Dẫn động chổi
+  brushPressure?: string;           // Áp lực chổi
+  vacuumPumpType?: string;          // Loại bơm hút
+  vacuumAirFlow?: string;           // Lưu lượng hút
+  vacuumLevel?: string;             // Độ chân không
+  suctionNozzleWidth?: string;      // Chiều rộng miệng hút
+  filterSystem?: string;            // Hệ thống lọc
+  filterCleaning?: string;          // Làm sạch bộ lọc
+  dustSprayPressure?: string;       // Áp lực phun dập bụi
+  dustSprayFlow?: string;           // Lưu lượng phun dập bụi
+  highPressurePump?: string;        // Bơm áp lực cao
+  highPressureFlow?: string;        // Lưu lượng bơm cao áp
+  sprayGunHoseLength?: string;      // Dây súng phun
+  waterPumpType?: string;           // Loại bơm nước
+  dumpingSystem?: string;           // Hệ thống xả rác
+  sweepingSpeed?: string;           // Tốc độ quét
+  sweepingProductivity?: string;    // Năng suất quét
+  controlSystem?: string;           // Hệ thống điều khiển
+  safetyFeatures?: string;          // Tính năng an toàn
+}
+
 export interface Truck {
   id: string;
   name: string;
@@ -449,6 +478,7 @@ export interface Truck {
   glassRackSpec?: GlassRackSpecification;   // Xe chở kính giá chữ A
   manBasketSpec?: ManBasketSpecification;   // Giỏ nâng người gắn cẩu
   tiltDeckSpec?: TiltDeckSpecification;     // Xe nâng đầu chở máy công trình
+  streetSweeperSpec?: StreetSweeperSpecification; // Xe quét rửa đường
 
   // Thông số kỹ thuật phổ biến
   engineType?: string;
