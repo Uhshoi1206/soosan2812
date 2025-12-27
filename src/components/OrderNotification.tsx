@@ -189,7 +189,7 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
     // Đặt thời gian hiển thị thông báo sau khi trang web tải
     const initialDelay = setTimeout(() => {
       showNextNotification();
-    }, 5000); // 5 giây sau khi tải trang
+    }, 3000); // 3 giây sau khi tải trang
 
     return () => {
       clearTimeout(initialDelay);
@@ -212,10 +212,11 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
     const hideTimeout = setTimeout(() => {
       setIsVisible(false);
 
-      // Sau khi ẩn, đợi 15 giây trước khi hiển thị tiếp
+      // Sau khi ẩn, đợi 15-25 giây ngẫu nhiên trước khi hiển thị tiếp
+      const randomWait = Math.floor(Math.random() * 10000) + 15000; // 15-25s
       const nextTimeout = setTimeout(() => {
         showNextNotification();
-      }, 15000); // 15 giây
+      }, randomWait);
 
 
       timeoutRef.current = nextTimeout;
