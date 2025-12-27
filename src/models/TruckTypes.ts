@@ -302,6 +302,24 @@ export interface AerialPlatformSpec {
   outriggerSpan?: string;      // Khẩu độ chân chống
   controlSystem?: string;      // Hệ thống điều khiển
   safetyFeatures?: string;     // Tính năng an toàn
+  // Scissor lift specific fields
+  maxPlatformHeight?: string;    // Chiều cao nâng sàn tối đa
+  platformExtension?: string;    // Sàn mở rộng
+  voltage?: string;              // Điện áp
+  batteryCapacity?: string;      // Dung lượng pin
+  chargingTime?: string;         // Thời gian sạc
+  operatingTime?: string;        // Thời gian hoạt động
+  hydraulicSystem?: string;      // Hệ thống thủy lực
+  liftingSpeed?: string;         // Tốc độ nâng
+  loweringSpeed?: string;        // Tốc độ hạ
+  driveSystem?: string;          // Hệ thống dẫn động
+  tireType?: string;             // Loại lốp
+  travelSpeed?: string;          // Tốc độ di chuyển
+  gradability?: string;          // Khả năng leo dốc
+  turningRadius?: string;        // Bán kính quay
+  operatingTemperature?: string; // Nhiệt độ hoạt động
+  noiseLevel?: string;           // Độ ồn
+  certifications?: string;       // Chứng nhận
 }
 
 // Chi tiết về giá chữ A chở kính (xe chở kính, đá hoa cương)

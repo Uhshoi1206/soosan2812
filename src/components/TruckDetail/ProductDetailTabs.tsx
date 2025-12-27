@@ -2068,10 +2068,34 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               <h4 className="font-bold text-lg bg-cyan-100 p-2 rounded mb-3 text-cyan-800">Hệ thống nâng người</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
+                  {truck.aerialPlatformSpec.maxPlatformHeight && (
+                    <tr className="border-b bg-cyan-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao nâng sàn tối đa</td>
+                      <td className="py-2 px-3 font-medium text-cyan-700">{truck.aerialPlatformSpec.maxPlatformHeight}</td>
+                    </tr>
+                  )}
                   {truck.aerialPlatformSpec.workingHeight && (
                     <tr className="border-b bg-cyan-50">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao làm việc</td>
                       <td className="py-2 px-3 font-medium text-cyan-700">{truck.aerialPlatformSpec.workingHeight}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.platformCapacity && (
+                    <tr className="border-b bg-cyan-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tải trọng sàn</td>
+                      <td className="py-2 px-3 font-medium text-cyan-700">{truck.aerialPlatformSpec.platformCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.platformSize && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước sàn</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.platformSize}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.platformExtension && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Sàn mở rộng</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.platformExtension}</td>
                     </tr>
                   )}
                   {truck.aerialPlatformSpec.horizontalReach && (
@@ -2080,22 +2104,16 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                       <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.horizontalReach}</td>
                     </tr>
                   )}
-                  {truck.aerialPlatformSpec.platformCapacity && (
-                    <tr className="border-b bg-cyan-50">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Tải trọng giỏ</td>
-                      <td className="py-2 px-3 font-medium text-cyan-700">{truck.aerialPlatformSpec.platformCapacity}</td>
-                    </tr>
-                  )}
-                  {truck.aerialPlatformSpec.platformSize && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước giỏ</td>
-                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.platformSize}</td>
-                    </tr>
-                  )}
                   {truck.aerialPlatformSpec.boomElevation && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Góc nâng boom</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Kiểu nâng</td>
                       <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.boomElevation}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.boomType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại thiết bị</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.boomType}</td>
                     </tr>
                   )}
                   {truck.aerialPlatformSpec.slewing && (
@@ -2104,10 +2122,76 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                       <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.slewing}</td>
                     </tr>
                   )}
-                  {truck.aerialPlatformSpec.boomType && (
+                  {truck.aerialPlatformSpec.voltage && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Điện áp</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.aerialPlatformSpec.voltage}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.batteryCapacity && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại boom</td>
-                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.boomType}</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung lượng pin</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.batteryCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.chargingTime && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thời gian sạc</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.chargingTime}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.operatingTime && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thời gian hoạt động</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.aerialPlatformSpec.operatingTime}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.hydraulicSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống thủy lực</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.hydraulicSystem}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.liftingSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ nâng</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.liftingSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.loweringSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ hạ</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.loweringSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.driveSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống dẫn động</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.driveSystem}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.travelSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ di chuyển</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.travelSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.gradability && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Khả năng leo dốc</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.gradability}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.turningRadius && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Bán kính quay</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.turningRadius}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.tireType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại lốp</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.tireType}</td>
                     </tr>
                   )}
                   {truck.aerialPlatformSpec.insulationRating && (
@@ -2129,9 +2213,27 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                     </tr>
                   )}
                   {truck.aerialPlatformSpec.safetyFeatures && (
-                    <tr className="border-b">
+                    <tr className="border-b bg-red-50">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Tính năng an toàn</td>
-                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.safetyFeatures}</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.aerialPlatformSpec.safetyFeatures}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.operatingTemperature && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Nhiệt độ hoạt động</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.operatingTemperature}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.noiseLevel && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Độ ồn</td>
+                      <td className="py-2 px-3 font-medium">{truck.aerialPlatformSpec.noiseLevel}</td>
+                    </tr>
+                  )}
+                  {truck.aerialPlatformSpec.certifications && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chứng nhận</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.aerialPlatformSpec.certifications}</td>
                     </tr>
                   )}
                 </tbody>
