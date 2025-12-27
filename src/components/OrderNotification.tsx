@@ -4,7 +4,7 @@ import { Check, X } from 'lucide-react';
 
 interface OrderNotificationProps {
   onOpenQuickContact?: () => void;
-  products?: Array<{ name: string; type: string; slug: string }>;
+  products?: Array<{ name: string; type: string; slug: string; stockStatus?: string }>;
 }
 
 // Mock customer names - Diverse mix of individuals and companies
@@ -55,9 +55,17 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
   const [currentProduct, setCurrentProduct] = useState<{ name: string; type: string; slug: string } | null>(null);
   const [categoryType, setCategoryType] = useState<string | null>(null);
 
+  // Chỉ lấy sản phẩm có tình trạng "Sẵn hàng" hoặc "Đặt trước"
+  // Loại bỏ sản phẩm "Hết hàng" và "Ngừng kinh doanh"
+  const availableProducts = products.filter(p =>
+    !p.stockStatus || // Nếu không có stockStatus, mặc định hiển thị
+    p.stockStatus === 'in-stock' ||
+    p.stockStatus === 'pre-order'
+  );
+
   // Detect current product from URL and category type from query params
   useEffect(() => {
-    if (typeof window === 'undefined' || products.length === 0) return;
+    if (typeof window === 'undefined' || availableProducts.length === 0) return;
 
     const pathname = window.location.pathname;
     const searchParams = new URLSearchParams(window.location.search);
@@ -94,14 +102,14 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
 
   // Generate random notification with smart priority
   const generateNotification = () => {
-    if (products.length === 0) return null;
+    if (availableProducts.length === 0) return null;
 
     let selectedProduct;
     const random = Math.random();
 
     // Priority 1: If on a category page, ONLY show products of that category type
     if (categoryType) {
-      const categoryProducts = products.filter(p => p.type === categoryType);
+      const categoryProducts = availableProducts.filter(p => p.type === categoryType);
       if (categoryProducts.length > 0) {
         selectedProduct = categoryProducts[Math.floor(Math.random() * categoryProducts.length)];
         console.log('📂 Category filter active - Showing', categoryType, 'product:', selectedProduct.name);
@@ -119,12 +127,12 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
         console.log('✅ 70% - Showing current product:', selectedProduct.name);
       } else {
         // 30% chance: Show notification for products of same type
-        const sameTypeProducts = products.filter(p => p.type === currentProduct.type);
+        const sameTypeProducts = availableProducts.filter(p => p.type === currentProduct.type);
         if (sameTypeProducts.length > 0) {
           selectedProduct = sameTypeProducts[Math.floor(Math.random() * sameTypeProducts.length)];
           console.log('✅ 30% - Showing same type product:', selectedProduct.name, '(type:', selectedProduct.type, ')');
         } else {
-          selectedProduct = products[Math.floor(Math.random() * products.length)];
+          selectedProduct = availableProducts[Math.floor(Math.random() * availableProducts.length)];
           console.log('⚠️ No same type products, showing random:', selectedProduct.name);
         }
       }
@@ -133,7 +141,7 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
     else {
       if (random < 0.7) {
         // 70% chance: Show mooc ben (dump trailers)
-        const moocBenProducts = products.filter(p =>
+        const moocBenProducts = availableProducts.filter(p =>
           p.type === 'mooc' && (
             p.name.toLowerCase().includes('ben') ||
             p.slug.toLowerCase().includes('ben')
@@ -144,12 +152,12 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
           console.log('🚛 70% - Showing mooc ben product:', selectedProduct.name);
         } else {
           // Fallback to random if no mooc ben products
-          selectedProduct = products[Math.floor(Math.random() * products.length)];
+          selectedProduct = availableProducts[Math.floor(Math.random() * availableProducts.length)];
           console.log('⚠️ No mooc ben products, showing random:', selectedProduct.name);
         }
       } else {
         // 30% chance: Show random from all types
-        selectedProduct = products[Math.floor(Math.random() * products.length)];
+        selectedProduct = availableProducts[Math.floor(Math.random() * availableProducts.length)];
         console.log('🎲 30% - Showing random product:', selectedProduct.name);
       }
     }
@@ -168,7 +176,7 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
 
   // Hiệu ứng chạy khi component được mount hoặc current product/category thay đổi
   useEffect(() => {
-    if (products.length === 0) return;
+    if (availableProducts.length === 0) return;
 
     // Reset dismissed state when navigating to new product or category
     setDismissed(false);
@@ -182,7 +190,7 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
       clearTimeout(initialDelay);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [products, currentProduct, categoryType]);
+  }, [availableProducts, currentProduct, categoryType]);
 
   // Hiển thị thông báo tiếp theo
   const showNextNotification = () => {
@@ -220,11 +228,11 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
   };
 
   if (!currentNotification || !isVisible) return null;
-  
+
   // Định dạng thời gian
   const formatTimeAgo = (timestamp: number) => {
     const seconds = Math.floor((Date.now() - timestamp) / 1000);
-    
+
     const intervals = {
       'năm': 31536000,
       'tháng': 2592000,
@@ -234,25 +242,24 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
       'phút': 60,
       'giây': 1
     };
-    
+
     for (const [unit, secondsInUnit] of Object.entries(intervals)) {
       const interval = Math.floor(seconds / secondsInUnit);
-      
+
       if (interval > 0) {
         return `${interval} ${unit}${interval === 1 ? '' : ''} trước`;
       }
     }
-    
+
     return 'vừa xong';
   };
 
   return (
     <div
-      className={`fixed bottom-2 left-4 max-w-xs sm:max-w-sm w-full z-50 transform transition-all duration-500 ${
-        isVisible
-          ? 'translate-x-0 opacity-100'
-          : '-translate-x-full opacity-0'
-      }`}
+      className={`fixed bottom-2 left-4 max-w-xs sm:max-w-sm w-full z-50 transform transition-all duration-500 ${isVisible
+        ? 'translate-x-0 opacity-100'
+        : '-translate-x-full opacity-0'
+        }`}
     >
       <a
         href={currentNotification.productUrl}
