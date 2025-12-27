@@ -22,7 +22,7 @@
         "/assets/may-xuc-lat-komatsu-wa320.webp"
     ],
     "description": "Máy xúc lật bánh lốp Komatsu WA320 15 tấn - Gầu 3.2m³, động cơ Komatsu 168HP, hộp số HST. Xúc đá, cát, sỏi, san lấp mặt bằng. Nhập khẩu Nhật Bản.",
-    "detailedDescription": "<h2>Máy Xúc Lật Bánh Lốp Komatsu WA320 - Sức Mạnh Xúc Đổ</h2>\n<p><strong>Máy xúc lật Komatsu WA320</strong> (Wheel Loader) là thiết bị xúc đổ phổ biến nhất với <strong>gầu 3.2m³</strong>, <strong>động cơ 168HP</strong>, phù hợp mọi công trường.</p>\n\n<h3>Thông Số Kỹ Thuật</h3>\n<ul>\n<li><strong>Trọng lượng:</strong> 15.200 kg</li>\n<li><strong>Dung tích gầu:</strong> 3.2 m³</li>\n<li><strong>Động cơ:</strong> Komatsu SAA6D107E-3 168HP</li>\n<li><strong>Lực đẩy:</strong> 150 kN</li>\n<li><strong>Chiều cao đổ:</strong> 2.890 mm</li>\n<li><strong>Tầm với:</strong> 1.180 mm</li>\n<li><strong>Tốc độ:</strong> 38 km/h</li>\n</ul>\n\n<h3>Ứng Dụng</h3>\n<ul>\n<li>Xúc đá, cát, sỏi, đất</li>\n<li>San lấp mặt bằng</li>\n<li>Xúc than, quặng mỏ</li>\n<li>Xúc lên xe tải</li>\n</ul>",
+    "detailedDescription": "<h2>Máy Xúc Lật Bánh Lốp Komatsu WA320 - Sức Mạnh Xúc Đổ</h2>\n<p><strong>Máy xúc lật Komatsu WA320</strong> (Wheel Loader) là thiết bị xúc đổ phổ biến nhất với <strong>gầu 3.2m³</strong>, <strong>động cơ 168HP</strong>, phù hợp mọi công trường.</p>\n\n<h3>Thông Số Kỹ Thuật</h3>\n<ul>\n<li><strong>Trọng lượng vận hành:</strong> 15.200 kg</li>\n<li><strong>Dung tích gầu:</strong> 3.2 m³</li>\n<li><strong>Động cơ:</strong> Komatsu SAA6D107E-3 168HP</li>\n<li><strong>Lực đẩy:</strong> 150 kN</li>\n<li><strong>Chiều cao đổ:</strong> 2.890 mm</li>\n<li><strong>Tầm với:</strong> 1.180 mm</li>\n<li><strong>Tốc độ:</strong> 38 km/h</li>\n<li><strong>Tải trọng lật:</strong> 12.500 kg</li>\n</ul>\n\n<h3>Ứng Dụng</h3>\n<ul>\n<li>Xúc đá, cát, sỏi, đất</li>\n<li>San lấp mặt bằng</li>\n<li>Xúc than, quặng mỏ</li>\n<li>Xúc lên xe tải</li>\n</ul>",
     "features": [
         "Trọng lượng 15 tấn",
         "Gầu 3.2 m³",
@@ -35,8 +35,42 @@
     ],
     "engineModel": "Komatsu SAA6D107E-3",
     "engineType": "Diesel 6 xi lanh, turbo tăng áp",
-    "enginePower": "125 kW (168 HP)",
+    "engineCapacity": "6.690 cc",
+    "enginePower": "125 kW (168 HP) @ 2.050 vòng/phút",
+    "engineTorque": "724 Nm @ 1.500 vòng/phút",
     "fuel": "Diesel",
-    "emissionStandard": "Tier 3",
+    "emissionStandard": "Tier 3 / EU Stage IIIA",
+    "fuelTankCapacity": "260 lít",
+    "hydraulicTankCapacity": "115 lít",
+    "transmission": "HST (Hydrostatic Transmission)",
+    "maxSpeed": "38 km/h",
+    "wheelbase": 3200,
+    "tires": "20.5R25 (L3)",
+    "loaderSpec": {
+        "bucketCapacity": "3.2 m³ (gầu tiêu chuẩn)",
+        "bucketWidth": "2.850 mm",
+        "breakoutForce": "150 kN",
+        "staticTippingLoad": "12.500 kg",
+        "maxLiftHeight": "3.980 mm",
+        "dumpHeight": "2.890 mm (@ góc đổ 45°)",
+        "dumpReach": "1.180 mm",
+        "digDepth": "90 mm",
+        "rackbackAngle": "42°",
+        "dumpAngle": "52°",
+        "liftCycleTime": "5.8 giây",
+        "dumpCycleTime": "1.5 giây",
+        "lowerCycleTime": "3.0 giây",
+        "hydraulicPumpFlow": "244 lít/phút",
+        "hydraulicPressure": "265 bar",
+        "turningRadius": "6.450 mm"
+    },
+    "cabinFeatures": [
+        "Điều hòa 2 chiều",
+        "Ghế giảm chấn khí nén",
+        "Màn hình LCD 7 inch",
+        "Joystick điều khiển",
+        "Camera lùi",
+        "Kính cường lực"
+    ],
     "order": 23
 }

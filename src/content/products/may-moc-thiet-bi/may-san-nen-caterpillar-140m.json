@@ -22,7 +22,7 @@
         "/assets/may-san-nen-caterpillar-140m.webp"
     ],
     "description": "Máy san nền Caterpillar 140M 14 tấn - Motor Grader lưỡi san 3.7m, động cơ CAT C7 153HP. San phẳng mặt đường, sân bãi, khai thác mỏ. Nhập khẩu Mỹ chính hãng.",
-    "detailedDescription": "<h2>Máy San Nền Caterpillar 140M - Độ Chính Xác San Phẳng Cao</h2>\n<p><strong>Máy san nền Caterpillar 140M</strong> (Motor Grader) là thiết bị chuyên san phẳng mặt đường, sân bãi với <strong>lưỡi san 3.7m</strong>, <strong>động cơ CAT 153HP</strong>, độ chính xác cao.</p>\n\n<h3>Thông Số Kỹ Thuật</h3>\n<ul>\n<li><strong>Trọng lượng:</strong> 14.600 kg</li>\n<li><strong>Lưỡi san:</strong> 3.700 mm x 610 mm</li>\n<li><strong>Động cơ:</strong> CAT C7 ACERT 153HP</li>\n<li><strong>Tốc độ:</strong> 0 - 45 km/h</li>\n<li><strong>Góc quay lưỡi:</strong> 360°</li>\n<li><strong>Góc nghiêng lưỡi:</strong> ± 18°</li>\n<li><strong>Hộp số:</strong> 8 số tiến, 6 số lùi</li>\n</ul>\n\n<h3>Ứng Dụng</h3>\n<ul>\n<li>San phẳng mặt đường</li>\n<li>San nền sân bãi, bãi đậu xe</li>\n<li>San mặt mỏ, khai thác khoáng sản</li>\n<li>Duy tu bảo dưỡng đường</li>\n</ul>",
+    "detailedDescription": "<h2>Máy San Nền Caterpillar 140M - Độ Chính Xác San Phẳng Cao</h2>\n<p><strong>Máy san nền Caterpillar 140M</strong> (Motor Grader) là thiết bị chuyên san phẳng mặt đường, sân bãi với <strong>lưỡi san 3.7m</strong>, <strong>động cơ CAT 153HP</strong>, độ chính xác cao.</p>\n\n<h3>Thông Số Kỹ Thuật</h3>\n<ul>\n<li><strong>Trọng lượng vận hành:</strong> 14.600 kg</li>\n<li><strong>Lưỡi san:</strong> 3.700 mm x 610 mm</li>\n<li><strong>Động cơ:</strong> CAT C7 ACERT 153HP</li>\n<li><strong>Tốc độ:</strong> 0 - 45 km/h</li>\n<li><strong>Góc quay lưỡi:</strong> 360°</li>\n<li><strong>Góc nghiêng lưỡi:</strong> ± 18°</li>\n<li><strong>Hộp số:</strong> 8 số tiến, 6 số lùi</li>\n<li><strong>Góc khớp nối:</strong> ± 20°</li>\n</ul>\n\n<h3>Ứng Dụng</h3>\n<ul>\n<li>San phẳng mặt đường</li>\n<li>San nền sân bãi, bãi đậu xe</li>\n<li>San mặt mỏ, khai thác khoáng sản</li>\n<li>Duy tu bảo dưỡng đường</li>\n</ul>",
     "features": [
         "Trọng lượng 14 tấn",
         "Lưỡi san 3.7m",
@@ -35,8 +35,40 @@
     ],
     "engineModel": "CAT C7 ACERT",
     "engineType": "Diesel 6 xi lanh, turbo tăng áp",
-    "enginePower": "114 kW (153 HP)",
+    "engineCapacity": "7.200 cc",
+    "enginePower": "114 kW (153 HP) @ 2.200 vòng/phút",
+    "engineTorque": "678 Nm @ 1.400 vòng/phút",
     "fuel": "Diesel",
-    "emissionStandard": "Tier 3",
+    "emissionStandard": "Tier 3 / EU Stage IIIA",
+    "fuelTankCapacity": "340 lít",
+    "hydraulicTankCapacity": "73 lít",
+    "transmission": "Powershift 8 tiến / 6 lùi",
+    "maxSpeed": "45 km/h",
+    "wheelbase": 6096,
+    "graderSpec": {
+        "bladeWidth": "3.700 mm",
+        "bladeHeight": "610 mm",
+        "bladeThickness": "22 mm",
+        "maxBladeRaise": "450 mm",
+        "maxBladeDig": "685 mm",
+        "circleRotation": "360° liên tục",
+        "bladeTiltAngle": "± 90°",
+        "bladeSideshift": "± 550 mm",
+        "articulationAngle": "± 20°",
+        "leanAngle": "± 18°",
+        "scarifierWidth": "1.270 mm (tùy chọn)",
+        "scarifierDepth": "300 mm",
+        "frontWheelLean": "± 18°",
+        "turningRadius": "7.300 mm",
+        "groundClearance": "500 mm"
+    },
+    "cabinFeatures": [
+        "Điều hòa 2 chiều",
+        "Ghế giảm chấn khí nén",
+        "Màn hình màu hiển thị thông số",
+        "Joystick điều khiển đa năng",
+        "Camera lùi",
+        "GPS Trimble AccuGrade (tùy chọn)"
+    ],
     "order": 22
 }

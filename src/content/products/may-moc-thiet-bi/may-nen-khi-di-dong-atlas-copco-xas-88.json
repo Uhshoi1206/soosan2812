@@ -22,7 +22,7 @@
         "/assets/may-nen-khi-atlas-copco-xas-88.webp"
     ],
     "description": "Máy nén khí di động Atlas Copco XAS 88 - Công suất 5m³/phút, 7 bar, động cơ Kubota tiết kiệm nhiên liệu. Dùng cho búa đục, súng phun sơn, dụng cụ khí nén.",
-    "detailedDescription": "<h2>Máy Nén Khí Di Động Atlas Copco XAS 88 - Công Nghệ Bỉ</h2>\n<p><strong>Máy nén khí di động Atlas Copco XAS 88</strong> là thiết bị cung cấp khí nén tại công trường với <strong>lưu lượng 5m³/phút</strong>, <strong>áp suất 7 bar</strong>.</p>\n\n<h3>Thông Số Kỹ Thuật</h3>\n<ul>\n<li><strong>Lưu lượng:</strong> 5.0 m³/phút (176 cfm)</li>\n<li><strong>Áp suất:</strong> 7 bar (100 psi)</li>\n<li><strong>Động cơ:</strong> Kubota V2403-M 49HP</li>\n<li><strong>Bình nhiên liệu:</strong> 62 lít</li>\n<li><strong>Tiêu hao:</strong> 9 lít/giờ</li>\n<li><strong>Độ ồn:</strong> 69 dB(A)</li>\n</ul>\n\n<h3>Ứng Dụng</h3>\n<ul>\n<li>Búa đục bê tông, đá</li>\n<li>Khoan đá, khoan nổ mìn</li>\n<li>Súng phun sơn, cát</li>\n<li>Dụng cụ khí nén tại công trường</li>\n</ul>",
+    "detailedDescription": "<h2>Máy Nén Khí Di Động Atlas Copco XAS 88 - Công Nghệ Bỉ</h2>\n<p><strong>Máy nén khí di động Atlas Copco XAS 88</strong> là thiết bị cung cấp khí nén tại công trường với <strong>lưu lượng 5m³/phút</strong>, <strong>áp suất 7 bar</strong>.</p>\n\n<h3>Thông Số Kỹ Thuật</h3>\n<ul>\n<li><strong>Lưu lượng:</strong> 5.0 m³/phút (176 cfm)</li>\n<li><strong>Áp suất:</strong> 7 bar (100 psi)</li>\n<li><strong>Động cơ:</strong> Kubota V2403-M 49HP</li>\n<li><strong>Bình nhiên liệu:</strong> 62 lít</li>\n<li><strong>Tiêu hao:</strong> 9 lít/giờ @ 100%</li>\n<li><strong>Độ ồn:</strong> 69 dB(A) @ 7m</li>\n<li><strong>Loại nén:</strong> Trục vít phun dầu</li>\n</ul>\n\n<h3>Ứng Dụng</h3>\n<ul>\n<li>Búa đục bê tông, đá</li>\n<li>Khoan đá, khoan nổ mìn</li>\n<li>Súng phun sơn, cát</li>\n<li>Dụng cụ khí nén tại công trường</li>\n</ul>",
     "features": [
         "Lưu lượng 5 m³/phút",
         "Áp suất 7 bar",
@@ -34,8 +34,31 @@
         "Thương hiệu Atlas Copco Bỉ"
     ],
     "engineModel": "Kubota V2403-M",
-    "engineType": "Diesel 4 xi lanh",
-    "enginePower": "36 kW (49 HP)",
+    "engineType": "Diesel 4 xi lanh, làm mát nước",
+    "engineCapacity": "2.434 cc",
+    "enginePower": "36 kW (49 HP) @ 2.700 vòng/phút",
+    "engineTorque": "145 Nm @ 1.600 vòng/phút",
     "fuel": "Diesel",
+    "fuelTankCapacity": "62 lít",
+    "compressorSpec": {
+        "compressorType": "Trục vít phun dầu (Oil-injected Rotary Screw)",
+        "freeAirDelivery": "5.0 m³/phút (176 cfm)",
+        "normalPressure": "7 bar (100 psi)",
+        "maxPressure": "8 bar (116 psi)",
+        "airOutletSize": "3/4 inch BSP (2 cổng)",
+        "airReceiverVolume": "Tích hợp trong hệ thống",
+        "oilCapacity": "8 lít",
+        "oilType": "Atlas Copco Roto-Inject Fluid",
+        "coolingSystem": "Bằng không khí + quạt ly tâm",
+        "fuelConsumption100": "9 lít/giờ @ 100%",
+        "fuelConsumption75": "7 lít/giờ @ 75%",
+        "runTimeAtFullTank": "7 giờ @ 100%",
+        "noiseLevel": "69 dB(A) @ 7m",
+        "trailerType": "Moóc 1 trục, lốp đơn",
+        "towingSpeed": "Tối đa 80 km/h",
+        "airFilter": "Bộ lọc khô 2 cấp",
+        "safetyFeatures": "Tự động ngắt khi quá nhiệt, quá áp",
+        "operatingTemperature": "-10°C đến +50°C"
+    },
     "order": 81
 }
