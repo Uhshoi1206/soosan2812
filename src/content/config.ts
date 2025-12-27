@@ -193,6 +193,13 @@ const productsCollection = defineCollection({
     bitumenTankSpec: z.record(z.any()).optional(),
     excavatorSpec: z.record(z.any()).optional(),
     forkliftSpec: z.record(z.any()).optional(),
+    bulldozerSpec: z.record(z.any()).optional(),
+    graderSpec: z.record(z.any()).optional(),
+    loaderSpec: z.record(z.any()).optional(),
+    rollerSpec: z.record(z.any()).optional(),
+    compactorSpec: z.record(z.any()).optional(),
+    generatorSpec: z.record(z.any()).optional(),
+    compressorSpec: z.record(z.any()).optional(),
 
     // Additional specs
     specifications: z.record(z.any()).optional(),

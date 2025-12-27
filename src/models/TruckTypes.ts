@@ -546,7 +546,6 @@ export interface ExcavatorSpecification {
   certifications?: string;          // Chứng nhận
 }
 
-// Chi tiết về xe nâng hàng
 export interface ForkliftSpecification {
   liftCapacity?: string;            // Tải trọng nâng
   maxLiftHeight?: string;           // Chiều cao nâng tối đa
@@ -564,7 +563,168 @@ export interface ForkliftSpecification {
   safetySystem?: string;            // Hệ thống an toàn
   attachments?: string;             // Phụ kiện
   certifications?: string;          // Chứng nhận
+  // Additional fields from JSON
+  loadCapacity?: string;
+  loadCenter?: string;
+  liftHeight?: string;
+  forkDimensions?: string;
+  freeLifHeight?: string;
+  motorType?: string;
+  batterySpec?: string;
+  transmission?: string;
+  steeringType?: string;
+  tireType?: string;
 }
+
+// Thông số máy ủi
+export interface BulldozerSpecification {
+  bladeType?: string;               // Loại lưỡi ủi
+  bladeCapacity?: string;           // Dung tích lưỡi
+  bladeWidth?: string;              // Chiều rộng lưỡi
+  bladeHeight?: string;             // Chiều cao lưỡi
+  maxBladeRaise?: string;           // Chiều cao nâng lưỡi tối đa
+  maxBladeDig?: string;             // Độ cắm lưỡi tối đa
+  bladeTiltAngle?: string;          // Góc nghiêng lưỡi
+  drawbarPull?: string;             // Lực kéo thanh
+  trackLength?: string;             // Chiều dài xích
+  trackShoeWidth?: string;          // Chiều rộng guốc xích
+  trackGauge?: string;              // Khoảng cách xích
+  groundPressure?: string;          // Áp suất lên mặt đất
+  numberOfRollers?: string;         // Số con lăn
+  ripperType?: string;              // Loại ripper
+  hydraulicSystem?: string;         // Hệ thống thủy lực
+}
+
+// Thông số máy san
+export interface GraderSpecification {
+  bladeWidth?: string;              // Chiều rộng lưỡi san
+  bladeHeight?: string;             // Chiều cao lưỡi san
+  bladeThickness?: string;          // Độ dày lưỡi
+  maxBladeRaise?: string;           // Nâng lưỡi tối đa
+  maxBladeDig?: string;             // Cắm lưỡi tối đa
+  circleRotation?: string;          // Góc quay đĩa
+  bladeTiltAngle?: string;          // Góc nghiêng lưỡi
+  bladeSideshift?: string;          // Dịch ngang lưỡi
+  articulationAngle?: string;       // Góc khớp nối
+  leanAngle?: string;               // Góc nghiêng bánh trước
+  scarifierWidth?: string;          // Chiều rộng scarifier
+  scarifierDepth?: string;          // Độ sâu scarifier
+  frontWheelLean?: string;          // Góc nghiêng bánh trước
+  turningRadius?: string;           // Bán kính quay
+  groundClearance?: string;         // Khoảng sáng gầm
+}
+
+// Thông số máy xúc lật
+export interface LoaderSpecification {
+  bucketCapacity?: string;          // Dung tích gầu
+  bucketWidth?: string;             // Chiều rộng gầu
+  breakoutForce?: string;           // Lực xúc
+  staticTippingLoad?: string;       // Tải trọng lật tĩnh
+  maxLiftHeight?: string;           // Chiều cao nâng tối đa
+  dumpHeight?: string;              // Chiều cao đổ
+  dumpReach?: string;               // Tầm đổ
+  digDepth?: string;                // Độ sâu đào
+  rackbackAngle?: string;           // Góc ngửa gầu
+  dumpAngle?: string;               // Góc đổ
+  liftCycleTime?: string;           // Thời gian nâng
+  dumpCycleTime?: string;           // Thời gian đổ
+  lowerCycleTime?: string;          // Thời gian hạ
+  hydraulicPumpFlow?: string;       // Lưu lượng bơm thủy lực
+  hydraulicPressure?: string;       // Áp suất thủy lực
+  turningRadius?: string;           // Bán kính quay
+}
+
+// Thông số xe lu
+export interface RollerSpecification {
+  drumWidth?: string;               // Chiều rộng trống
+  drumDiameter?: string;            // Đường kính trống
+  drumWeight?: string;              // Trọng lượng trống
+  centrifugalForce?: string;        // Lực li tâm
+  frequency?: string;               // Tần số rung
+  amplitude?: string;               // Biên độ rung
+  staticLinearLoad?: string;        // Tải trọng tuyến tính
+  compactionDepth?: string;         // Độ sâu đầm nén
+  compactionWidth?: string;         // Chiều rộng đầm nén
+  vibrationMode?: string;           // Chế độ rung
+  rearTireSize?: string;            // Kích thước lốp sau
+  rearAxleWeight?: string;          // Tải trọng cầu sau
+  steeringAngle?: string;           // Góc lái
+  climbingAbility?: string;         // Khả năng leo dốc
+  turningRadius?: string;           // Bán kính quay
+  waterTankCapacity?: string;       // Dung tích bình nước
+  // For pneumatic rollers
+  numberOfWheels?: string;          // Số lượng bánh
+  tireSize?: string;                // Kích thước lốp
+  tirePressureRange?: string;       // Dải áp suất lốp
+  minWeight?: string;               // Trọng lượng tối thiểu
+  maxWeight?: string;               // Trọng lượng tối đa
+  ballastType?: string;             // Loại ballast
+  waterSpraySystem?: string;        // Hệ thống phun nước
+}
+
+// Thông số máy đầm
+export interface CompactorSpecification {
+  compactorType?: string;           // Loại máy đầm
+  plateSize?: string;               // Kích thước bàn đầm
+  impactForce?: string;             // Lực đầm
+  frequency?: string;               // Tần số đầm
+  jumpingHeight?: string;           // Chiều cao nhảy
+  compactionDepth?: string;         // Độ sâu đầm nén
+  travelSpeed?: string;             // Tốc độ di chuyển
+  liftingHandle?: string;           // Tay cầm nâng
+  shockMount?: string;              // Đệm chống rung
+  throttleControl?: string;         // Điều khiển ga
+  airFilter?: string;               // Bộ lọc gió
+  oilCapacity?: string;             // Dung tích dầu
+  suitableSoil?: string;            // Loại đất phù hợp
+}
+
+// Thông số máy phát điện
+export interface GeneratorSpecification {
+  standbyPower?: string;            // Công suất dự phòng
+  primePower?: string;              // Công suất liên tục
+  ratedVoltage?: string;            // Điện áp định mức
+  frequency?: string;               // Tần số
+  phases?: string;                  // Số pha
+  powerFactor?: string;             // Hệ số công suất
+  alternatorModel?: string;         // Model đầu phát
+  alternatorType?: string;          // Loại đầu phát
+  excitationType?: string;          // Loại kích từ
+  regulationVoltage?: string;       // Điều chỉnh điện áp
+  engineSpeed?: string;             // Tốc độ động cơ
+  fuelConsumption100?: string;      // Tiêu hao @ 100%
+  fuelConsumption75?: string;       // Tiêu hao @ 75%
+  fuelConsumption50?: string;       // Tiêu hao @ 50%
+  startingSystem?: string;          // Hệ thống khởi động
+  coolingSystem?: string;           // Hệ thống làm mát
+  controlPanel?: string;            // Bảng điều khiển
+  noiseLevel?: string;              // Độ ồn
+  atsCompatible?: string;           // Tương thích ATS
+  protectionClass?: string;         // Cấp bảo vệ
+}
+
+// Thông số máy nén khí
+export interface CompressorSpecification {
+  compressorType?: string;          // Loại máy nén
+  freeAirDelivery?: string;         // Lưu lượng khí
+  normalPressure?: string;          // Áp suất làm việc
+  maxPressure?: string;             // Áp suất tối đa
+  airOutletSize?: string;           // Kích thước cổng ra
+  airReceiverVolume?: string;       // Dung tích bình khí
+  oilCapacity?: string;             // Dung tích dầu
+  oilType?: string;                 // Loại dầu
+  coolingSystem?: string;           // Hệ thống làm mát
+  fuelConsumption100?: string;      // Tiêu hao @ 100%
+  fuelConsumption75?: string;       // Tiêu hao @ 75%
+  runTimeAtFullTank?: string;       // Thời gian chạy
+  noiseLevel?: string;              // Độ ồn
+  trailerType?: string;             // Loại moóc
+  towingSpeed?: string;             // Tốc độ kéo
+  airFilter?: string;               // Bộ lọc gió
+  safetyFeatures?: string;          // Tính năng an toàn
+  operatingTemperature?: string;    // Nhiệt độ hoạt động
+}
+
 
 export interface Truck {
   id: string;
@@ -634,6 +794,13 @@ export interface Truck {
   bitumenTankSpec?: BitumenTankSpecification; // Xe bồn chở nhựa đường nóng
   excavatorSpec?: ExcavatorSpecification; // Máy xúc đào
   forkliftSpec?: ForkliftSpecification; // Xe nâng hàng
+  bulldozerSpec?: BulldozerSpecification; // Máy ủi
+  graderSpec?: GraderSpecification; // Máy san nền
+  loaderSpec?: LoaderSpecification; // Máy xúc lật
+  rollerSpec?: RollerSpecification; // Xe lu
+  compactorSpec?: CompactorSpecification; // Máy đầm
+  generatorSpec?: GeneratorSpecification; // Máy phát điện
+  compressorSpec?: CompressorSpecification; // Máy nén khí
 
   // Thông số kỹ thuật phổ biến
   engineType?: string;
