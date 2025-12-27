@@ -189,7 +189,7 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
     // Đặt thời gian hiển thị thông báo sau khi trang web tải
     const initialDelay = setTimeout(() => {
       showNextNotification();
-    }, 3000); // Reduced to 3s for faster engagement
+    }, 5000); // 5 giây sau khi tải trang
 
     return () => {
       clearTimeout(initialDelay);
