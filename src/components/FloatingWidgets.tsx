@@ -3,7 +3,7 @@ import QuickContact from './QuickContact';
 import OrderNotification from './OrderNotification';
 
 interface FloatingWidgetsProps {
-  products?: Array<{ name: string; type: string; slug: string }>;
+  products?: Array<{ name: string; type: string; slug: string; stockStatus?: string }>;
 }
 
 const FloatingWidgets: React.FC<FloatingWidgetsProps> = ({ products = [] }) => {
