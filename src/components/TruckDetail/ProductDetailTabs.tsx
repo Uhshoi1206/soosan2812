@@ -1020,22 +1020,25 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                       <td className="py-2 px-3 font-medium">{truck.craneSpec.maxLiftingMoment}</td>
                     </tr>
                   )}
-                  {truck.craneSpec.maxLiftingCapacity && (
+                  {/* Sức nâng: maxLiftingCapacity hoặc maxLiftCapacity */}
+                  {(truck.craneSpec.maxLiftingCapacity || truck.craneSpec.maxLiftCapacity) && (
                     <tr className="border-b bg-red-50">
                       <td className="py-2 px-3 text-gray-600">Sức nâng tối đa</td>
-                      <td className="py-2 px-3 font-medium text-red-700">{truck.craneSpec.maxLiftingCapacity}</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.craneSpec.maxLiftingCapacity || truck.craneSpec.maxLiftCapacity}</td>
                     </tr>
                   )}
+
                   {truck.craneSpec.liftingCapacityText && (
                     <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600">Sức nâng</td>
                       <td className="py-2 px-3 font-medium">{truck.craneSpec.liftingCapacityText}</td>
                     </tr>
                   )}
-                  {truck.craneSpec.maxLiftingHeight && (
+                  {/* Chiều cao nâng: maxLiftingHeight hoặc maxLiftHeight */}
+                  {(truck.craneSpec.maxLiftingHeight || truck.craneSpec.maxLiftHeight) && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Chiều cao nâng lớn nhất</td>
-                      <td className="py-2 px-3 font-medium">{truck.craneSpec.maxLiftingHeight}</td>
+                      <td className="py-2 px-3 text-gray-600">Chiều cao nâng</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.maxLiftingHeight || truck.craneSpec.maxLiftHeight}</td>
                     </tr>
                   )}
                   {truck.craneSpec.maxWorkingHeight && (
@@ -1046,8 +1049,14 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                   )}
                   {truck.craneSpec.maxWorkingRadius && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Bán kính làm việc</td>
+                      <td className="py-2 px-3 text-gray-600">Bán kính làm việc tối đa</td>
                       <td className="py-2 px-3 font-medium">{truck.craneSpec.maxWorkingRadius}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.minWorkingRadius && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Bán kính làm việc tối thiểu</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.minWorkingRadius}</td>
                     </tr>
                   )}
                   {truck.craneSpec.boomType && (
@@ -1062,10 +1071,23 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                       <td className="py-2 px-3 font-medium">{truck.craneSpec.boomSections}</td>
                     </tr>
                   )}
-                  {truck.craneSpec.boomLength && (
-                    <tr className="border-b">
+                  {/* Chiều dài cần: boomLength hoặc maxBoomLength */}
+                  {(truck.craneSpec.boomLength || truck.craneSpec.maxBoomLength) && (
+                    <tr className="border-b bg-blue-50">
                       <td className="py-2 px-3 text-gray-600">Chiều dài cần</td>
-                      <td className="py-2 px-3 font-medium">{truck.craneSpec.boomLength}</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.craneSpec.boomLength || truck.craneSpec.maxBoomLength}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.maxJibLength && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều dài cần phụ</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.maxJibLength}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.tipLoadCapacity && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600">Sức nâng đầu cần</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.craneSpec.tipLoadCapacity}</td>
                     </tr>
                   )}
                   {truck.craneSpec.boomExtensionSpeed && (
@@ -1080,16 +1102,42 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                       <td className="py-2 px-3 font-medium">{truck.craneSpec.boomLuffingSpeed}</td>
                     </tr>
                   )}
-                  {truck.craneSpec.swingAngle && (
+                  {/* Góc quay: swingAngle hoặc slewingAngle */}
+                  {(truck.craneSpec.swingAngle || truck.craneSpec.slewingAngle) && (
                     <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600">Góc quay</td>
-                      <td className="py-2 px-3 font-medium">{truck.craneSpec.swingAngle}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.swingAngle || truck.craneSpec.slewingAngle}</td>
                     </tr>
                   )}
-                  {truck.craneSpec.swingSpeed && (
+                  {/* Tốc độ quay: swingSpeed hoặc slewingSpeed */}
+                  {(truck.craneSpec.swingSpeed || truck.craneSpec.slewingSpeed) && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Tốc độ quay cần</td>
-                      <td className="py-2 px-3 font-medium">{truck.craneSpec.swingSpeed}</td>
+                      <td className="py-2 px-3 text-gray-600">Tốc độ quay toa</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.swingSpeed || truck.craneSpec.slewingSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.hoistSpeed && (
+                    <tr className="border-b bg-blue-50">
+                      <td className="py-2 px-3 text-gray-600">Tốc độ nâng</td>
+                      <td className="py-2 px-3 font-medium text-blue-700">{truck.craneSpec.hoistSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.trolleySpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tốc độ xe con</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.trolleySpeed}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.counterweight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Đối trọng</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.counterweight}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.outriggerSpan && (
+                    <tr className="border-b bg-green-50">
+                      <td className="py-2 px-3 text-gray-600">Chiều rộng chân chống</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.craneSpec.outriggerSpan}</td>
                     </tr>
                   )}
                   {truck.craneSpec.winchRopeType && (
