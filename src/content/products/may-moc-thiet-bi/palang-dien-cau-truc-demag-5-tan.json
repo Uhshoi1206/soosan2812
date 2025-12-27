@@ -33,5 +33,23 @@
         "Bền bỉ, ít bảo trì",
         "Thương hiệu Demag Đức"
     ],
+    "hoistSpec": {
+        "liftCapacity": "5.000 kg",
+        "liftHeight": "12 m",
+        "liftSpeed": "8 / 2 m/phút (2 tốc độ)",
+        "liftMotorPower": "5.5 kW",
+        "hoistType": "Palang xích điện",
+        "chainType": "Xích tải Grade 80",
+        "brakeType": "Phanh điện từ đĩa kép",
+        "dutyClass": "FEM 2m / ISO M5",
+        "voltage": "380V / 50Hz / 3 pha",
+        "frequency": "50 Hz",
+        "protectionClass": "IP55",
+        "ambientTemperature": "-20°C đến +45°C",
+        "trolleySpeed": "20 m/phút",
+        "trolleyMotorPower": "0.75 kW",
+        "controlType": "Pendant / Remote",
+        "safetyFeatures": "Phanh quá tải, giới hạn hành trình, cảnh báo âm thanh"
+    },
     "order": 73
 }

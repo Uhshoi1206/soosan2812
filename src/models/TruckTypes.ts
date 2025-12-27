@@ -725,6 +725,83 @@ export interface CompressorSpecification {
   operatingTemperature?: string;    // Nhiệt độ hoạt động
 }
 
+// Thông số máy trộn bê tông tự hành
+export interface ConcreteMixerSpecification {
+  mixerCapacity?: string;             // Dung tích thùng trộn
+  outputPerBatch?: string;            // Sản lượng mỗi mẻ
+  bucketCapacity?: string;            // Dung tích gầu xúc
+  waterTankCapacity?: string;         // Dung tích bồn nước
+  mixingTime?: string;                // Thời gian trộn
+  drumSpeed?: string;                 // Tốc độ quay thùng
+  maxDischargingHeight?: string;      // Chiều cao đổ tối đa
+  maxTransportSpeed?: string;         // Tốc độ di chuyển
+  gradability?: string;               // Khả năng leo dốc
+  wheelDrive?: string;                // Hệ thống dẫn động
+  weighingSystem?: string;            // Hệ thống cân
+  hydraulicSystem?: string;           // Hệ thống thủy lực
+  steeringType?: string;              // Loại lái
+  turningRadius?: string;             // Bán kính quay
+}
+
+// Thông số trạm trộn bê tông
+export interface BatchingPlantSpecification {
+  theoreticalOutput?: string;         // Công suất lý thuyết
+  mixerType?: string;                 // Loại máy trộn
+  mixerCapacity?: string;             // Dung tích máy trộn
+  aggregateBins?: string;             // Số phễu cốt liệu
+  aggregateBinCapacity?: string;      // Dung tích mỗi phễu
+  cementSiloCapacity?: string;        // Dung tích silo xi măng
+  conveyorWidth?: string;             // Chiều rộng băng tải
+  conveyorSpeed?: string;             // Tốc độ băng tải
+  weighingSystem?: string;            // Hệ thống cân
+  weighingAccuracy?: string;          // Độ chính xác cân
+  controlSystem?: string;             // Hệ thống điều khiển
+  waterMeasuring?: string;            // Hệ thống đo nước
+  admixtureMeasuring?: string;        // Hệ thống đo phụ gia
+  dustCollector?: string;             // Hệ thống lọc bụi
+  installTime?: string;               // Thời gian lắp đặt
+  totalPower?: string;                // Tổng công suất điện
+}
+
+// Thông số máy bơm bê tông
+export interface ConcretePumpSpecification {
+  theoreticalOutput?: string;         // Công suất lý thuyết
+  maxPressure?: string;               // Áp suất tối đa
+  cylinderDiameter?: string;          // Đường kính xi lanh
+  pistonStroke?: string;              // Hành trình piston
+  strokesPerMinute?: string;          // Số hành trình/phút
+  hopperCapacity?: string;            // Dung tích phễu
+  maxAggregateSize?: string;          // Kích thước cốt liệu tối đa
+  pipelineDiameter?: string;          // Đường kính ống bơm
+  horizontalDistance?: string;        // Cự ly bơm ngang
+  verticalDistance?: string;          // Cự ly bơm đứng
+  hydraulicPressure?: string;         // Áp suất thủy lực
+  hydraulicOilCapacity?: string;      // Dung tích dầu thủy lực
+  remoteControl?: string;             // Điều khiển từ xa
+  cleaningSystem?: string;            // Hệ thống làm sạch
+  trailerType?: string;               // Loại moóc
+}
+
+// Thông số palang điện cầu trục
+export interface HoistSpecification {
+  liftCapacity?: string;              // Tải trọng nâng
+  liftHeight?: string;                // Chiều cao nâng
+  liftSpeed?: string;                 // Tốc độ nâng
+  liftMotorPower?: string;            // Công suất động cơ nâng
+  hoistType?: string;                 // Loại palang (dây xích/cáp)
+  chainType?: string;                 // Loại xích/cáp
+  brakeType?: string;                 // Loại phanh
+  dutyClass?: string;                 // Cấp chế độ làm việc
+  voltage?: string;                   // Điện áp
+  frequency?: string;                 // Tần số
+  protectionClass?: string;           // Cấp bảo vệ
+  ambientTemperature?: string;        // Nhiệt độ môi trường
+  trolleySpeed?: string;              // Tốc độ xe con
+  trolleyMotorPower?: string;         // Công suất động cơ xe con
+  craneSpan?: string;                 // Khẩu độ cầu trục
+  controlType?: string;               // Loại điều khiển
+  safetyFeatures?: string;            // Tính năng an toàn
+}
 
 export interface Truck {
   id: string;
@@ -801,6 +878,10 @@ export interface Truck {
   compactorSpec?: CompactorSpecification; // Máy đầm
   generatorSpec?: GeneratorSpecification; // Máy phát điện
   compressorSpec?: CompressorSpecification; // Máy nén khí
+  concreteMixerSpec?: ConcreteMixerSpecification; // Máy trộn bê tông tự hành
+  batchingPlantSpec?: BatchingPlantSpecification; // Trạm trộn bê tông
+  concretePumpSpec?: ConcretePumpSpecification; // Máy bơm bê tông tĩnh
+  hoistSpec?: HoistSpecification; // Palang điện cầu trục
 
   // Thông số kỹ thuật phổ biến
   engineType?: string;

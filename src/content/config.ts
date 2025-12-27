@@ -200,6 +200,10 @@ const productsCollection = defineCollection({
     compactorSpec: z.record(z.any()).optional(),
     generatorSpec: z.record(z.any()).optional(),
     compressorSpec: z.record(z.any()).optional(),
+    concreteMixerSpec: z.record(z.any()).optional(),
+    batchingPlantSpec: z.record(z.any()).optional(),
+    concretePumpSpec: z.record(z.any()).optional(),
+    hoistSpec: z.record(z.any()).optional(),
 
     // Additional specs
     specifications: z.record(z.any()).optional(),

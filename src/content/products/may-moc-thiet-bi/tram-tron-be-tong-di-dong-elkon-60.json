@@ -33,5 +33,23 @@
         "Băng tải 800mm",
         "Thương hiệu Elkon Thổ Nhĩ Kỳ"
     ],
+    "batchingPlantSpec": {
+        "theoreticalOutput": "60 m³/h",
+        "mixerType": "Cưỡng bức trục ngang kép",
+        "mixerCapacity": "1.0 m³",
+        "aggregateBins": "4 ngăn",
+        "aggregateBinCapacity": "15 m³/ngăn",
+        "cementSiloCapacity": "80 tấn",
+        "conveyorWidth": "800 mm",
+        "conveyorSpeed": "1.6 m/s",
+        "weighingSystem": "Cân điện tử từng thành phần",
+        "weighingAccuracy": "± 1%",
+        "controlSystem": "PLC Siemens + phần mềm điều khiển",
+        "waterMeasuring": "Đồng hồ điện từ",
+        "admixtureMeasuring": "Bơm định lượng",
+        "dustCollector": "Lọc bụi túi vải",
+        "installTime": "1-2 ngày",
+        "totalPower": "75 kW"
+    },
     "order": 61
 }

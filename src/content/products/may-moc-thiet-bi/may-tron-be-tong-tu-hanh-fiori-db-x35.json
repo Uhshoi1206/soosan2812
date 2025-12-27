@@ -37,5 +37,21 @@
     "engineType": "Diesel 4 xi lanh, turbo tăng áp",
     "enginePower": "75 kW (100 HP)",
     "fuel": "Diesel",
+    "concreteMixerSpec": {
+        "mixerCapacity": "3.5 m³ (thùng trộn)",
+        "outputPerBatch": "3.0 m³ (bê tông ra)",
+        "bucketCapacity": "0.5 m³",
+        "waterTankCapacity": "500 lít",
+        "mixingTime": "6-8 phút/mẻ",
+        "drumSpeed": "0-14 vòng/phút",
+        "maxDischargingHeight": "2.500 mm",
+        "maxTransportSpeed": "25 km/h",
+        "gradability": "40%",
+        "wheelDrive": "4x4 thủy tĩnh",
+        "weighingSystem": "Cân điện tử tự động",
+        "hydraulicSystem": "Bosch Rexroth",
+        "steeringType": "Lái 4 bánh",
+        "turningRadius": "4.600 mm"
+    },
     "order": 60
 }

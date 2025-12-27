@@ -37,5 +37,21 @@
     "engineType": "Diesel 4 xi lanh, turbo tăng áp",
     "enginePower": "104 kW (140 HP)",
     "fuel": "Diesel",
+    "concretePumpSpec": {
+        "theoreticalOutput": "80 m³/h",
+        "maxPressure": "108 bar",
+        "cylinderDiameter": "200 mm",
+        "pistonStroke": "1.400 mm",
+        "strokesPerMinute": "22 lần/phút",
+        "hopperCapacity": "550 lít",
+        "maxAggregateSize": "40 mm",
+        "pipelineDiameter": "125 mm",
+        "horizontalDistance": "600 m",
+        "verticalDistance": "150 m",
+        "hydraulicPressure": "350 bar",
+        "hydraulicOilCapacity": "260 lít",
+        "remoteControl": "Remote điều khiển từ xa",
+        "cleaningSystem": "Nước áp lực + bi cao su"
+    },
     "order": 62
 }

@@ -2285,49 +2285,49 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                   )}
                   {truck.rollerSpec.staticLinearLoad && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Tải trọng tuyến tính</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tải trọng tuyến tính</td>
                       <td className="py-2 px-3 font-medium">{truck.rollerSpec.staticLinearLoad}</td>
                     </tr>
                   )}
                   {truck.rollerSpec.compactionDepth && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Độ sâu đầm nén</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Độ sâu đầm nén</td>
                       <td className="py-2 px-3 font-medium">{truck.rollerSpec.compactionDepth}</td>
                     </tr>
                   )}
                   {truck.rollerSpec.numberOfWheels && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Số lượng bánh</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Số lượng bánh</td>
                       <td className="py-2 px-3 font-medium">{truck.rollerSpec.numberOfWheels}</td>
                     </tr>
                   )}
                   {truck.rollerSpec.tireSize && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Kích thước lốp</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước lốp</td>
                       <td className="py-2 px-3 font-medium">{truck.rollerSpec.tireSize}</td>
                     </tr>
                   )}
                   {truck.rollerSpec.tirePressureRange && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Áp suất lốp</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Áp suất lốp</td>
                       <td className="py-2 px-3 font-medium">{truck.rollerSpec.tirePressureRange}</td>
                     </tr>
                   )}
                   {truck.rollerSpec.waterTankCapacity && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Dung tích bình nước</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích bình nước</td>
                       <td className="py-2 px-3 font-medium">{truck.rollerSpec.waterTankCapacity}</td>
                     </tr>
                   )}
                   {truck.rollerSpec.turningRadius && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Bán kính quay</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Bán kính quay</td>
                       <td className="py-2 px-3 font-medium">{truck.rollerSpec.turningRadius}</td>
                     </tr>
                   )}
                   {truck.rollerSpec.climbingAbility && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600">Khả năng leo dốc</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Khả năng leo dốc</td>
                       <td className="py-2 px-3 font-medium">{truck.rollerSpec.climbingAbility}</td>
                     </tr>
                   )}
@@ -2703,6 +2703,95 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
             </>
           )}
 
+          {/* Forklift Spec - Thông số xe nâng */}
+          {truck.forkliftSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-sky-100 p-2 rounded mb-3 text-sky-800">Thông số xe nâng</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.forkliftSpec.loadCapacity && (
+                    <tr className="border-b bg-sky-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tải trọng nâng</td>
+                      <td className="py-2 px-3 font-medium text-sky-700">{truck.forkliftSpec.loadCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.liftHeight && (
+                    <tr className="border-b bg-sky-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao nâng</td>
+                      <td className="py-2 px-3 font-medium text-sky-700">{truck.forkliftSpec.liftHeight}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.loadCenter && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tâm tải</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.loadCenter}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.forkDimensions && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước càng</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.forkDimensions}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.mastType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại trụ nâng</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.mastType}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.freeLifHeight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao tự do</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.freeLifHeight}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.tiltAngle && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Góc nghiêng</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.tiltAngle}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.motorType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại động cơ</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.motorType}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.batterySpec && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thông số pin</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.batterySpec}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.transmission && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hộp số</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.transmission}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.steeringType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại lái</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.steeringType}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.tireType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại lốp</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.tireType}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.turningRadius && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Bán kính quay</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.turningRadius}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
           {/* Bulldozer Spec - Thông số máy ủi */}
           {truck.bulldozerSpec && (
             <>
@@ -2820,6 +2909,272 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                     <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600">Bán kính quay</td>
                       <td className="py-2 px-3 font-medium">{truck.graderSpec.turningRadius}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Concrete Mixer Spec - Thông số máy trộn bê tông tự hành */}
+          {truck.concreteMixerSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-slate-100 p-2 rounded mb-3 text-slate-800">Thông số máy trộn bê tông</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.concreteMixerSpec.mixerCapacity && (
+                    <tr className="border-b bg-slate-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích thùng trộn</td>
+                      <td className="py-2 px-3 font-medium text-slate-700">{truck.concreteMixerSpec.mixerCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.concreteMixerSpec.outputPerBatch && (
+                    <tr className="border-b bg-slate-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Sản lượng mỗi mẻ</td>
+                      <td className="py-2 px-3 font-medium text-slate-700">{truck.concreteMixerSpec.outputPerBatch}</td>
+                    </tr>
+                  )}
+                  {truck.concreteMixerSpec.bucketCapacity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích gầu xúc</td>
+                      <td className="py-2 px-3 font-medium">{truck.concreteMixerSpec.bucketCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.concreteMixerSpec.waterTankCapacity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích bồn nước</td>
+                      <td className="py-2 px-3 font-medium">{truck.concreteMixerSpec.waterTankCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.concreteMixerSpec.mixingTime && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thời gian trộn</td>
+                      <td className="py-2 px-3 font-medium">{truck.concreteMixerSpec.mixingTime}</td>
+                    </tr>
+                  )}
+                  {truck.concreteMixerSpec.weighingSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống cân</td>
+                      <td className="py-2 px-3 font-medium">{truck.concreteMixerSpec.weighingSystem}</td>
+                    </tr>
+                  )}
+                  {truck.concreteMixerSpec.wheelDrive && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống dẫn động</td>
+                      <td className="py-2 px-3 font-medium">{truck.concreteMixerSpec.wheelDrive}</td>
+                    </tr>
+                  )}
+                  {truck.concreteMixerSpec.maxTransportSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ di chuyển</td>
+                      <td className="py-2 px-3 font-medium">{truck.concreteMixerSpec.maxTransportSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.concreteMixerSpec.gradability && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Khả năng leo dốc</td>
+                      <td className="py-2 px-3 font-medium">{truck.concreteMixerSpec.gradability}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Batching Plant Spec - Thông số trạm trộn bê tông */}
+          {truck.batchingPlantSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-zinc-100 p-2 rounded mb-3 text-zinc-800">Thông số trạm trộn</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.batchingPlantSpec.theoreticalOutput && (
+                    <tr className="border-b bg-zinc-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Công suất lý thuyết</td>
+                      <td className="py-2 px-3 font-medium text-zinc-700">{truck.batchingPlantSpec.theoreticalOutput}</td>
+                    </tr>
+                  )}
+                  {truck.batchingPlantSpec.mixerType && (
+                    <tr className="border-b bg-zinc-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại máy trộn</td>
+                      <td className="py-2 px-3 font-medium text-zinc-700">{truck.batchingPlantSpec.mixerType}</td>
+                    </tr>
+                  )}
+                  {truck.batchingPlantSpec.mixerCapacity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích máy trộn</td>
+                      <td className="py-2 px-3 font-medium">{truck.batchingPlantSpec.mixerCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.batchingPlantSpec.aggregateBins && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Số phễu cốt liệu</td>
+                      <td className="py-2 px-3 font-medium">{truck.batchingPlantSpec.aggregateBins}</td>
+                    </tr>
+                  )}
+                  {truck.batchingPlantSpec.cementSiloCapacity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích silo xi măng</td>
+                      <td className="py-2 px-3 font-medium">{truck.batchingPlantSpec.cementSiloCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.batchingPlantSpec.conveyorWidth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều rộng băng tải</td>
+                      <td className="py-2 px-3 font-medium">{truck.batchingPlantSpec.conveyorWidth}</td>
+                    </tr>
+                  )}
+                  {truck.batchingPlantSpec.weighingSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống cân</td>
+                      <td className="py-2 px-3 font-medium">{truck.batchingPlantSpec.weighingSystem}</td>
+                    </tr>
+                  )}
+                  {truck.batchingPlantSpec.controlSystem && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hệ thống điều khiển</td>
+                      <td className="py-2 px-3 font-medium">{truck.batchingPlantSpec.controlSystem}</td>
+                    </tr>
+                  )}
+                  {truck.batchingPlantSpec.totalPower && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tổng công suất điện</td>
+                      <td className="py-2 px-3 font-medium">{truck.batchingPlantSpec.totalPower}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Concrete Pump Spec - Thông số máy bơm bê tông */}
+          {truck.concretePumpSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3 text-gray-800">Thông số máy bơm bê tông</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.concretePumpSpec.theoreticalOutput && (
+                    <tr className="border-b bg-gray-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Công suất lý thuyết</td>
+                      <td className="py-2 px-3 font-medium text-gray-700">{truck.concretePumpSpec.theoreticalOutput}</td>
+                    </tr>
+                  )}
+                  {truck.concretePumpSpec.maxPressure && (
+                    <tr className="border-b bg-gray-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Áp suất tối đa</td>
+                      <td className="py-2 px-3 font-medium text-gray-700">{truck.concretePumpSpec.maxPressure}</td>
+                    </tr>
+                  )}
+                  {truck.concretePumpSpec.cylinderDiameter && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Đường kính xi lanh</td>
+                      <td className="py-2 px-3 font-medium">{truck.concretePumpSpec.cylinderDiameter}</td>
+                    </tr>
+                  )}
+                  {truck.concretePumpSpec.pistonStroke && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hành trình piston</td>
+                      <td className="py-2 px-3 font-medium">{truck.concretePumpSpec.pistonStroke}</td>
+                    </tr>
+                  )}
+                  {truck.concretePumpSpec.pipelineDiameter && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Đường kính ống bơm</td>
+                      <td className="py-2 px-3 font-medium">{truck.concretePumpSpec.pipelineDiameter}</td>
+                    </tr>
+                  )}
+                  {truck.concretePumpSpec.horizontalDistance && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Cự ly bơm ngang</td>
+                      <td className="py-2 px-3 font-medium">{truck.concretePumpSpec.horizontalDistance}</td>
+                    </tr>
+                  )}
+                  {truck.concretePumpSpec.verticalDistance && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Cự ly bơm đứng</td>
+                      <td className="py-2 px-3 font-medium">{truck.concretePumpSpec.verticalDistance}</td>
+                    </tr>
+                  )}
+                  {truck.concretePumpSpec.hopperCapacity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích phễu</td>
+                      <td className="py-2 px-3 font-medium">{truck.concretePumpSpec.hopperCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.concretePumpSpec.remoteControl && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Điều khiển từ xa</td>
+                      <td className="py-2 px-3 font-medium">{truck.concretePumpSpec.remoteControl}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Hoist Spec - Thông số palang điện */}
+          {truck.hoistSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-neutral-100 p-2 rounded mb-3 text-neutral-800">Thông số palang điện</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.hoistSpec.liftCapacity && (
+                    <tr className="border-b bg-neutral-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tải trọng nâng</td>
+                      <td className="py-2 px-3 font-medium text-neutral-700">{truck.hoistSpec.liftCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.hoistSpec.liftHeight && (
+                    <tr className="border-b bg-neutral-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao nâng</td>
+                      <td className="py-2 px-3 font-medium text-neutral-700">{truck.hoistSpec.liftHeight}</td>
+                    </tr>
+                  )}
+                  {truck.hoistSpec.liftSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ nâng</td>
+                      <td className="py-2 px-3 font-medium">{truck.hoistSpec.liftSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.hoistSpec.liftMotorPower && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Công suất động cơ nâng</td>
+                      <td className="py-2 px-3 font-medium">{truck.hoistSpec.liftMotorPower}</td>
+                    </tr>
+                  )}
+                  {truck.hoistSpec.hoistType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại palang</td>
+                      <td className="py-2 px-3 font-medium">{truck.hoistSpec.hoistType}</td>
+                    </tr>
+                  )}
+                  {truck.hoistSpec.brakeType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại phanh</td>
+                      <td className="py-2 px-3 font-medium">{truck.hoistSpec.brakeType}</td>
+                    </tr>
+                  )}
+                  {truck.hoistSpec.voltage && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Điện áp</td>
+                      <td className="py-2 px-3 font-medium">{truck.hoistSpec.voltage}</td>
+                    </tr>
+                  )}
+                  {truck.hoistSpec.dutyClass && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Cấp chế độ làm việc</td>
+                      <td className="py-2 px-3 font-medium">{truck.hoistSpec.dutyClass}</td>
+                    </tr>
+                  )}
+                  {truck.hoistSpec.controlType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại điều khiển</td>
+                      <td className="py-2 px-3 font-medium">{truck.hoistSpec.controlType}</td>
+                    </tr>
+                  )}
+                  {truck.hoistSpec.safetyFeatures && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tính năng an toàn</td>
+                      <td className="py-2 px-3 font-medium">{truck.hoistSpec.safetyFeatures}</td>
                     </tr>
                   )}
                 </tbody>
