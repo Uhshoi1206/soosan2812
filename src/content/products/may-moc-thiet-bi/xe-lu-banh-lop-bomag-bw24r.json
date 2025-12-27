@@ -1,0 +1,43 @@
+{
+    "id": "xe-lu-banh-lop-bomag-bw24r",
+    "name": "Xe Lu Bánh Lốp Bomag BW24R - 24 Tấn Lu Nhựa Đường Hoàn Thiện",
+    "slug": "xe-lu-banh-lop-bomag-bw24r",
+    "brand": "Bomag",
+    "model": "BW24R",
+    "price": null,
+    "priceText": "Liên hệ",
+    "weightText": "24.000 kg",
+    "weight": 24000,
+    "length": 5350,
+    "width": 2550,
+    "height": 3230,
+    "dimensions": "5.350 x 2.550 x 3.230 mm",
+    "insideDimension": "Xe lu bánh lốp 24 tấn, 11 bánh, chiều rộng lu 2.18m",
+    "type": "may-moc-thiet-bi",
+    "isNew": true,
+    "isHot": false,
+    "stockStatus": "in-stock",
+    "origin": "Đức",
+    "thumbnailUrl": "/assets/xe-lu-banh-lop-bomag-bw24r.webp",
+    "images": [
+        "/assets/xe-lu-banh-lop-bomag-bw24r.webp"
+    ],
+    "description": "Xe lu bánh lốp Bomag BW24R 24 tấn - Lu hoàn thiện mặt đường nhựa 11 bánh, chiều rộng lu 2.18m, động cơ Deutz 173HP. Nhập khẩu Đức chính hãng.",
+    "detailedDescription": "<h2>Xe Lu Bánh Lốp Bomag BW24R - Lu Hoàn Thiện Mặt Đường Nhựa</h2>\n<p><strong>Xe lu bánh lốp Bomag BW24R</strong> chuyên lu hoàn thiện lớp thảm nhựa đường với <strong>11 bánh lốp</strong>, <strong>tải trọng 24 tấn</strong>.</p>\n\n<h3>Thông Số Kỹ Thuật</h3>\n<ul>\n<li><strong>Trọng lượng:</strong> 24.000 kg</li>\n<li><strong>Số bánh:</strong> 11 bánh lốp</li>\n<li><strong>Chiều rộng lu:</strong> 2.180 mm</li>\n<li><strong>Động cơ:</strong> Deutz TCD 2012 173HP</li>\n<li><strong>Tốc độ:</strong> 0 - 20 km/h</li>\n<li><strong>Hệ thống phun nước:</strong> Tự động</li>\n</ul>\n\n<h3>Ứng Dụng</h3>\n<ul>\n<li>Lu hoàn thiện lớp nhựa đường</li>\n<li>Lu bê tông nhựa nóng</li>\n<li>Lu mặt đường sân bay</li>\n<li>Lu bề mặt cầu đường</li>\n</ul>",
+    "features": [
+        "Trọng lượng 24 tấn",
+        "11 bánh lốp",
+        "Chiều rộng lu 2.18m",
+        "Động cơ Deutz 173HP",
+        "Tốc độ đến 20 km/h",
+        "Hệ thống phun nước tự động",
+        "Cabin điều hòa cao cấp",
+        "Thương hiệu Bomag Đức"
+    ],
+    "engineModel": "Deutz TCD 2012 L04",
+    "engineType": "Diesel 4 xi lanh, turbo tăng áp",
+    "enginePower": "129 kW (173 HP)",
+    "fuel": "Diesel",
+    "emissionStandard": "Tier 3",
+    "order": 31
+}

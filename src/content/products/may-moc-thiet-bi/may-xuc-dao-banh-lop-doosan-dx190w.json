@@ -1,0 +1,43 @@
+{
+    "id": "may-xuc-dao-banh-lop-doosan-dx190w",
+    "name": "Máy Xúc Đào Bánh Lốp Doosan DX190W - 19 Tấn Di Chuyển Nhanh",
+    "slug": "may-xuc-dao-banh-lop-doosan-dx190w",
+    "brand": "Doosan",
+    "model": "DX190W",
+    "price": null,
+    "priceText": "Liên hệ",
+    "weightText": "19.500 kg",
+    "weight": 19500,
+    "length": 9200,
+    "width": 2550,
+    "height": 3200,
+    "dimensions": "9.200 x 2.550 x 3.200 mm",
+    "insideDimension": "Máy xúc đào bánh lốp 19 tấn, gầu 0.93m³, di chuyển 35 km/h",
+    "type": "may-moc-thiet-bi",
+    "isNew": true,
+    "isHot": true,
+    "stockStatus": "in-stock",
+    "origin": "Hàn Quốc",
+    "thumbnailUrl": "/assets/may-xuc-dao-doosan-dx190w.webp",
+    "images": [
+        "/assets/may-xuc-dao-doosan-dx190w.webp"
+    ],
+    "description": "Máy xúc đào bánh lốp Doosan DX190W 19 tấn - Di chuyển nhanh 35 km/h trên đường giao thông, gầu 0.93m³, động cơ Doosan 140HP. Phù hợp công trình đô thị, san lấp, đào móng.",
+    "detailedDescription": "<h2>Máy Xúc Đào Bánh Lốp Doosan DX190W - Linh Hoạt Di Chuyển Nhanh</h2>\n<p><strong>Máy xúc đào bánh lốp Doosan DX190W</strong> kết hợp sức mạnh xúc đào với khả năng di chuyển nhanh trên đường giao thông, không cần xe chở. Phù hợp thi công trong đô thị.</p>\n\n<h3>Thông Số Kỹ Thuật</h3>\n<ul>\n<li><strong>Trọng lượng:</strong> 19.500 kg</li>\n<li><strong>Dung tích gầu:</strong> 0.93 m³</li>\n<li><strong>Động cơ:</strong> Doosan DL06 140HP (103 kW)</li>\n<li><strong>Tốc độ di chuyển:</strong> 35 km/h</li>\n<li><strong>Chiều sâu đào:</strong> 5.890 mm</li>\n<li><strong>Tầm với ngang:</strong> 9.410 mm</li>\n<li><strong>Lực đào gầu:</strong> 128 kN</li>\n</ul>\n\n<h3>Ưu Điểm</h3>\n<ul>\n<li>Di chuyển nhanh trên đường giao thông</li>\n<li>Không cần xe chở, tiết kiệm chi phí</li>\n<li>Linh hoạt thi công nhiều vị trí/ngày</li>\n<li>Cabin rộng rãi, điều hòa 2 chiều</li>\n</ul>",
+    "features": [
+        "Trọng lượng 19 tấn",
+        "Gầu 0.93 m³",
+        "Di chuyển 35 km/h trên đường",
+        "Động cơ Doosan DL06 140HP",
+        "Chiều sâu đào 5.9m",
+        "Không cần xe chở",
+        "Cabin điều hòa 2 chiều",
+        "Thương hiệu Doosan Hàn Quốc"
+    ],
+    "engineModel": "Doosan DL06",
+    "engineType": "Diesel 6 xi lanh, turbo tăng áp",
+    "enginePower": "103 kW (140 HP)",
+    "fuel": "Diesel",
+    "emissionStandard": "Tier 3",
+    "order": 20
+}
