@@ -121,16 +121,21 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
     }
     // Priority 2: If on a product page, use smart prioritization
     else if (currentProduct) {
-      if (random < 0.7) {
-        // 70% chance: Show notification for current product
+      // Kiểm tra xem currentProduct có nằm trong availableProducts không (tức là còn bán)
+      const isCurrentProductAvailable = availableProducts.some(
+        p => p.slug === currentProduct.slug && p.type === currentProduct.type
+      );
+
+      if (isCurrentProductAvailable && random < 0.7) {
+        // 70% chance: Show notification for current product (chỉ khi sản phẩm còn bán)
         selectedProduct = currentProduct;
         console.log('✅ 70% - Showing current product:', selectedProduct.name);
       } else {
-        // 30% chance: Show notification for products of same type
+        // 30% chance hoặc nếu currentProduct đã ngừng bán: Show notification for products of same type
         const sameTypeProducts = availableProducts.filter(p => p.type === currentProduct.type);
         if (sameTypeProducts.length > 0) {
           selectedProduct = sameTypeProducts[Math.floor(Math.random() * sameTypeProducts.length)];
-          console.log('✅ 30% - Showing same type product:', selectedProduct.name, '(type:', selectedProduct.type, ')');
+          console.log('✅ Showing same type product:', selectedProduct.name, '(type:', selectedProduct.type, ')');
         } else {
           selectedProduct = availableProducts[Math.floor(Math.random() * availableProducts.length)];
           console.log('⚠️ No same type products, showing random:', selectedProduct.name);
