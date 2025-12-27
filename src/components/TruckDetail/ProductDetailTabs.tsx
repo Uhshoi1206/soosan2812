@@ -2703,95 +2703,6 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
             </>
           )}
 
-          {/* Forklift Spec - Thông số xe nâng */}
-          {truck.forkliftSpec && (
-            <>
-              <h4 className="font-bold text-lg bg-sky-100 p-2 rounded mb-3 text-sky-800">Thông số xe nâng</h4>
-              <table className="w-full border-collapse border mb-6">
-                <tbody>
-                  {truck.forkliftSpec.loadCapacity && (
-                    <tr className="border-b bg-sky-50">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Tải trọng nâng</td>
-                      <td className="py-2 px-3 font-medium text-sky-700">{truck.forkliftSpec.loadCapacity}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.liftHeight && (
-                    <tr className="border-b bg-sky-50">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao nâng</td>
-                      <td className="py-2 px-3 font-medium text-sky-700">{truck.forkliftSpec.liftHeight}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.loadCenter && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Tâm tải</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.loadCenter}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.forkDimensions && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước càng</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.forkDimensions}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.mastType && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại trụ nâng</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.mastType}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.freeLifHeight && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao tự do</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.freeLifHeight}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.tiltAngle && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Góc nghiêng</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.tiltAngle}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.motorType && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại động cơ</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.motorType}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.batterySpec && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Thông số pin</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.batterySpec}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.transmission && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Hộp số</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.transmission}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.steeringType && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại lái</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.steeringType}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.tireType && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại lốp</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.tireType}</td>
-                    </tr>
-                  )}
-                  {truck.forkliftSpec.turningRadius && (
-                    <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Bán kính quay</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.turningRadius}</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </>
-          )}
-
           {/* Bulldozer Spec - Thông số máy ủi */}
           {truck.bulldozerSpec && (
             <>
@@ -4194,28 +4105,38 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Hiệu suất nâng hạ</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
-                  {truck.forkliftSpec.liftCapacity && (
+                  {/* Tải trọng: liftCapacity hoặc loadCapacity */}
+                  {(truck.forkliftSpec.liftCapacity || truck.forkliftSpec.loadCapacity) && (
                     <tr className="border-b bg-red-50">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Tải trọng nâng</td>
-                      <td className="py-2 px-3 font-medium text-red-700">{truck.forkliftSpec.liftCapacity}</td>
+                      <td className="py-2 px-3 font-medium text-red-700">{truck.forkliftSpec.liftCapacity || truck.forkliftSpec.loadCapacity}</td>
                     </tr>
                   )}
-                  {truck.forkliftSpec.maxLiftHeight && (
+                  {/* Chiều cao nâng: maxLiftHeight hoặc liftHeight */}
+                  {(truck.forkliftSpec.maxLiftHeight || truck.forkliftSpec.liftHeight) && (
                     <tr className="border-b bg-green-50">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao nâng tối đa</td>
-                      <td className="py-2 px-3 font-medium text-green-700">{truck.forkliftSpec.maxLiftHeight}</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao nâng</td>
+                      <td className="py-2 px-3 font-medium text-green-700">{truck.forkliftSpec.maxLiftHeight || truck.forkliftSpec.liftHeight}</td>
                     </tr>
                   )}
-                  {truck.forkliftSpec.freeLift && (
+                  {truck.forkliftSpec.loadCenter && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao tự do (Free Lift)</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.freeLift}</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tâm tải</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.loadCenter}</td>
                     </tr>
                   )}
-                  {truck.forkliftSpec.forkLength && (
+                  {/* Chiều cao tự do: freeLift hoặc freeLifHeight */}
+                  {(truck.forkliftSpec.freeLift || truck.forkliftSpec.freeLifHeight) && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều dài càng</td>
-                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.forkLength}</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều cao tự do</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.freeLift || truck.forkliftSpec.freeLifHeight}</td>
+                    </tr>
+                  )}
+                  {/* Kích thước càng: forkLength hoặc forkDimensions */}
+                  {(truck.forkliftSpec.forkLength || truck.forkliftSpec.forkDimensions) && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước càng</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.forkLength || truck.forkliftSpec.forkDimensions}</td>
                     </tr>
                   )}
                   {truck.forkliftSpec.mastType && (
@@ -4230,6 +4151,18 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                       <td className="py-2 px-3 font-medium">{truck.forkliftSpec.tiltAngle}</td>
                     </tr>
                   )}
+                  {truck.forkliftSpec.motorType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại động cơ</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.motorType}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.batterySpec && (
+                    <tr className="border-b bg-yellow-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Thông số pin</td>
+                      <td className="py-2 px-3 font-medium text-yellow-700">{truck.forkliftSpec.batterySpec}</td>
+                    </tr>
+                  )}
                   {truck.forkliftSpec.liftSpeedLoaded && (
                     <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ nâng có tải</td>
@@ -4242,6 +4175,24 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               <h4 className="font-bold text-lg bg-gray-100 p-2 rounded mb-3">Di chuyển & Vận hành</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
+                  {truck.forkliftSpec.transmission && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Hộp số</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.transmission}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.steeringType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại lái</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.steeringType}</td>
+                    </tr>
+                  )}
+                  {truck.forkliftSpec.tireType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại lốp</td>
+                      <td className="py-2 px-3 font-medium">{truck.forkliftSpec.tireType}</td>
+                    </tr>
+                  )}
                   {truck.forkliftSpec.travelSpeedLoaded && (
                     <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ di chuyển có tải</td>
@@ -4286,6 +4237,7 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                   )}
                 </tbody>
               </table>
+
             </>
           )}
         </div>
