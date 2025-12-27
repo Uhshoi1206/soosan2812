@@ -2241,6 +2241,592 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
             </>
           )}
 
+          {/* Roller Spec - Thông số xe lu */}
+          {truck.rollerSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-amber-100 p-2 rounded mb-3 text-amber-800">Thông số hệ thống lu</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.rollerSpec.drumWidth && (
+                    <tr className="border-b bg-amber-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều rộng trống</td>
+                      <td className="py-2 px-3 font-medium text-amber-700">{truck.rollerSpec.drumWidth}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.drumDiameter && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Đường kính trống</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.drumDiameter}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.drumWeight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Trọng lượng trống</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.drumWeight}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.centrifugalForce && (
+                    <tr className="border-b bg-amber-50">
+                      <td className="py-2 px-3 text-gray-600">Lực li tâm</td>
+                      <td className="py-2 px-3 font-medium text-amber-700">{truck.rollerSpec.centrifugalForce}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.frequency && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tần số rung</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.frequency}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.amplitude && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Biên độ rung</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.amplitude}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.staticLinearLoad && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tải trọng tuyến tính</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.staticLinearLoad}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.compactionDepth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Độ sâu đầm nén</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.compactionDepth}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.numberOfWheels && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Số lượng bánh</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.numberOfWheels}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.tireSize && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Kích thước lốp</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.tireSize}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.tirePressureRange && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Áp suất lốp</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.tirePressureRange}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.waterTankCapacity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Dung tích bình nước</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.waterTankCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.turningRadius && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Bán kính quay</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.turningRadius}</td>
+                    </tr>
+                  )}
+                  {truck.rollerSpec.climbingAbility && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Khả năng leo dốc</td>
+                      <td className="py-2 px-3 font-medium">{truck.rollerSpec.climbingAbility}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Compactor Spec - Thông số máy đầm */}
+          {truck.compactorSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-orange-100 p-2 rounded mb-3 text-orange-800">Thông số máy đầm</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.compactorSpec.compactorType && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại máy đầm</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.compactorSpec.compactorType}</td>
+                    </tr>
+                  )}
+                  {truck.compactorSpec.plateSize && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Kích thước bàn đầm</td>
+                      <td className="py-2 px-3 font-medium">{truck.compactorSpec.plateSize}</td>
+                    </tr>
+                  )}
+                  {truck.compactorSpec.impactForce && (
+                    <tr className="border-b bg-orange-50">
+                      <td className="py-2 px-3 text-gray-600">Lực đầm</td>
+                      <td className="py-2 px-3 font-medium text-orange-700">{truck.compactorSpec.impactForce}</td>
+                    </tr>
+                  )}
+                  {truck.compactorSpec.frequency && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tần số đầm</td>
+                      <td className="py-2 px-3 font-medium">{truck.compactorSpec.frequency}</td>
+                    </tr>
+                  )}
+                  {truck.compactorSpec.jumpingHeight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều cao nhảy</td>
+                      <td className="py-2 px-3 font-medium">{truck.compactorSpec.jumpingHeight}</td>
+                    </tr>
+                  )}
+                  {truck.compactorSpec.compactionDepth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Độ sâu đầm nén</td>
+                      <td className="py-2 px-3 font-medium">{truck.compactorSpec.compactionDepth}</td>
+                    </tr>
+                  )}
+                  {truck.compactorSpec.travelSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tốc độ di chuyển</td>
+                      <td className="py-2 px-3 font-medium">{truck.compactorSpec.travelSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.compactorSpec.suitableSoil && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Loại đất phù hợp</td>
+                      <td className="py-2 px-3 font-medium">{truck.compactorSpec.suitableSoil}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Generator Spec - Thông số máy phát điện */}
+          {truck.generatorSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-yellow-100 p-2 rounded mb-3 text-yellow-800">Thông số máy phát điện</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.generatorSpec.standbyPower && (
+                    <tr className="border-b bg-yellow-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Công suất dự phòng</td>
+                      <td className="py-2 px-3 font-medium text-yellow-700">{truck.generatorSpec.standbyPower}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.primePower && (
+                    <tr className="border-b bg-yellow-50">
+                      <td className="py-2 px-3 text-gray-600">Công suất liên tục</td>
+                      <td className="py-2 px-3 font-medium text-yellow-700">{truck.generatorSpec.primePower}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.ratedVoltage && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Điện áp định mức</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.ratedVoltage}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.frequency && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tần số</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.frequency}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.phases && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Số pha</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.phases}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.powerFactor && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Hệ số công suất</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.powerFactor}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.alternatorModel && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Model đầu phát</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.alternatorModel}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.alternatorType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Loại đầu phát</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.alternatorType}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.fuelConsumption100 && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tiêu hao @ 100%</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.fuelConsumption100}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.fuelConsumption75 && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tiêu hao @ 75%</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.fuelConsumption75}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.controlPanel && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Bảng điều khiển</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.controlPanel}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.noiseLevel && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Độ ồn</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.noiseLevel}</td>
+                    </tr>
+                  )}
+                  {truck.generatorSpec.atsCompatible && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">ATS tự động</td>
+                      <td className="py-2 px-3 font-medium">{truck.generatorSpec.atsCompatible}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Compressor Spec - Thông số máy nén khí */}
+          {truck.compressorSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-sky-100 p-2 rounded mb-3 text-sky-800">Thông số máy nén khí</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.compressorSpec.compressorType && (
+                    <tr className="border-b bg-sky-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại máy nén</td>
+                      <td className="py-2 px-3 font-medium text-sky-700">{truck.compressorSpec.compressorType}</td>
+                    </tr>
+                  )}
+                  {truck.compressorSpec.freeAirDelivery && (
+                    <tr className="border-b bg-sky-50">
+                      <td className="py-2 px-3 text-gray-600">Lưu lượng khí</td>
+                      <td className="py-2 px-3 font-medium text-sky-700">{truck.compressorSpec.freeAirDelivery}</td>
+                    </tr>
+                  )}
+                  {truck.compressorSpec.normalPressure && (
+                    <tr className="border-b bg-sky-50">
+                      <td className="py-2 px-3 text-gray-600">Áp suất làm việc</td>
+                      <td className="py-2 px-3 font-medium text-sky-700">{truck.compressorSpec.normalPressure}</td>
+                    </tr>
+                  )}
+                  {truck.compressorSpec.maxPressure && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Áp suất tối đa</td>
+                      <td className="py-2 px-3 font-medium">{truck.compressorSpec.maxPressure}</td>
+                    </tr>
+                  )}
+                  {truck.compressorSpec.airOutletSize && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Cổng ra khí</td>
+                      <td className="py-2 px-3 font-medium">{truck.compressorSpec.airOutletSize}</td>
+                    </tr>
+                  )}
+                  {truck.compressorSpec.oilCapacity && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Dung tích dầu</td>
+                      <td className="py-2 px-3 font-medium">{truck.compressorSpec.oilCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.compressorSpec.fuelConsumption100 && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tiêu hao @ 100%</td>
+                      <td className="py-2 px-3 font-medium">{truck.compressorSpec.fuelConsumption100}</td>
+                    </tr>
+                  )}
+                  {truck.compressorSpec.runTimeAtFullTank && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Thời gian chạy</td>
+                      <td className="py-2 px-3 font-medium">{truck.compressorSpec.runTimeAtFullTank}</td>
+                    </tr>
+                  )}
+                  {truck.compressorSpec.noiseLevel && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Độ ồn</td>
+                      <td className="py-2 px-3 font-medium">{truck.compressorSpec.noiseLevel}</td>
+                    </tr>
+                  )}
+                  {truck.compressorSpec.trailerType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Loại moóc</td>
+                      <td className="py-2 px-3 font-medium">{truck.compressorSpec.trailerType}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Loader Spec - Thông số máy xúc lật */}
+          {truck.loaderSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-lime-100 p-2 rounded mb-3 text-lime-800">Thông số xúc lật</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.loaderSpec.bucketCapacity && (
+                    <tr className="border-b bg-lime-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích gầu</td>
+                      <td className="py-2 px-3 font-medium text-lime-700">{truck.loaderSpec.bucketCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.loaderSpec.bucketWidth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều rộng gầu</td>
+                      <td className="py-2 px-3 font-medium">{truck.loaderSpec.bucketWidth}</td>
+                    </tr>
+                  )}
+                  {truck.loaderSpec.breakoutForce && (
+                    <tr className="border-b bg-lime-50">
+                      <td className="py-2 px-3 text-gray-600">Lực xúc</td>
+                      <td className="py-2 px-3 font-medium text-lime-700">{truck.loaderSpec.breakoutForce}</td>
+                    </tr>
+                  )}
+                  {truck.loaderSpec.staticTippingLoad && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tải trọng lật tĩnh</td>
+                      <td className="py-2 px-3 font-medium">{truck.loaderSpec.staticTippingLoad}</td>
+                    </tr>
+                  )}
+                  {truck.loaderSpec.maxLiftHeight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều cao nâng tối đa</td>
+                      <td className="py-2 px-3 font-medium">{truck.loaderSpec.maxLiftHeight}</td>
+                    </tr>
+                  )}
+                  {truck.loaderSpec.dumpHeight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều cao đổ</td>
+                      <td className="py-2 px-3 font-medium">{truck.loaderSpec.dumpHeight}</td>
+                    </tr>
+                  )}
+                  {truck.loaderSpec.dumpReach && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tầm đổ</td>
+                      <td className="py-2 px-3 font-medium">{truck.loaderSpec.dumpReach}</td>
+                    </tr>
+                  )}
+                  {truck.loaderSpec.liftCycleTime && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Thời gian nâng</td>
+                      <td className="py-2 px-3 font-medium">{truck.loaderSpec.liftCycleTime}</td>
+                    </tr>
+                  )}
+                  {truck.loaderSpec.hydraulicPumpFlow && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Lưu lượng bơm thủy lực</td>
+                      <td className="py-2 px-3 font-medium">{truck.loaderSpec.hydraulicPumpFlow}</td>
+                    </tr>
+                  )}
+                  {truck.loaderSpec.turningRadius && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Bán kính quay</td>
+                      <td className="py-2 px-3 font-medium">{truck.loaderSpec.turningRadius}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Excavator Spec - Thông số máy xúc đào */}
+          {truck.excavatorSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-yellow-100 p-2 rounded mb-3 text-yellow-800">Thông số xúc đào</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.excavatorSpec.bucketCapacity && (
+                    <tr className="border-b bg-yellow-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích gầu</td>
+                      <td className="py-2 px-3 font-medium text-yellow-700">{truck.excavatorSpec.bucketCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.maxDiggingDepth && (
+                    <tr className="border-b bg-yellow-50">
+                      <td className="py-2 px-3 text-gray-600">Chiều sâu đào tối đa</td>
+                      <td className="py-2 px-3 font-medium text-yellow-700">{truck.excavatorSpec.maxDiggingDepth}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.maxReach && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tầm với tối đa</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.maxReach}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.maxDumpHeight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều cao đổ</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.maxDumpHeight}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.bucketBreakoutForce && (
+                    <tr className="border-b bg-yellow-50">
+                      <td className="py-2 px-3 text-gray-600">Lực đào gầu</td>
+                      <td className="py-2 px-3 font-medium text-yellow-700">{truck.excavatorSpec.bucketBreakoutForce}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.armBreakoutForce && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Lực đào tay gầu</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.armBreakoutForce}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.swingSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Tốc độ quay</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.swingSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.boomLength && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều dài cần</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.boomLength}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.armLength && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều dài tay gầu</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.armLength}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.hydraulicPumpFlow && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Lưu lượng bơm thủy lực</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.hydraulicPumpFlow}</td>
+                    </tr>
+                  )}
+                  {truck.excavatorSpec.hydraulicPressure && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Áp suất thủy lực</td>
+                      <td className="py-2 px-3 font-medium">{truck.excavatorSpec.hydraulicPressure}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Bulldozer Spec - Thông số máy ủi */}
+          {truck.bulldozerSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-stone-100 p-2 rounded mb-3 text-stone-800">Thông số máy ủi</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.bulldozerSpec.bladeType && (
+                    <tr className="border-b bg-stone-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại lưỡi</td>
+                      <td className="py-2 px-3 font-medium text-stone-700">{truck.bulldozerSpec.bladeType}</td>
+                    </tr>
+                  )}
+                  {truck.bulldozerSpec.bladeCapacity && (
+                    <tr className="border-b bg-stone-50">
+                      <td className="py-2 px-3 text-gray-600">Dung tích lưỡi</td>
+                      <td className="py-2 px-3 font-medium text-stone-700">{truck.bulldozerSpec.bladeCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.bulldozerSpec.bladeWidth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều rộng lưỡi</td>
+                      <td className="py-2 px-3 font-medium">{truck.bulldozerSpec.bladeWidth}</td>
+                    </tr>
+                  )}
+                  {truck.bulldozerSpec.bladeHeight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều cao lưỡi</td>
+                      <td className="py-2 px-3 font-medium">{truck.bulldozerSpec.bladeHeight}</td>
+                    </tr>
+                  )}
+                  {truck.bulldozerSpec.drawbarPull && (
+                    <tr className="border-b bg-stone-50">
+                      <td className="py-2 px-3 text-gray-600">Lực kéo</td>
+                      <td className="py-2 px-3 font-medium text-stone-700">{truck.bulldozerSpec.drawbarPull}</td>
+                    </tr>
+                  )}
+                  {truck.bulldozerSpec.trackShoeWidth && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều rộng guốc xích</td>
+                      <td className="py-2 px-3 font-medium">{truck.bulldozerSpec.trackShoeWidth}</td>
+                    </tr>
+                  )}
+                  {truck.bulldozerSpec.trackGauge && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Khoảng cách xích</td>
+                      <td className="py-2 px-3 font-medium">{truck.bulldozerSpec.trackGauge}</td>
+                    </tr>
+                  )}
+                  {truck.bulldozerSpec.groundPressure && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Áp suất lên đất</td>
+                      <td className="py-2 px-3 font-medium">{truck.bulldozerSpec.groundPressure}</td>
+                    </tr>
+                  )}
+                  {truck.bulldozerSpec.ripperType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Loại ripper</td>
+                      <td className="py-2 px-3 font-medium">{truck.bulldozerSpec.ripperType}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
+          {/* Grader Spec - Thông số máy san */}
+          {truck.graderSpec && (
+            <>
+              <h4 className="font-bold text-lg bg-teal-100 p-2 rounded mb-3 text-teal-800">Thông số máy san</h4>
+              <table className="w-full border-collapse border mb-6">
+                <tbody>
+                  {truck.graderSpec.bladeWidth && (
+                    <tr className="border-b bg-teal-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Chiều rộng lưỡi san</td>
+                      <td className="py-2 px-3 font-medium text-teal-700">{truck.graderSpec.bladeWidth}</td>
+                    </tr>
+                  )}
+                  {truck.graderSpec.bladeHeight && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Chiều cao lưỡi san</td>
+                      <td className="py-2 px-3 font-medium">{truck.graderSpec.bladeHeight}</td>
+                    </tr>
+                  )}
+                  {truck.graderSpec.circleRotation && (
+                    <tr className="border-b bg-teal-50">
+                      <td className="py-2 px-3 text-gray-600">Góc quay lưỡi</td>
+                      <td className="py-2 px-3 font-medium text-teal-700">{truck.graderSpec.circleRotation}</td>
+                    </tr>
+                  )}
+                  {truck.graderSpec.bladeTiltAngle && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Góc nghiêng lưỡi</td>
+                      <td className="py-2 px-3 font-medium">{truck.graderSpec.bladeTiltAngle}</td>
+                    </tr>
+                  )}
+                  {truck.graderSpec.bladeSideshift && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Dịch ngang lưỡi</td>
+                      <td className="py-2 px-3 font-medium">{truck.graderSpec.bladeSideshift}</td>
+                    </tr>
+                  )}
+                  {truck.graderSpec.articulationAngle && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Góc khớp nối</td>
+                      <td className="py-2 px-3 font-medium">{truck.graderSpec.articulationAngle}</td>
+                    </tr>
+                  )}
+                  {truck.graderSpec.leanAngle && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Góc nghiêng bánh trước</td>
+                      <td className="py-2 px-3 font-medium">{truck.graderSpec.leanAngle}</td>
+                    </tr>
+                  )}
+                  {truck.graderSpec.turningRadius && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600">Bán kính quay</td>
+                      <td className="py-2 px-3 font-medium">{truck.graderSpec.turningRadius}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
+
           {truck.vacuumSystem && (
             <>
               <h4 className="font-bold text-lg bg-amber-100 p-2 rounded mb-3 text-amber-800">Hệ thống hút chân không</h4>
