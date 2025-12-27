@@ -212,10 +212,10 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
     const hideTimeout = setTimeout(() => {
       setIsVisible(false);
 
-      // Sau khi ẩn, đợi 5 giây trước khi hiển thị tiếp
+      // Sau khi ẩn, đợi 15 giây trước khi hiển thị tiếp
       const nextTimeout = setTimeout(() => {
         showNextNotification();
-      }, 5000); // 5 giây
+      }, 15000); // 15 giây
 
 
       timeoutRef.current = nextTimeout;
