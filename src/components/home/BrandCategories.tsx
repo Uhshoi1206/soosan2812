@@ -122,7 +122,7 @@ const BrandCategories = ({ trucks, cmsBrands = [] }: BrandCategoriesProps) => {
           "name": brand.name,
           ...(brand.logo && { "logo": brand.logo }),
           ...(brand.description && { "description": brand.description }),
-          "url": `https://soosanmotor.com/danh-muc-xe?brand=${encodeURIComponent(brand.name)}`
+          "url": `https://soosanmotor.com/danh-muc-xe?thuong-hieu=${encodeURIComponent(brand.name)}`
         }
       }))
     };
@@ -155,7 +155,7 @@ const BrandCategories = ({ trucks, cmsBrands = [] }: BrandCategoriesProps) => {
             brands.map((brand, index) => (
               <a
                 key={brand.id}
-                href={`/danh-muc-xe?brand=${encodeURIComponent(brand.name)}`}
+                href={`/danh-muc-xe?thuong-hieu=${encodeURIComponent(brand.name)}`}
                 className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow flex items-center justify-center border border-gray-100 hover:border-primary/20 group min-h-[120px]"
                 title={`Xem các sản phẩm ${brand.name}`}
                 aria-label={`Thương hiệu ${brand.name}${brand.country ? ` - ${brand.country}` : ''}`}
