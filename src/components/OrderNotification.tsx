@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Check, X } from 'lucide-react';
 
 interface OrderNotificationProps {
@@ -57,11 +57,12 @@ const OrderNotification: React.FC<OrderNotificationProps> = ({ onOpenQuickContac
 
   // Chỉ lấy sản phẩm có tình trạng "Sẵn hàng" hoặc "Đặt trước"
   // Loại bỏ sản phẩm "Hết hàng" và "Ngừng kinh doanh"
-  const availableProducts = products.filter(p =>
+  // Sử dụng useMemo để tránh tạo array mới mỗi lần render (gây re-trigger useEffect)
+  const availableProducts = useMemo(() => products.filter(p =>
     !p.stockStatus || // Nếu không có stockStatus, mặc định hiển thị
     p.stockStatus === 'in-stock' ||
     p.stockStatus === 'pre-order'
-  );
+  ), [products]);
 
   // Detect current product from URL and category type from query params
   useEffect(() => {
