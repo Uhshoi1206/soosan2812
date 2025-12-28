@@ -506,7 +506,7 @@ async function bulkUpdateVisibility(hide) {
     }
 
     const action = hide ? 'Ẩn' : 'Hiện';
-    if (!confirm(`Bạn có chắc muốn ${action.toLowerCase()} ${selectedItems.size} mục đã chọn?`)) {
+    if (!confirm(`Bạn có chắc muốn ${action.toLowerCase()} ${selectedItems.size} mục đã chọn?\n\n✅ Tất cả thay đổi sẽ được gộp vào 1 commit duy nhất.`)) {
         return;
     }
 
@@ -525,70 +525,73 @@ async function bulkUpdateVisibility(hide) {
         }
 
         log(`Bắt đầu ${action.toLowerCase()} ${selectedItems.size} mục...`, 'info');
+        log('⏳ Đang chuẩn bị batch commit (1 commit duy nhất)...', 'info');
 
         const itemsToUpdate = allItems.filter(item => selectedItems.has(item.id));
-        let success = 0;
-        let failed = 0;
+
+        // Step 1: Prepare all file changes
+        const fileChanges = [];
+        let prepareSuccess = 0;
 
         for (let i = 0; i < itemsToUpdate.length; i++) {
             const item = itemsToUpdate[i];
 
             try {
                 let newContent;
-                const commitMessage = `[Bulk ${action}] ${item.name}`;
 
                 if (item.isMarkdown) {
-                    // Update markdown frontmatter
                     newContent = updateMarkdownFrontmatter(item.content, 'isHidden', hide);
                 } else {
-                    // Update JSON
                     const jsonData = JSON.parse(item.content);
                     jsonData.isHidden = hide;
                     newContent = JSON.stringify(jsonData, null, 4);
                 }
 
-                await updateFile(item.path, newContent, item.sha, token, commitMessage);
+                fileChanges.push({
+                    path: item.path,
+                    content: newContent,
+                    item: item
+                });
 
-                // Update local state
-                item.isHidden = hide;
-                item.content = newContent;
-
-                // We need to get the new SHA after update
-                const updatedFile = await fetchFileContent(item.path, token);
-                item.sha = updatedFile.sha;
-
-                success++;
-
-                if ((i + 1) % 5 === 0 || i === itemsToUpdate.length - 1) {
-                    log(`Đã xử lý ${i + 1}/${itemsToUpdate.length}...`, 'info');
-                }
+                prepareSuccess++;
+                setProgress((prepareSuccess / itemsToUpdate.length) * 50);
 
             } catch (error) {
-                failed++;
-                log(`✗ Lỗi ${action.toLowerCase()} ${item.name}: ${error.message}`, 'error');
+                log(`⚠ Lỗi chuẩn bị ${item.name}: ${error.message}`, 'warning');
             }
+        }
 
-            setProgress(((i + 1) / itemsToUpdate.length) * 100);
+        if (fileChanges.length === 0) {
+            throw new Error('Không có file nào để cập nhật');
+        }
 
-            // Rate limiting
-            if (i < itemsToUpdate.length - 1) {
-                await new Promise(resolve => setTimeout(resolve, 300));
-            }
+        log(`✓ Đã chuẩn bị ${fileChanges.length} files`, 'success');
+        log('⏳ Đang tạo batch commit...', 'info');
+
+        // Step 2: Create batch commit using GitHub Tree API
+        await createBatchCommit(fileChanges, token, `[Bulk ${action}] ${fileChanges.length} items`);
+
+        setProgress(100);
+
+        // Step 3: Update local state
+        for (const change of fileChanges) {
+            change.item.isHidden = hide;
+            change.item.content = change.content;
         }
 
         showProgress(false);
         setProgress(0);
 
-        if (failed === 0) {
-            log(`✓ ${action} thành công ${success} mục!`, 'success');
-        } else {
-            log(`⚠ Hoàn tất với ${failed} lỗi. ${success}/${itemsToUpdate.length} thành công.`, 'warning');
-        }
+        log(`✓ ${action} thành công ${fileChanges.length} mục trong 1 commit!`, 'success');
+        log('✓ Website sẽ chỉ deploy 1 lần duy nhất.', 'success');
 
         // Clear selection and refresh display
         selectedItems.clear();
         document.getElementById('select-all').checked = false;
-        applyFilters();
+
+        // Reload data to get new SHAs
+        log('⏳ Đang tải lại dữ liệu...', 'info');
+        await loadData();
 
     } catch (error) {
         log(`✗ Lỗi: ${error.message}`, 'error');
@@ -598,6 +601,138 @@ async function bulkUpdateVisibility(hide) {
         isOperationRunning = false;
         updateSelectionInfo();
     }
+}
+
+// Create a single commit with multiple file changes using GitHub Tree API
+async function createBatchCommit(fileChanges, token, commitMessage) {
+    const apiBase = `https://api.github.com/repos/${CONFIG.repo}`;
+
+    // Step 1: Get the latest commit SHA from the branch
+    const branchResponse = await fetch(`${apiBase}/git/ref/heads/${CONFIG.branch}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    });
+
+    if (!branchResponse.ok) {
+        throw new Error(`Không thể lấy thông tin branch: ${branchResponse.status}`);
+    }
+
+    const branchData = await branchResponse.json();
+    const latestCommitSha = branchData.object.sha;
+
+    // Step 2: Get the tree SHA from the latest commit
+    const commitResponse = await fetch(`${apiBase}/git/commits/${latestCommitSha}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    });
+
+    if (!commitResponse.ok) {
+        throw new Error(`Không thể lấy thông tin commit: ${commitResponse.status}`);
+    }
+
+    const commitData = await commitResponse.json();
+    const baseTreeSha = commitData.tree.sha;
+
+    // Step 3: Create blobs for each file
+    const treeItems = [];
+
+    for (const change of fileChanges) {
+        // Create blob
+        const blobResponse = await fetch(`${apiBase}/git/blobs`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                content: change.content,
+                encoding: 'utf-8'
+            })
+        });
+
+        if (!blobResponse.ok) {
+            const error = await blobResponse.json();
+            throw new Error(`Không thể tạo blob cho ${change.path}: ${error.message}`);
+        }
+
+        const blobData = await blobResponse.json();
+
+        treeItems.push({
+            path: change.path,
+            mode: '100644', // Regular file
+            type: 'blob',
+            sha: blobData.sha
+        });
+    }
+
+    // Step 4: Create a new tree with all changes
+    const treeResponse = await fetch(`${apiBase}/git/trees`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            base_tree: baseTreeSha,
+            tree: treeItems
+        })
+    });
+
+    if (!treeResponse.ok) {
+        const error = await treeResponse.json();
+        throw new Error(`Không thể tạo tree: ${error.message}`);
+    }
+
+    const treeData = await treeResponse.json();
+
+    // Step 5: Create a new commit
+    const newCommitResponse = await fetch(`${apiBase}/git/commits`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            message: commitMessage,
+            tree: treeData.sha,
+            parents: [latestCommitSha]
+        })
+    });
+
+    if (!newCommitResponse.ok) {
+        const error = await newCommitResponse.json();
+        throw new Error(`Không thể tạo commit: ${error.message}`);
+    }
+
+    const newCommitData = await newCommitResponse.json();
+
+    // Step 6: Update the branch reference to point to the new commit
+    const updateRefResponse = await fetch(`${apiBase}/git/refs/heads/${CONFIG.branch}`, {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            sha: newCommitData.sha,
+            force: false
+        })
+    });
+
+    if (!updateRefResponse.ok) {
+        const error = await updateRefResponse.json();
+        throw new Error(`Không thể cập nhật branch: ${error.message}`);
+    }
+
+    return newCommitData;
 }
 
 function updateMarkdownFrontmatter(content, key, value) {
