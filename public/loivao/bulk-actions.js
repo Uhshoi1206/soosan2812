@@ -3,9 +3,9 @@
  * Provides functionality to bulk hide/show products and blog posts
  */
 
-// Configuration
-const CONFIG = {
-    repo: 'Uhshoi1206/soosan2812',
+// Configuration - will be loaded from site.config.json
+let CONFIG = {
+    repo: '',
     branch: 'main',
     paths: {
         products: {
@@ -44,6 +44,25 @@ const CONFIG = {
         }
     }
 };
+
+// Load config from site.config.json
+async function loadSiteConfig() {
+    try {
+        const response = await fetch('/site.config.json');
+        if (response.ok) {
+            const siteConfig = await response.json();
+            if (siteConfig.github) {
+                CONFIG.repo = siteConfig.github.repo || CONFIG.repo;
+                CONFIG.branch = siteConfig.github.branch || CONFIG.branch;
+            }
+            console.log('✓ Loaded config from site.config.json:', CONFIG.repo);
+            return true;
+        }
+    } catch (error) {
+        console.warn('Could not load site.config.json, using defaults:', error);
+    }
+    return false;
+}
 
 // State
 let currentTab = 'products';
@@ -786,9 +805,12 @@ function switchTab(tab) {
 // INITIALIZATION
 // =====================================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const accessDenied = document.getElementById('access-denied');
     const mainContent = document.getElementById('main-content');
+
+    // Load site config first
+    await loadSiteConfig();
 
     const token = getGitHubToken();
 
@@ -797,6 +819,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (accessDenied) accessDenied.classList.remove('show');
 
         log('✓ Đã tìm thấy GitHub token', 'success');
+        log(`✓ Repo: ${CONFIG.repo}`, 'success');
         loadData();
     } else {
         if (accessDenied) accessDenied.classList.add('show');

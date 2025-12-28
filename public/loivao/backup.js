@@ -3,9 +3,9 @@
  * Provides functionality to backup website content via GitHub API
  */
 
-// Configuration
-const CONFIG = {
-    repo: 'Uhshoi1206/soosan2812',
+// Configuration - will be loaded from site.config.json
+let CONFIG = {
+    repo: '',
     branch: 'main',
     contentPath: 'src/content',
     paths: {
@@ -30,6 +30,25 @@ const CONFIG = {
         'components.json'
     ]
 };
+
+// Load config from site.config.json
+async function loadSiteConfig() {
+    try {
+        const response = await fetch('/site.config.json');
+        if (response.ok) {
+            const siteConfig = await response.json();
+            if (siteConfig.github) {
+                CONFIG.repo = siteConfig.github.repo || CONFIG.repo;
+                CONFIG.branch = siteConfig.github.branch || CONFIG.branch;
+            }
+            console.log('✓ Loaded config from site.config.json:', CONFIG.repo);
+            return true;
+        }
+    } catch (error) {
+        console.warn('Could not load site.config.json, using defaults:', error);
+    }
+    return false;
+}
 
 // State
 let isBackupRunning = false;
@@ -706,9 +725,12 @@ async function performRestore() {
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const accessDenied = document.getElementById('access-denied');
     const mainContent = document.getElementById('main-content');
+
+    // Load site config first
+    await loadSiteConfig();
 
     // Check token availability for access control
     const token = getGitHubToken();
@@ -722,7 +744,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setupDragDrop();
 
         log('Sẵn sàng thực hiện backup/restore. Chọn chức năng bên trên.', 'info');
-        log('✓ Đã tìm thấy GitHub token', 'success');
+        log(`✓ Đã tìm thấy GitHub token`, 'success');
+        log(`✓ Repo: ${CONFIG.repo}`, 'success');
     } else {
         // No token - show access denied
         if (accessDenied) accessDenied.classList.add('show');
