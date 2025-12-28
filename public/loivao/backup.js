@@ -5,7 +5,7 @@
 
 // Configuration
 const CONFIG = {
-    repo: 'Uhshoi1206/soosan1712',
+    repo: 'Uhshoi1206/soosan2812',
     branch: 'main',
     contentPath: 'src/content',
     paths: {
