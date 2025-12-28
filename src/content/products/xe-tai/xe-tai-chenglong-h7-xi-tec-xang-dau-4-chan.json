@@ -87,5 +87,6 @@
         },
         "fuelSaving": "Tiết kiệm 2-3 lít/100km so với đối thủ"
     },
-    "order": 20
+    "order": 20,
+    "isHidden": true
 }
