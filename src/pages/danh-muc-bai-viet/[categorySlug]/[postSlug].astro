@@ -16,11 +16,13 @@ import useRelatedTruckForBlogPost from '../../../hooks/useRelatedTruckForBlogPos
 export const prerender = true;
 
 export async function getStaticPaths() {
+  // Use ALL posts (including hidden) to generate pages
+  // This ensures hidden posts are still crawlable by search engines and AI bots for SEO
+  // Hidden posts won't appear in lists, but their individual pages will exist
   const allPosts = await getCollection('blog');
   const { getCategorySlug } = await getBlogCategories();
 
   return allPosts
-    .filter(post => !post.data.isHidden)
     .map((post) => {
       // Extract slug: prefer frontmatter slug, then extract filename from post.id (which may include folder path)
       let slug = post.data.slug;

@@ -1,10 +1,13 @@
 ---
 import ProductLayout from '../../layouts/ProductLayout.astro';
 import ProductDetailWithProvider from '../../components/TruckDetail/ProductDetailWithProvider.tsx';
-import { getVisibleProducts, getCategoryById, getVisibleBlogPosts } from '../../utils/contentCollections';
+import { getVisibleProducts, getAllProducts, getCategoryById, getVisibleBlogPosts } from '../../utils/contentCollections';
 import { getEntry } from 'astro:content';
+
 export async function getStaticPaths() {
-  const trucks = await getVisibleProducts();
+  // Use getAllProducts to generate pages for ALL products (including hidden ones)
+  // This ensures hidden products are still crawlable by search engines and AI bots for SEO
+  const trucks = await getAllProducts();
 
   return trucks.map((truck) => ({
     params: {
