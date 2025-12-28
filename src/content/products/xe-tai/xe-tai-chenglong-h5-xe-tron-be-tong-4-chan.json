@@ -79,5 +79,6 @@
         "rearAxle": "Cầu dầu đúc nguyên khối 16 tấn/cầu",
         "axleRatio": "4.769 hoặc 4.8"
     },
-    "order": 17
+    "order": 17,
+    "isHidden": true
 }
