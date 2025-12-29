@@ -573,63 +573,158 @@ function cancelRestore() {
     log('Đã hủy restore', 'info');
 }
 
-// Get file SHA (needed for updating existing files)
-async function getFileSha(path, token) {
-    try {
-        const url = `https://api.github.com/repos/${CONFIG.repo}/contents/${path}?ref=${CONFIG.branch}`;
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
+// =====================================================
+// BATCHED RESTORE - Single commit for all files
+// Uses GitHub Git Trees API to minimize deploys
+// =====================================================
 
-        if (response.ok) {
-            const data = await response.json();
-            return data.sha;
+// Get the latest commit SHA of a branch
+async function getLatestCommitSha(token) {
+    const url = `https://api.github.com/repos/${CONFIG.repo}/git/refs/heads/${CONFIG.branch}`;
+    const response = await fetch(url, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
         }
-        return null;
-    } catch {
-        return null;
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to get branch ref: ${response.status}`);
     }
+
+    const data = await response.json();
+    return data.object.sha;
 }
 
-// Upload single file to GitHub
-async function uploadFileToGitHub(path, content, token, sha = null) {
-    const url = `https://api.github.com/repos/${CONFIG.repo}/contents/${path}`;
+// Get the tree SHA from a commit
+async function getTreeSha(commitSha, token) {
+    const url = `https://api.github.com/repos/${CONFIG.repo}/git/commits/${commitSha}`;
+    const response = await fetch(url, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to get commit: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.tree.sha;
+}
+
+// Create a blob for file content
+async function createBlob(content, token) {
+    const url = `https://api.github.com/repos/${CONFIG.repo}/git/blobs`;
 
     // Encode content to base64
     const base64Content = btoa(unescape(encodeURIComponent(content)));
 
-    const body = {
-        message: `[Restore] Update ${path}`,
-        content: base64Content,
-        branch: CONFIG.branch
-    };
-
-    if (sha) {
-        body.sha = sha;
-    }
-
     const response = await fetch(url, {
-        method: 'PUT',
+        method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/vnd.github.v3+json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify({
+            content: base64Content,
+            encoding: 'base64'
+        })
     });
 
     if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || `HTTP ${response.status}`);
+        throw new Error(`Failed to create blob: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.sha;
+}
+
+// Create a new tree with all files
+async function createTree(baseTreeSha, files, token) {
+    const url = `https://api.github.com/repos/${CONFIG.repo}/git/trees`;
+
+    const tree = files.map(file => ({
+        path: file.path,
+        mode: '100644', // file mode
+        type: 'blob',
+        sha: file.blobSha
+    }));
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            base_tree: baseTreeSha,
+            tree: tree
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to create tree: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.sha;
+}
+
+// Create a new commit
+async function createCommit(treeSha, parentCommitSha, message, token) {
+    const url = `https://api.github.com/repos/${CONFIG.repo}/git/commits`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            message: message,
+            tree: treeSha,
+            parents: [parentCommitSha]
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to create commit: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.sha;
+}
+
+// Update branch ref to point to new commit
+async function updateBranchRef(commitSha, token) {
+    const url = `https://api.github.com/repos/${CONFIG.repo}/git/refs/heads/${CONFIG.branch}`;
+
+    const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            sha: commitSha,
+            force: false
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to update branch ref: ${response.status}`);
     }
 
     return await response.json();
 }
 
-// Perform restore
+// Perform batched restore - ALL files in ONE commit
 async function performRestore() {
     if (isRestoreRunning) {
         log('Đang có restore đang chạy, vui lòng đợi...', 'warning');
@@ -642,7 +737,7 @@ async function performRestore() {
     }
 
     // Confirm
-    if (!confirm(`Bạn có chắc muốn khôi phục ${restoreFiles.length} files?\n\nCác file hiện có sẽ bị GHI ĐÈ!`)) {
+    if (!confirm(`Bạn có chắc muốn khôi phục ${restoreFiles.length} files?\n\nCác file hiện có sẽ bị GHI ĐÈ!\n\n✓ Tất cả sẽ được gộp vào MỘT commit duy nhất.`)) {
         return;
     }
 
@@ -653,7 +748,7 @@ async function performRestore() {
         isRestoreRunning = true;
         setButtonLoading(button, true);
 
-        log('Bắt đầu restore...', 'info');
+        log('🚀 Bắt đầu restore (batched - single commit)...', 'info');
 
         // Get token
         let token = getGitHubToken();
@@ -667,49 +762,77 @@ async function performRestore() {
 
         showProgress(true);
         const total = restoreFiles.length;
-        let success = 0;
-        let failed = 0;
 
-        for (let i = 0; i < restoreFiles.length; i++) {
-            const file = restoreFiles[i];
+        // Step 1: Get latest commit and tree
+        log('📥 Đang lấy thông tin repository...', 'info');
+        const latestCommitSha = await getLatestCommitSha(token);
+        const baseTreeSha = await getTreeSha(latestCommitSha, token);
+        log(`✓ Base commit: ${latestCommitSha.substring(0, 7)}`, 'success');
 
+        // Step 2: Create blobs for all files
+        log(`📦 Đang tạo blobs cho ${total} files...`, 'info');
+        const filesWithBlobs = [];
+        let processed = 0;
+
+        for (const file of restoreFiles) {
             try {
                 // Read file content from ZIP
                 const content = await file.zipEntry.async('string');
 
-                // Get existing file SHA (if exists)
-                const sha = await getFileSha(file.path, token);
+                // Create blob
+                const blobSha = await createBlob(content, token);
 
-                // Upload to GitHub
-                await uploadFileToGitHub(file.path, content, token, sha);
+                filesWithBlobs.push({
+                    path: file.path,
+                    blobSha: blobSha
+                });
 
-                success++;
+                processed++;
+                setProgress((processed / total) * 50); // First 50% for blobs
 
-                if ((i + 1) % 5 === 0 || i === total - 1) {
-                    log(`Đã restore ${i + 1}/${total} files...`, 'info');
+                if (processed % 10 === 0 || processed === total) {
+                    log(`   Đã xử lý ${processed}/${total} files...`, 'info');
                 }
 
+                // Small delay to avoid rate limiting
+                if (processed < total) {
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                }
             } catch (error) {
-                failed++;
-                log(`✗ Lỗi restore ${file.path}: ${error.message}`, 'warning');
-            }
-
-            setProgress(((i + 1) / total) * 100);
-
-            // Rate limiting: small delay between requests
-            if (i < restoreFiles.length - 1) {
-                await new Promise(resolve => setTimeout(resolve, 100));
+                log(`⚠ Bỏ qua ${file.path}: ${error.message}`, 'warning');
             }
         }
 
+        if (filesWithBlobs.length === 0) {
+            throw new Error('Không có file nào được xử lý thành công');
+        }
+
+        // Step 3: Create new tree
+        log('🌳 Đang tạo Git tree...', 'info');
+        setProgress(60);
+        const newTreeSha = await createTree(baseTreeSha, filesWithBlobs, token);
+        log(`✓ Tree created: ${newTreeSha.substring(0, 7)}`, 'success');
+
+        // Step 4: Create commit
+        log('💾 Đang tạo commit...', 'info');
+        setProgress(80);
+        const timestamp = new Date().toLocaleString('vi-VN');
+        const commitMessage = `[Restore] Khôi phục ${filesWithBlobs.length} files - ${timestamp}`;
+        const newCommitSha = await createCommit(newTreeSha, latestCommitSha, commitMessage, token);
+        log(`✓ Commit created: ${newCommitSha.substring(0, 7)}`, 'success');
+
+        // Step 5: Update branch ref
+        log('🔄 Đang cập nhật branch...', 'info');
+        setProgress(90);
+        await updateBranchRef(newCommitSha, token);
+
+        setProgress(100);
         showProgress(false);
-        setProgress(0);
 
-        if (failed === 0) {
-            log(`✓ Restore hoàn tất! ${success} files đã được khôi phục.`, 'success');
-        } else {
-            log(`⚠ Restore hoàn tất với ${failed} lỗi. ${success}/${total} files thành công.`, 'warning');
-        }
+        log(`✅ Restore hoàn tất!`, 'success');
+        log(`   📁 ${filesWithBlobs.length}/${total} files đã được khôi phục`, 'success');
+        log(`   🔗 Commit: ${newCommitSha.substring(0, 7)}`, 'success');
+        log(`   ⚡ Chỉ trigger 1 lần deploy trên Netlify`, 'success');
 
         // Reset UI
         cancelRestore();
