@@ -1006,13 +1006,13 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
           {truck.craneSpec && (
             <>
               {/* THÔNG TIN CHUNG */}
-              <h4 className="font-bold text-lg bg-blue-600 text-white p-2 rounded mb-3">Thông tin chung</h4>
+              <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-blue-500">Thông tin chung</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
                   {truck.craneSpec.model && (
-                    <tr className="border-b bg-blue-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Model cẩu</td>
-                      <td className="py-2 px-3 font-medium text-blue-700">{truck.craneSpec.model}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.model}</td>
                     </tr>
                   )}
                   {truck.craneSpec.applicableTruckChassis && (
@@ -1037,13 +1037,13 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
 
               {/* SỨC NÂNG (CRANE CAPACITY) */}
-              <h4 className="font-bold text-lg bg-red-600 text-white p-2 rounded mb-3">Sức nâng (Crane Capacity)</h4>
+              <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-red-500">Sức nâng (Crane Capacity)</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
                   {truck.craneSpec.maxLiftingMoment && (
-                    <tr className="border-b bg-red-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Mômen nâng lớn nhất</td>
-                      <td className="py-2 px-3 font-medium text-red-700">{truck.craneSpec.maxLiftingMoment}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.maxLiftingMoment}</td>
                     </tr>
                   )}
                   {(truck.craneSpec.liftingCapacityText || truck.craneSpec.maxLiftingCapacity) && (
@@ -1080,13 +1080,13 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
 
               {/* CẦN CẨU (BOOM) */}
-              <h4 className="font-bold text-lg bg-sky-600 text-white p-2 rounded mb-3">Cần cẩu (Boom)</h4>
+              <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-sky-500">Cần cẩu (Boom)</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
                   {truck.craneSpec.boomType && (
-                    <tr className="border-b bg-sky-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Loại cần</td>
-                      <td className="py-2 px-3 font-medium text-sky-700">{truck.craneSpec.boomType}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.boomType}</td>
                     </tr>
                   )}
                   {truck.craneSpec.boomSections && (
@@ -1126,22 +1126,22 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                     </tr>
                   )}
                   {truck.craneSpec.tipLoadCapacity && (
-                    <tr className="border-b bg-orange-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Sức nâng đầu cần</td>
-                      <td className="py-2 px-3 font-medium text-orange-700">{truck.craneSpec.tipLoadCapacity}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.tipLoadCapacity}</td>
                     </tr>
                   )}
                 </tbody>
               </table>
 
               {/* TỜI (WINCH) */}
-              <h4 className="font-bold text-lg bg-purple-600 text-white p-2 rounded mb-3">Tời (Winch)</h4>
+              <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-purple-500">Tời (Winch)</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
                   {truck.craneSpec.winchType && (
-                    <tr className="border-b bg-purple-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Loại tời</td>
-                      <td className="py-2 px-3 font-medium text-purple-700">{truck.craneSpec.winchType}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.winchType}</td>
                     </tr>
                   )}
                   {truck.craneSpec.winchSingleLinePull && (
@@ -1163,9 +1163,9 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                     </tr>
                   )}
                   {truck.craneSpec.sheaveBlockCapacity && (
-                    <tr className="border-b bg-purple-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Sức nâng khối ròng rọc</td>
-                      <td className="py-2 px-3 font-medium text-purple-700">{truck.craneSpec.sheaveBlockCapacity}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.sheaveBlockCapacity}</td>
                     </tr>
                   )}
                   {truck.craneSpec.sheaveBlockType && (
@@ -1196,13 +1196,13 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
 
               {/* XOAY (SLEWING) */}
-              <h4 className="font-bold text-lg bg-indigo-600 text-white p-2 rounded mb-3">Xoay toa (Slewing)</h4>
+              <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-indigo-500">Xoay toa (Slewing)</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
                   {truck.craneSpec.swingType && (
-                    <tr className="border-b bg-indigo-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Loại xoay</td>
-                      <td className="py-2 px-3 font-medium text-indigo-700">{truck.craneSpec.swingType}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.swingType}</td>
                     </tr>
                   )}
                   {(truck.craneSpec.swingAngle || truck.craneSpec.slewingAngle) && (
@@ -1221,13 +1221,13 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
 
               {/* CHÂN CHỐNG (OUTRIGGERS) */}
-              <h4 className="font-bold text-lg bg-green-600 text-white p-2 rounded mb-3">Chân chống (Outriggers)</h4>
+              <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-green-500">Chân chống (Outriggers)</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
                   {truck.craneSpec.outriggersType && (
-                    <tr className="border-b bg-green-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Loại chân chống</td>
-                      <td className="py-2 px-3 font-medium text-green-700">{truck.craneSpec.outriggersType}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.outriggersType}</td>
                     </tr>
                   )}
                   {truck.craneSpec.outriggersVerticalJacks && (
@@ -1249,9 +1249,9 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                     </tr>
                   )}
                   {truck.craneSpec.outriggerSpan && (
-                    <tr className="border-b bg-green-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Chiều rộng chân chống</td>
-                      <td className="py-2 px-3 font-medium text-green-700">{truck.craneSpec.outriggerSpan}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.outriggerSpan}</td>
                     </tr>
                   )}
                   {truck.craneSpec.outriggersFrontRetracted && (
@@ -1282,13 +1282,13 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
 
               {/* HỆ THỐNG THỦY LỰC (HYDRAULIC SYSTEM) */}
-              <h4 className="font-bold text-lg bg-amber-600 text-white p-2 rounded mb-3">Hệ thống thủy lực (Hydraulic System)</h4>
+              <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-amber-500">Hệ thống thủy lực (Hydraulic System)</h4>
               <table className="w-full border-collapse border mb-6">
                 <tbody>
                   {truck.craneSpec.hydraulicPumpType && (
-                    <tr className="border-b bg-amber-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Loại bơm thủy lực</td>
-                      <td className="py-2 px-3 font-medium text-amber-700">{truck.craneSpec.hydraulicPumpType}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.hydraulicPumpType}</td>
                     </tr>
                   )}
                   {truck.craneSpec.hydraulicOperatingPressure && (
@@ -1310,9 +1310,9 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                     </tr>
                   )}
                   {truck.craneSpec.hydraulicControlValve && (
-                    <tr className="border-b bg-amber-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Van điều khiển</td>
-                      <td className="py-2 px-3 font-medium text-amber-700">{truck.craneSpec.hydraulicControlValve}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.hydraulicControlValve}</td>
                     </tr>
                   )}
                   {truck.craneSpec.hydraulicReliefValvePressure && (
@@ -1352,9 +1352,9 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                     </tr>
                   )}
                   {truck.craneSpec.hydraulicTankCapacity && (
-                    <tr className="border-b bg-amber-50">
+                    <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Dung tích thùng dầu</td>
-                      <td className="py-2 px-3 font-medium text-amber-700">{truck.craneSpec.hydraulicTankCapacity}</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.hydraulicTankCapacity}</td>
                     </tr>
                   )}
                 </tbody>
@@ -1363,7 +1363,7 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               {/* THIẾT BỊ AN TOÀN (SAFETY DEVICES) */}
               {truck.craneSpec.safetyFeatures && (
                 <>
-                  <h4 className="font-bold text-lg bg-rose-600 text-white p-2 rounded mb-3">Thiết bị an toàn (Safety Devices)</h4>
+                  <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-rose-500">Thiết bị an toàn (Safety Devices)</h4>
                   <table className="w-full border-collapse border mb-6">
                     <tbody>
                       <tr className="border-b">
@@ -1377,7 +1377,7 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               {/* TÍNH NĂNG TÙY CHỌN (OPTIONAL FEATURES) */}
               {truck.craneSpec.optionalFeatures && truck.craneSpec.optionalFeatures.length > 0 && (
                 <>
-                  <h4 className="font-bold text-lg bg-teal-600 text-white p-2 rounded mb-3">Tính năng tùy chọn (Optional Features)</h4>
+                  <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-teal-500">Tính năng tùy chọn (Optional Features)</h4>
                   <table className="w-full border-collapse border mb-6">
                     <tbody>
                       {truck.craneSpec.optionalFeatures.map((feature: string, index: number) => (
@@ -1393,7 +1393,7 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               {/* HỆ THỐNG ĐIỀU KHIỂN */}
               {truck.craneSpec.controlSystem && (
                 <>
-                  <h4 className="font-bold text-lg bg-gray-600 text-white p-2 rounded mb-3">Hệ thống điều khiển</h4>
+                  <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-gray-500">Hệ thống điều khiển</h4>
                   <table className="w-full border-collapse border mb-6">
                     <tbody>
                       <tr className="border-b">
@@ -1407,24 +1407,24 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               {/* BẢNG TẢI TRỌNG (RATED LOAD CHART) */}
               {truck.craneSpec.ratedLoadChart && (
                 <>
-                  <h4 className="font-bold text-lg bg-slate-700 text-white p-2 rounded mb-3">Bảng tải trọng (Rated Load Chart) - Đơn vị: kgf</h4>
+                  <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-slate-500">Bảng tải trọng (Rated Load Chart) - Đơn vị: kgf</h4>
                   <div className="overflow-x-auto mb-6">
                     <table className="w-full border-collapse border text-sm">
                       <thead>
-                        <tr className="bg-slate-600 text-white">
-                          <th className="py-2 px-2 border text-center" rowSpan={2}>Bán kính (m)</th>
-                          <th className="py-2 px-2 border text-center" colSpan={truck.craneSpec.ratedLoadChart.boomLengths?.length || 4}>Chiều dài cần (Boom Length)</th>
+                        <tr className="bg-gray-200">
+                          <th className="py-2 px-2 border text-center text-gray-700" rowSpan={2}>Bán kính (m)</th>
+                          <th className="py-2 px-2 border text-center text-gray-700" colSpan={truck.craneSpec.ratedLoadChart.boomLengths?.length || 4}>Chiều dài cần (Boom Length)</th>
                         </tr>
-                        <tr className="bg-slate-500 text-white">
+                        <tr className="bg-gray-100">
                           {truck.craneSpec.ratedLoadChart.boomLengths?.map((length: string, idx: number) => (
-                            <th key={idx} className="py-2 px-2 border text-center">{length}</th>
+                            <th key={idx} className="py-2 px-2 border text-center text-gray-700">{length}</th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
                         {truck.craneSpec.ratedLoadChart.data?.map((row: { radius: string; values: (string | null)[] }, idx: number) => (
                           <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                            <td className="py-2 px-2 border text-center font-medium bg-slate-100">{row.radius}</td>
+                            <td className="py-2 px-2 border text-center font-medium bg-gray-50">{row.radius}</td>
                             {row.values.map((val: string | null, valIdx: number) => (
                               <td key={valIdx} className={`py-2 px-2 border text-center ${val ? '' : 'bg-gray-200'}`}>
                                 {val || '-'}
@@ -1442,7 +1442,7 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               {/* CHI TIẾT TẢI TRỌNG (danh sách) */}
               {truck.craneSpec.detailedLiftingCapacity && truck.craneSpec.detailedLiftingCapacity.length > 0 && !truck.craneSpec.ratedLoadChart && (
                 <>
-                  <h4 className="font-bold text-lg bg-slate-700 text-white p-2 rounded mb-3">Bảng tải trọng chi tiết (Rated Load)</h4>
+                  <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-slate-500">Bảng tải trọng chi tiết (Rated Load)</h4>
                   <table className="w-full border-collapse border mb-6">
                     <tbody>
                       {truck.craneSpec.detailedLiftingCapacity.map((item: string, index: number) => (
