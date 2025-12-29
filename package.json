@@ -15,7 +15,7 @@
     "cms:brands": "node scripts/generate-brands.cjs",
     "cms:sync-filenames": "node scripts/sync-product-filenames.cjs",
     "migrate:categories": "node scripts/migrate-blog-category.mjs",
-    "prebuild": "npm run cms:generate && npm run cms:sync-filenames && npm run cms:organize && npm run migrate:categories && npm run cms:sync"
+    "prebuild": "npm run cms:generate && npm run cms:sync-filenames && node scripts/sync-category-products.cjs && npm run cms:organize && npm run migrate:categories && npm run cms:sync"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
