@@ -1404,6 +1404,57 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                 </>
               )}
 
+              {/* BẢNG TẢI TRỌNG (RATED LOAD CHART) */}
+              {truck.craneSpec.ratedLoadChart && (
+                <>
+                  <h4 className="font-bold text-lg bg-slate-700 text-white p-2 rounded mb-3">Bảng tải trọng (Rated Load Chart) - Đơn vị: kgf</h4>
+                  <div className="overflow-x-auto mb-6">
+                    <table className="w-full border-collapse border text-sm">
+                      <thead>
+                        <tr className="bg-slate-600 text-white">
+                          <th className="py-2 px-2 border text-center" rowSpan={2}>Bán kính (m)</th>
+                          <th className="py-2 px-2 border text-center" colSpan={truck.craneSpec.ratedLoadChart.boomLengths?.length || 4}>Chiều dài cần (Boom Length)</th>
+                        </tr>
+                        <tr className="bg-slate-500 text-white">
+                          {truck.craneSpec.ratedLoadChart.boomLengths?.map((length: string, idx: number) => (
+                            <th key={idx} className="py-2 px-2 border text-center">{length}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {truck.craneSpec.ratedLoadChart.data?.map((row: { radius: string; values: (string | null)[] }, idx: number) => (
+                          <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                            <td className="py-2 px-2 border text-center font-medium bg-slate-100">{row.radius}</td>
+                            {row.values.map((val: string | null, valIdx: number) => (
+                              <td key={valIdx} className={`py-2 px-2 border text-center ${val ? '' : 'bg-gray-200'}`}>
+                                {val || '-'}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-6">* Số trong ngoặc ( ) là bán kính làm việc</p>
+                </>
+              )}
+
+              {/* CHI TIẾT TẢI TRỌNG (danh sách) */}
+              {truck.craneSpec.detailedLiftingCapacity && truck.craneSpec.detailedLiftingCapacity.length > 0 && !truck.craneSpec.ratedLoadChart && (
+                <>
+                  <h4 className="font-bold text-lg bg-slate-700 text-white p-2 rounded mb-3">Bảng tải trọng chi tiết (Rated Load)</h4>
+                  <table className="w-full border-collapse border mb-6">
+                    <tbody>
+                      {truck.craneSpec.detailedLiftingCapacity.map((item: string, index: number) => (
+                        <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                          <td className="py-2 px-3 border">{item}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </>
+              )}
+
               {/* Các thông số cũ cho tương thích ngược */}
               {(truck.craneSpec.hoistSpeed || truck.craneSpec.trolleySpeed || truck.craneSpec.counterweight) && (
                 <>
