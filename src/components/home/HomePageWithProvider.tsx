@@ -71,40 +71,40 @@ const HomePageWithProvider: React.FC<HomePageWithProviderProps> = ({
               {isTypeEnabled('xe-tai') && (
                 <VehicleCarousel
                   vehicles={featuredTrucks}
-                  title="Xe Tải"
-                  description="Các dòng xe tải được nhiều khách hàng tin dùng, đa dạng tải trọng và thương hiệu"
+                  title={categoryInfoMap['xe-tai']?.name || "Xe Tải"}
+                  description={categoryInfoMap['xe-tai']?.description || "Các dòng xe tải được nhiều khách hàng tin dùng, đa dạng tải trọng và thương hiệu"}
                   viewAllUrl="/danh-muc-xe?loai-xe=xe-tai"
-                  viewAllText="Xem tất cả xe tải"
+                  viewAllText={`Xem tất cả ${(categoryInfoMap['xe-tai']?.name || 'xe tải').toLowerCase()}`}
                 />
               )}
 
               {isTypeEnabled('xe-cau') && (
                 <VehicleCarousel
                   vehicles={specializedCranes}
-                  title="Cẩu"
-                  description="Các dòng xe cẩu chuyên dụng, đa dạng tải trọng và thương hiệu"
+                  title={categoryInfoMap['xe-cau']?.name || "Xe Cẩu"}
+                  description={categoryInfoMap['xe-cau']?.description || "Các dòng xe cẩu chuyên dụng, đa dạng tải trọng và thương hiệu"}
                   viewAllUrl="/danh-muc-xe?loai-xe=xe-cau"
-                  viewAllText="Xem tất cả cẩu"
+                  viewAllText={`Xem tất cả ${(categoryInfoMap['xe-cau']?.name || 'xe cẩu').toLowerCase()}`}
                 />
               )}
 
               {isTypeEnabled('mooc') && (
                 <VehicleCarousel
                   vehicles={semiTrailers}
-                  title="Sơ Mi Rơ Mooc"
-                  description="Các dòng mooc chuyên dụng, đa dạng loại và thương hiệu"
+                  title={categoryInfoMap['mooc']?.name || "Sơ Mi Rơ Mooc"}
+                  description={categoryInfoMap['mooc']?.description || "Các dòng mooc chuyên dụng, đa dạng loại và thương hiệu"}
                   viewAllUrl="/danh-muc-xe?loai-xe=mooc"
-                  viewAllText="Xem tất cả sơ mi rơ mooc"
+                  viewAllText={`Xem tất cả ${(categoryInfoMap['mooc']?.name || 'sơ mi rơ mooc').toLowerCase()}`}
                 />
               )}
 
               {isTypeEnabled('dau-keo') && (
                 <VehicleCarousel
                   vehicles={tractors}
-                  title="Xe Đầu Kéo"
-                  description="Các dòng xe đầu kéo, đa dạng công suất và thương hiệu"
+                  title={categoryInfoMap['dau-keo']?.name || "Xe Đầu Kéo"}
+                  description={categoryInfoMap['dau-keo']?.description || "Các dòng xe đầu kéo, đa dạng công suất và thương hiệu"}
                   viewAllUrl="/danh-muc-xe?loai-xe=dau-keo"
-                  viewAllText="Xem tất cả xe đầu kéo"
+                  viewAllText={`Xem tất cả ${(categoryInfoMap['dau-keo']?.name || 'xe đầu kéo').toLowerCase()}`}
                 />
               )}
 
