@@ -16,7 +16,7 @@ const CATEGORIES_DIR = path.join(__dirname, '../src/content/categories');
 const BLOG_CATEGORIES_DIR = path.join(__dirname, '../src/content/blog-categories');
 const OUTPUT_FILE = path.join(__dirname, '../public/loivao/config.yml');
 const TEMPLATE_FILE = path.join(__dirname, 'cms-config-base.yml');
-const SITE_CONFIG_FILE = path.join(__dirname, '../site.config.json');
+const SITE_CONFIG_FILE = path.join(__dirname, '../public/site.config.json');
 
 // Icon mapping for product categories
 const PRODUCT_ICONS = {
