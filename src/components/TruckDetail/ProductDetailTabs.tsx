@@ -1102,6 +1102,14 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                       <td className="py-2 px-3 font-medium">{truck.craneSpec.boomLuffingSpeed}</td>
                     </tr>
                   )}
+
+                  {/* Thông số xoay (Slewing) */}
+                  {truck.craneSpec.swingType && (
+                    <tr className="border-b bg-indigo-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại xoay (toa)</td>
+                      <td className="py-2 px-3 font-medium text-indigo-700">{truck.craneSpec.swingType}</td>
+                    </tr>
+                  )}
                   {/* Góc quay: swingAngle hoặc slewingAngle */}
                   {(truck.craneSpec.swingAngle || truck.craneSpec.slewingAngle) && (
                     <tr className="border-b">
