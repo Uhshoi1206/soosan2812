@@ -1140,16 +1140,60 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                       <td className="py-2 px-3 font-medium text-green-700">{truck.craneSpec.outriggerSpan}</td>
                     </tr>
                   )}
+
+                  {/* Thông số tời (Winch) */}
+                  {truck.craneSpec.winchType && (
+                    <tr className="border-b bg-purple-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại tời</td>
+                      <td className="py-2 px-3 font-medium text-purple-700">{truck.craneSpec.winchType}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.winchSingleLinePull && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lực kéo đơn</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.winchSingleLinePull}</td>
+                    </tr>
+                  )}
                   {truck.craneSpec.winchRopeType && (
                     <tr className="border-b">
-                      <td className="py-2 px-3 text-gray-600 w-1/3">Dây cáp</td>
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Cấu tạo dây cáp</td>
                       <td className="py-2 px-3 font-medium">{truck.craneSpec.winchRopeType}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.winchRopeDimension && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Kích thước dây cáp</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.winchRopeDimension}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.winchBrakingStrength && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Lực phanh cáp</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.winchBrakingStrength}</td>
                     </tr>
                   )}
                   {truck.craneSpec.winchRatedSpeed && (
                     <tr className="border-b">
                       <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ cuộn dây cáp</td>
                       <td className="py-2 px-3 font-medium">{truck.craneSpec.winchRatedSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.winchHookSpeed && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Tốc độ móc (ròng rọc)</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.winchHookSpeed}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.sheaveBlockCapacity && (
+                    <tr className="border-b bg-purple-50">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Sức nâng khối ròng rọc</td>
+                      <td className="py-2 px-3 font-medium text-purple-700">{truck.craneSpec.sheaveBlockCapacity}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.sheaveBlockType && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Loại khối ròng rọc</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.sheaveBlockType}</td>
                     </tr>
                   )}
                   {truck.craneSpec.hydraulicOilFlow && (
