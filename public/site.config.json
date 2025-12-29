@@ -1,0 +1,11 @@
+{
+    "github": {
+        "repo": "Uhshoi1206/soosan2812",
+        "branch": "main"
+    },
+    "netlify": {
+        "siteDomain": "soosan2812.netlify.app",
+        "baseUrl": "https://api.netlify.com"
+    },
+    "siteUrl": "https://soosan2812.netlify.app"
+}
