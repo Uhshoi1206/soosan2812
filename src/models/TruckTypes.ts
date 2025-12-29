@@ -140,7 +140,12 @@ export interface CraneSpecification {
   liftingCapacityText?: string; // Hiển thị dạng text (ví dụ: 10,000 kg / 2.0 m)
   maxLiftingMoment?: string; // Moment nâng lớn nhất (tấn.m)
   maxLiftingHeight?: string; // Chiều cao nâng lớn nhất (m)
+  maxHeightBelowGround?: string; // Chiều cao nâng dưới mặt đất (m)
   maxWorkingRadius?: string; // Bán kính làm việc lớn nhất (m)
+  minWorkingRadius?: string; // Bán kính làm việc nhỏ nhất (m)
+  applicableTruckChassis?: string; // Xe chassis phù hợp (tải trọng)
+  craneOperatingWeight?: string; // Trọng lượng vận hành cẩu (kg)
+  craneNetWeight?: string; // Trọng lượng thân cẩu (kg)
 
   // Thông số cần cẩu (Boom)
   boomType?: string; // Loại cần (ví dụ: Cần lục giác)
@@ -154,6 +159,10 @@ export interface CraneSpecification {
   winchRatedSpeed?: string; // Tốc độ tời định mức (m/phút) - ví dụ: 16 (m/phút) (tại lớp thứ 4)
   winchHookSpeed?: string; // Tốc độ móc tời (m/phút)
   winchRopeType?: string; // Loại cáp tời (ø x m) - ví dụ: 10 x 120 IWRC 6xWS(26)
+  winchSingleLinePull?: string; // Lực kéo đơn (kgf)
+  winchBrakingStrength?: string; // Lực phanh cáp (kgf)
+  sheaveBlockCapacity?: string; // Sức nâng khối ròng rọc (kgf)
+  sheaveBlockType?: string; // Loại khối ròng rọc (số puly, chốt an toàn)
 
   // Thông số xoay (Swing)
   swingAngle?: string; // Góc xoay (độ) - ví dụ: 360° liên tục
@@ -164,12 +173,21 @@ export interface CraneSpecification {
   outriggersFrontExtension?: string; // Chân chống trước - Mở rộng tối đa (m)
   outriggersRearExtension?: string; // Chân chống sau - Mở rộng tối đa (m)
   outriggersType?: string; // Loại chân chống - ví dụ: Mô tơ thủy lực, bánh răng nêm và hộp giảm tốc hành tinh
+  outriggersVerticalJacks?: string; // Kích đứng chân chống
+  outriggersHorizontalBeams?: string; // Dầm ngang chân chống
 
   // Hệ thống thủy lực (Hydraulic System)
   hydraulicPumpType?: string; // Loại bơm thủy lực
   hydraulicTankCapacity?: string; // Dung tích thùng dầu thủy lực (L) - ví dụ: 65 Lít
   hydraulicOilFlow?: string; // Lưu lượng dầu thủy lực (L/phút) - ví dụ: 65 (L/phút)
   hydraulicOperatingPressure?: string; // Áp suất vận hành thủy lực (kg/cm²) - ví dụ: 210 (kg/cm²)
+  hydraulicRatedRevolution?: string; // Tốc độ quay bơm định mức (rpm)
+  hydraulicReliefValvePressure?: string; // Áp suất van xả (kg/cm²)
+  hydraulicCounterBalanceValve?: string; // Van cân bằng
+  hydraulicPilotCheckValve?: string; // Van kiểm tra pilot
+  hydraulicMotorHoisting?: string; // Mô tơ thủy lực nâng
+  hydraulicMotorSlewing?: string; // Mô tơ thủy lực xoay
+  hydraulicCylinders?: string; // Xi lanh thủy lực (số lượng và loại)
 
   // Các thông số cũ nếu vẫn cần thiết
   reachLength?: number; // Tầm với (m) - có thể thay bằng maxWorkingRadius
@@ -186,6 +204,7 @@ export interface CraneSpecification {
   powerSource?: string;
   safetySystem?: string;
   winchCapacity?: string; // Có thể hiển thị chi tiết hơn ở winchRatedSpeed, winchHookSpeed
+  optionalFeatures?: string[]; // Tính năng tùy chọn (giỏ nâng người, điều khiển từ xa, AML...)
 
   // Thông tin bổ sung (lấy từ hình ảnh)
   craneModelName?: string; // Tên model cẩu, ví dụ: SOOSAN SCS1015LS
