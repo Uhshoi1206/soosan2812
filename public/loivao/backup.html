@@ -638,6 +638,47 @@
         </div>
       </div>
 
+      <!-- Sync Categories Section -->
+      <section class="restore-section"
+        style="border: 1px solid rgba(168, 85, 247, 0.3); background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(59, 130, 246, 0.1));">
+        <div class="restore-header">
+          <h2
+            style="background: linear-gradient(90deg, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            🔄 Đồng Bộ Danh Mục</h2>
+          <p>Tự động đổi tên file/folder danh mục theo ID</p>
+        </div>
+
+        <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 20px;">
+          <p style="color: var(--text-muted); margin-bottom: 15px;">
+            Khi bạn đổi <strong>id</strong> hoặc <strong>slug</strong> của danh mục qua CMS, tên file và folder không tự
+            động đổi theo.
+            Nhấn nút bên dưới để tự động:
+          </p>
+          <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 15px; list-style: disc;">
+            <li>Đổi tên file category: <code>cau.json</code> → <code>xe-cau.json</code></li>
+            <li>Đổi tên folder sản phẩm: <code>products/cau</code> → <code>products/xe-cau</code></li>
+            <li>Cập nhật <code>type</code> trong tất cả sản phẩm</li>
+          </ul>
+
+          <div id="sync-preview"
+            style="display: none; margin-bottom: 15px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+            <h4 style="margin-bottom: 10px; color: #a855f7;">📋 Các thay đổi sẽ thực hiện:</h4>
+            <div id="sync-changes-list" style="font-family: 'Consolas', monospace; font-size: 0.85rem;"></div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 15px;">
+          <button class="backup-btn" onclick="scanCategoryChanges()"
+            style="background: linear-gradient(135deg, #6366f1, #8b5cf6); flex: 1;">
+            <span class="btn-text">🔍 Quét Thay Đổi</span>
+          </button>
+          <button class="backup-btn" id="btn-sync-categories" onclick="applyCategorySync()"
+            style="background: linear-gradient(135deg, #a855f7, #ec4899); flex: 1;" disabled>
+            <span class="btn-text">⚡ Áp Dụng Thay Đổi</span>
+          </button>
+        </div>
+      </section>
+
       <!-- Restore Section -->
       <section class="restore-section">
         <div class="restore-header">

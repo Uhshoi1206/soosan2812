@@ -1021,6 +1021,291 @@ async function performRestore() {
     }
 }
 
+// =====================================================
+// SYNC CATEGORIES - Rename files/folders based on ID
+// =====================================================
+
+let pendingSyncChanges = [];
+
+// Scan for category changes
+async function scanCategoryChanges() {
+    const button = event.target.closest('button');
+    button.dataset.originalText = button.querySelector('.btn-text').textContent;
+
+    try {
+        setButtonLoading(button, true);
+        clearLog();
+        log('🔍 Đang quét danh mục...', 'info');
+
+        // Get token
+        let token = getGitHubToken();
+        if (!token) {
+            token = promptForToken();
+            if (!token) {
+                throw new Error('Cần GitHub token để tiếp tục');
+            }
+        }
+
+        pendingSyncChanges = [];
+
+        // Fetch all category files
+        const categoriesPath = 'src/content/categories';
+        let categoryFiles;
+        try {
+            categoryFiles = await fetchDirectoryContents(categoriesPath, token);
+        } catch (e) {
+            throw new Error(`Không thể đọc thư mục categories: ${e.message}`);
+        }
+
+        log(`✓ Tìm thấy ${categoryFiles.length} danh mục`, 'success');
+
+        // Analyze each category
+        for (const file of categoryFiles) {
+            if (!file.name.endsWith('.json')) continue;
+
+            const filename = file.name.replace('.json', '');
+
+            // Fetch category content
+            const content = await fetchFileContent(file.path, token);
+            const category = JSON.parse(content);
+            const categoryId = category.id;
+
+            log(`  📁 ${filename}.json → id: "${categoryId}"`, 'info');
+
+            // Check if filename matches id
+            if (filename !== categoryId) {
+                // Need to rename category file
+                pendingSyncChanges.push({
+                    type: 'rename-category',
+                    from: `${categoriesPath}/${filename}.json`,
+                    to: `${categoriesPath}/${categoryId}.json`,
+                    content: content,
+                    oldId: filename,
+                    newId: categoryId
+                });
+
+                log(`  ⚠️ Cần đổi tên: ${filename}.json → ${categoryId}.json`, 'warning');
+
+                // Check if product folder exists with old name
+                const oldProductFolder = `src/content/products/${filename}`;
+                const newProductFolder = `src/content/products/${categoryId}`;
+
+                try {
+                    const folderContents = await fetchDirectoryContents(oldProductFolder, token);
+
+                    // Need to move all files in folder
+                    for (const productFile of folderContents) {
+                        if (productFile.type === 'file') {
+                            const productContent = await fetchFileContent(productFile.path, token);
+
+                            // Update type field in product
+                            let updatedContent = productContent;
+                            if (productContent.includes(`"type": "${filename}"`)) {
+                                updatedContent = productContent.replace(
+                                    `"type": "${filename}"`,
+                                    `"type": "${categoryId}"`
+                                );
+                            }
+
+                            pendingSyncChanges.push({
+                                type: 'move-product',
+                                from: productFile.path,
+                                to: `${newProductFolder}/${productFile.name}`,
+                                content: updatedContent,
+                                needsTypeUpdate: productContent !== updatedContent
+                            });
+                        }
+                    }
+
+                    log(`  ⚠️ Cần di chuyển ${folderContents.filter(f => f.type === 'file').length} sản phẩm từ ${filename}/ → ${categoryId}/`, 'warning');
+
+                    // Mark old folder files for deletion
+                    pendingSyncChanges.push({
+                        type: 'delete-old-folder',
+                        folder: oldProductFolder,
+                        files: folderContents.filter(f => f.type === 'file').map(f => f.path)
+                    });
+
+                } catch (e) {
+                    // Folder doesn't exist with old name, try new name
+                    try {
+                        await fetchDirectoryContents(newProductFolder, token);
+                        log(`  ✓ Folder sản phẩm đã đúng: ${categoryId}/`, 'success');
+                    } catch (e2) {
+                        log(`  ℹ️ Không tìm thấy folder sản phẩm cho ${filename}`, 'info');
+                    }
+                }
+            } else {
+                log(`  ✓ Đã khớp: ${filename}.json`, 'success');
+            }
+        }
+
+        // Update UI
+        const previewDiv = document.getElementById('sync-preview');
+        const changesList = document.getElementById('sync-changes-list');
+        const applyBtn = document.getElementById('btn-sync-categories');
+
+        if (pendingSyncChanges.length > 0) {
+            let html = '';
+            const renames = pendingSyncChanges.filter(c => c.type === 'rename-category');
+            const moves = pendingSyncChanges.filter(c => c.type === 'move-product');
+
+            if (renames.length > 0) {
+                html += `<div style="color: #fbbf24; margin-bottom: 8px;">📝 Đổi tên ${renames.length} file danh mục</div>`;
+                renames.forEach(r => {
+                    html += `<div style="color: var(--text-muted); margin-left: 15px;">• ${r.from.split('/').pop()} → ${r.to.split('/').pop()}</div>`;
+                });
+            }
+
+            if (moves.length > 0) {
+                html += `<div style="color: #60a5fa; margin-top: 8px; margin-bottom: 8px;">📦 Di chuyển ${moves.length} file sản phẩm</div>`;
+            }
+
+            changesList.innerHTML = html;
+            previewDiv.style.display = 'block';
+            applyBtn.disabled = false;
+
+            log(`\n✅ Tìm thấy ${pendingSyncChanges.length} thay đổi cần thực hiện`, 'success');
+        } else {
+            previewDiv.style.display = 'none';
+            applyBtn.disabled = true;
+            log(`\n✅ Tất cả danh mục đã được đồng bộ! Không cần thay đổi.`, 'success');
+        }
+
+    } catch (error) {
+        log(`✗ Lỗi: ${error.message}`, 'error');
+    } finally {
+        setButtonLoading(button, false);
+    }
+}
+
+// Apply category sync changes
+async function applyCategorySync() {
+    if (pendingSyncChanges.length === 0) {
+        log('Không có thay đổi nào để áp dụng', 'warning');
+        return;
+    }
+
+    const button = document.getElementById('btn-sync-categories');
+    button.dataset.originalText = button.querySelector('.btn-text').textContent;
+
+    try {
+        setButtonLoading(button, true);
+        showProgress(true);
+
+        log('⚡ Đang áp dụng thay đổi...', 'info');
+
+        // Get token
+        let token = getGitHubToken();
+        if (!token) {
+            token = promptForToken();
+            if (!token) {
+                throw new Error('Cần GitHub token để tiếp tục');
+            }
+        }
+
+        // Get latest commit
+        log('📥 Đang lấy commit mới nhất...', 'info');
+        const latestCommitSha = await getLatestCommitSha(token);
+        const baseTreeSha = await getTreeSha(latestCommitSha, token);
+
+        // Prepare files for new tree
+        const filesForTree = [];
+        const filesToDelete = [];
+        let processed = 0;
+        const total = pendingSyncChanges.filter(c => c.type !== 'delete-old-folder').length;
+
+        for (const change of pendingSyncChanges) {
+            if (change.type === 'rename-category' || change.type === 'move-product') {
+                // Create blob for new file
+                const blobSha = await createBlob(change.content, token);
+                filesForTree.push({
+                    path: change.to,
+                    blobSha: blobSha
+                });
+
+                // Mark old file for deletion
+                filesToDelete.push(change.from);
+
+                processed++;
+                setProgress((processed / total) * 80);
+                log(`  ✓ ${change.from.split('/').pop()} → ${change.to.split('/').pop()}`, 'success');
+            } else if (change.type === 'delete-old-folder') {
+                filesToDelete.push(...change.files);
+            }
+        }
+
+        // Create tree with files (new files + deletions)
+        log('🌳 Đang tạo tree mới...', 'info');
+
+        // For deletions, we need to create tree entries with sha = null
+        const treeEntries = filesForTree.map(file => ({
+            path: file.path,
+            mode: '100644',
+            type: 'blob',
+            sha: file.blobSha
+        }));
+
+        // Add deletion entries
+        for (const deleteFile of filesToDelete) {
+            treeEntries.push({
+                path: deleteFile,
+                mode: '100644',
+                type: 'blob',
+                sha: null // null sha = delete file
+            });
+        }
+
+        // Create tree via API
+        const treeUrl = `https://api.github.com/repos/${CONFIG.repo}/git/trees`;
+        const treeResponse = await fetch(treeUrl, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                base_tree: baseTreeSha,
+                tree: treeEntries
+            })
+        });
+
+        if (!treeResponse.ok) {
+            throw new Error(`Failed to create tree: ${treeResponse.status}`);
+        }
+
+        const newTree = await treeResponse.json();
+        setProgress(90);
+
+        // Create commit
+        log('📝 Đang tạo commit...', 'info');
+        const commitMessage = `[Auto-Sync] Đổi tên danh mục: ${pendingSyncChanges.filter(c => c.type === 'rename-category').map(c => c.oldId + ' → ' + c.newId).join(', ')}`;
+        const newCommitSha = await createCommit(newTree.sha, latestCommitSha, commitMessage, token);
+
+        // Update branch ref
+        log('🚀 Đang cập nhật branch...', 'info');
+        await updateBranchRef(newCommitSha, token);
+        setProgress(100);
+
+        log(`\n✅ Đồng bộ hoàn tất!`, 'success');
+        log(`   🔗 Commit: ${newCommitSha.substring(0, 7)}`, 'success');
+        log(`   ⚡ Netlify sẽ tự động deploy`, 'success');
+
+        // Reset UI
+        pendingSyncChanges = [];
+        document.getElementById('sync-preview').style.display = 'none';
+        document.getElementById('btn-sync-categories').disabled = true;
+
+    } catch (error) {
+        log(`✗ Lỗi: ${error.message}`, 'error');
+    } finally {
+        showProgress(false);
+        setProgress(0);
+        setButtonLoading(button, false);
+    }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
     const accessDenied = document.getElementById('access-denied');
@@ -1049,3 +1334,4 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (mainContent) mainContent.classList.remove('show');
     }
 });
+
