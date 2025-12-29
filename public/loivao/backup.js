@@ -561,7 +561,82 @@ function showRestorePreview() {
         filesContainer.innerHTML += `<div class="file-item" style="color: var(--warning)">... và ${restoreFiles.length - 50} files khác</div>`;
     }
 
+    // Detect source config from backup
+    detectSourceConfig();
+
+    // Set default values from current website config
+    document.getElementById('target-repo').placeholder = `Mặc định: ${CONFIG.repo}`;
+    document.getElementById('target-branch').value = CONFIG.branch || 'main';
+    document.getElementById('target-domain').placeholder = `Mặc định: ${extractDomain()}`;
+
+    // Update config info display
+    updateConfigInfo();
+
+    // Add event listeners for real-time config info update
+    document.getElementById('target-repo').addEventListener('input', updateConfigInfo);
+    document.getElementById('target-branch').addEventListener('input', updateConfigInfo);
+    document.getElementById('target-domain').addEventListener('input', updateConfigInfo);
+
     previewSection.style.display = 'block';
+}
+
+// Source config detected from backup
+let sourceConfig = {
+    repo: '',
+    domain: ''
+};
+
+// Detect source config from backup files
+async function detectSourceConfig() {
+    // Try to find site.config.json in backup
+    const siteConfigFile = restoreFiles.find(f => f.path.endsWith('site.config.json'));
+
+    if (siteConfigFile) {
+        try {
+            const content = await siteConfigFile.zipEntry.async('string');
+            const config = JSON.parse(content);
+            sourceConfig.repo = config.github?.repo || '';
+            sourceConfig.domain = config.netlify?.siteDomain || '';
+            updateConfigInfo();
+        } catch (e) {
+            console.log('Could not parse site.config.json from backup');
+        }
+    }
+}
+
+// Extract domain from current config
+function extractDomain() {
+    // Try to get domain from various sources
+    if (typeof window !== 'undefined') {
+        return window.location.hostname;
+    }
+    return '';
+}
+
+// Update config info display
+function updateConfigInfo() {
+    const configInfo = document.getElementById('config-info');
+
+    const targetRepo = document.getElementById('target-repo').value.trim() || CONFIG.repo;
+    const targetBranch = document.getElementById('target-branch').value.trim() || CONFIG.branch;
+    const targetDomain = document.getElementById('target-domain').value.trim() || extractDomain();
+
+    const willReplace = (sourceConfig.repo && sourceConfig.repo !== targetRepo) ||
+        (sourceConfig.domain && sourceConfig.domain !== targetDomain);
+
+    let html = '';
+
+    if (sourceConfig.repo || sourceConfig.domain) {
+        html += `<div class="source-config">📦 Nguồn (từ backup): ${sourceConfig.repo || '?'} → ${sourceConfig.domain || '?'}</div>`;
+    }
+
+    html += `<div class="target-config-display">🎯 Đích: ${targetRepo} (${targetBranch}) → ${targetDomain}</div>`;
+
+    if (willReplace) {
+        html += `<div style="color: var(--primary); margin-top: 8px;">⚠️ Sẽ tự động thay thế repo/domain trong các file config</div>`;
+    }
+
+    configInfo.innerHTML = html;
 }
 
 // Cancel restore
@@ -724,6 +799,39 @@ async function updateBranchRef(commitSha, token) {
     return await response.json();
 }
 
+// Files that need repo/domain replacement
+const CONFIG_FILES = [
+    'public/site.config.json',
+    'site.config.json',
+    'public/loivao/config.yml'
+];
+
+// Replace repo and domain in file content
+function replaceConfigValues(content, filePath, sourceRepo, sourceDomain, targetRepo, targetDomain) {
+    let modified = content;
+
+    // Only process config files
+    const isConfigFile = CONFIG_FILES.some(cf => filePath.endsWith(cf));
+    if (!isConfigFile) return modified;
+
+    // Replace repo
+    if (sourceRepo && targetRepo && sourceRepo !== targetRepo) {
+        // Replace full repo path
+        modified = modified.split(sourceRepo).join(targetRepo);
+    }
+
+    // Replace domain
+    if (sourceDomain && targetDomain && sourceDomain !== targetDomain) {
+        // Replace full domain
+        modified = modified.split(sourceDomain).join(targetDomain);
+
+        // Also replace https:// prefixed versions
+        modified = modified.split(`https://${sourceDomain}`).join(`https://${targetDomain}`);
+    }
+
+    return modified;
+}
+
 // Perform batched restore - ALL files in ONE commit
 async function performRestore() {
     if (isRestoreRunning) {
@@ -736,8 +844,35 @@ async function performRestore() {
         return;
     }
 
-    // Confirm
-    if (!confirm(`Bạn có chắc muốn khôi phục ${restoreFiles.length} files?\n\nCác file hiện có sẽ bị GHI ĐÈ!\n\n✓ Tất cả sẽ được gộp vào MỘT commit duy nhất.`)) {
+    // Get target config from form
+    const targetRepo = document.getElementById('target-repo').value.trim() || CONFIG.repo;
+    const targetBranch = document.getElementById('target-branch').value.trim() || CONFIG.branch;
+    const targetDomain = document.getElementById('target-domain').value.trim() || extractDomain();
+
+    // Check if we need to replace config values
+    const needsReplacement = (sourceConfig.repo && sourceConfig.repo !== targetRepo) ||
+        (sourceConfig.domain && sourceConfig.domain !== targetDomain);
+
+    // Build confirmation message
+    let confirmMsg = `Bạn có chắc muốn khôi phục ${restoreFiles.length} files?\n\n`;
+    confirmMsg += `📦 Repo đích: ${targetRepo}\n`;
+    confirmMsg += `🌿 Branch: ${targetBranch}\n`;
+    confirmMsg += `🌐 Domain: ${targetDomain}\n\n`;
+
+    if (needsReplacement) {
+        confirmMsg += `⚠️ Sẽ tự động thay thế:\n`;
+        if (sourceConfig.repo !== targetRepo) {
+            confirmMsg += `   ${sourceConfig.repo} → ${targetRepo}\n`;
+        }
+        if (sourceConfig.domain !== targetDomain) {
+            confirmMsg += `   ${sourceConfig.domain} → ${targetDomain}\n`;
+        }
+        confirmMsg += '\n';
+    }
+
+    confirmMsg += `✓ Tất cả sẽ được gộp vào MỘT commit duy nhất.`;
+
+    if (!confirm(confirmMsg)) {
         return;
     }
 
@@ -749,6 +884,9 @@ async function performRestore() {
         setButtonLoading(button, true);
 
         log('🚀 Bắt đầu restore (batched - single commit)...', 'info');
+        log(`   Repo đích: ${targetRepo}`, 'info');
+        log(`   Branch: ${targetBranch}`, 'info');
+        log(`   Domain: ${targetDomain}`, 'info');
 
         // Get token
         let token = getGitHubToken();
@@ -759,6 +897,12 @@ async function performRestore() {
             }
         }
         log('✓ Đã xác thực token', 'success');
+
+        // Use target repo for API calls
+        const originalRepo = CONFIG.repo;
+        const originalBranch = CONFIG.branch;
+        CONFIG.repo = targetRepo;
+        CONFIG.branch = targetBranch;
 
         showProgress(true);
         const total = restoreFiles.length;
@@ -771,13 +915,34 @@ async function performRestore() {
 
         // Step 2: Create blobs for all files
         log(`📦 Đang tạo blobs cho ${total} files...`, 'info');
+        if (needsReplacement) {
+            log(`🔄 Đang thay thế config values...`, 'info');
+        }
+
         const filesWithBlobs = [];
         let processed = 0;
+        let replacedCount = 0;
 
         for (const file of restoreFiles) {
             try {
                 // Read file content from ZIP
-                const content = await file.zipEntry.async('string');
+                let content = await file.zipEntry.async('string');
+
+                // Replace config values if needed
+                if (needsReplacement) {
+                    const originalContent = content;
+                    content = replaceConfigValues(
+                        content,
+                        file.path,
+                        sourceConfig.repo,
+                        sourceConfig.domain,
+                        targetRepo,
+                        targetDomain
+                    );
+                    if (content !== originalContent) {
+                        replacedCount++;
+                    }
+                }
 
                 // Create blob
                 const blobSha = await createBlob(content, token);
@@ -807,6 +972,10 @@ async function performRestore() {
             throw new Error('Không có file nào được xử lý thành công');
         }
 
+        if (replacedCount > 0) {
+            log(`✓ Đã thay thế config trong ${replacedCount} files`, 'success');
+        }
+
         // Step 3: Create new tree
         log('🌳 Đang tạo Git tree...', 'info');
         setProgress(60);
@@ -832,7 +1001,12 @@ async function performRestore() {
         log(`✅ Restore hoàn tất!`, 'success');
         log(`   📁 ${filesWithBlobs.length}/${total} files đã được khôi phục`, 'success');
         log(`   🔗 Commit: ${newCommitSha.substring(0, 7)}`, 'success');
+        log(`   🎯 Repo: ${targetRepo}`, 'success');
         log(`   ⚡ Chỉ trigger 1 lần deploy trên Netlify`, 'success');
+
+        // Restore original config
+        CONFIG.repo = originalRepo;
+        CONFIG.branch = originalBranch;
 
         // Reset UI
         cancelRestore();
