@@ -24,13 +24,15 @@ interface ProductDetailWithProviderProps {
   relatedTrucks: Truck[];
   allBlogPosts: BlogPost[];
   siteSettings?: Partial<SiteSettings>;
+  categoryName?: string;
 }
 
 const ProductDetailWithProvider: React.FC<ProductDetailWithProviderProps> = ({
   truck,
   relatedTrucks,
   allBlogPosts = [],
-  siteSettings
+  siteSettings,
+  categoryName
 }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -64,7 +66,8 @@ const ProductDetailWithProvider: React.FC<ProductDetailWithProviderProps> = ({
     return [];
   };
 
-  const vehicleTypeName = getVehicleTypeName(truck.type);
+  // Use categoryName from CMS if provided, otherwise fallback to getVehicleTypeName
+  const vehicleTypeName = categoryName || getVehicleTypeName(truck.type);
   const boxTypeName = truck.boxType ? getBoxTypeName(truck.boxType) : '';
   const trailerTypeName = truck.trailerType ? getTrailerTypeName(truck.trailerType) : '';
 
