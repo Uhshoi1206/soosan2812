@@ -11,7 +11,7 @@
   "width": 2.5,
   "height": 3.6,
   "dimensions": "9200x2500x3600 mm",
-  "type": "xe-cau",
+  "type": "can-cau",
   "isNew": true,
   "isHot": false,
   "origin": "Hàn Quốc",
