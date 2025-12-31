@@ -271,8 +271,8 @@ const labelMappings: Record<string, string> = {
   swingTorque: 'Mô-men xoay',
 
   // Crane - Safety & Control
-  safetySystem: 'Hệ thống an toàn',
-  safetyFeatures: 'Tính năng an toàn',
+  safetySystem: 'Thiết bị an toàn',
+  safetyFeatures: 'Thiết bị an toàn', // Same label as safetySystem for deduplication
   safetyEquipment: 'Thiết bị an toàn',
   safetyHook: 'Móc an toàn',
   safetyValve: 'Van an toàn',
