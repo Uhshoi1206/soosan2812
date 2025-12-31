@@ -744,16 +744,45 @@ const CompareTable: React.FC<CompareTableProps> = ({ trucks }) => {
     return specsMap;
   }, [trucks]);
 
-  // Nhóm specs theo category
+  // Nhóm specs theo category VÀ loại bỏ trùng lặp theo label
   const groupedSpecs = useMemo(() => {
     const groups = new Map<string, Array<{ path: string; label: string }>>();
 
+    // Tạo một map theo label để detect trùng lặp
+    const labelToPath = new Map<string, string>();
+
     for (const [, spec] of allSpecs) {
-      const category = spec.category;
+      const { category, path, label } = spec;
+
+      // Kiểm tra trùng lặp theo label
+      if (labelToPath.has(label)) {
+        const existingPath = labelToPath.get(label)!;
+        // Ưu tiên path dài hơn (chi tiết hơn, ví dụ: craneSpec.boomLength > boomLength)
+        if (path.length > existingPath.length) {
+          // Xóa path cũ khỏi groups
+          for (const [groupKey, specs] of groups) {
+            const idx = specs.findIndex(s => s.path === existingPath);
+            if (idx !== -1) {
+              specs.splice(idx, 1);
+              if (specs.length === 0) {
+                groups.delete(groupKey);
+              }
+              break;
+            }
+          }
+          labelToPath.set(label, path);
+        } else {
+          // Path hiện tại ngắn hơn hoặc bằng -> bỏ qua
+          continue;
+        }
+      } else {
+        labelToPath.set(label, path);
+      }
+
       if (!groups.has(category)) {
         groups.set(category, []);
       }
-      groups.get(category)!.push({ path: spec.path, label: spec.label });
+      groups.get(category)!.push({ path, label });
     }
 
     // Sắp xếp theo thứ tự đã định nghĩa
