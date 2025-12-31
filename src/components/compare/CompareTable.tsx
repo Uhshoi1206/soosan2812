@@ -272,7 +272,7 @@ const labelMappings: Record<string, string> = {
 
   // Crane - Safety & Control
   safetySystem: 'Hệ thống an toàn',
-  safetyFeatures: 'Tính năng an toàn',
+  safetyFeatures: 'Hệ thống an toàn',
   safetyEquipment: 'Thiết bị an toàn',
   safetyHook: 'Móc an toàn',
   safetyValve: 'Van an toàn',
@@ -616,6 +616,14 @@ const excludedFields = new Set([
   'boomRetractedLength', 'boomExtendedLength', 'boomMinLength', 'boomMaxLength',
 ]);
 
+// Path aliases - các field có cùng ý nghĩa, khi lấy giá trị sẽ thử tất cả aliases
+const pathAliases: Record<string, string[]> = {
+  // An toàn - safetySystem và safetyFeatures là cùng 1 thông số
+  'craneSpec.safetySystem': ['craneSpec.safetyFeatures'],
+  'craneSpec.safetyFeatures': ['craneSpec.safetySystem'],
+  // Có thể thêm các alias khác nếu cần
+};
+
 // Hàm chuyển camelCase thành tiếng Việt đọc được
 const camelToLabel = (str: string): string => {
   // Kiểm tra mapping trước
@@ -637,8 +645,8 @@ const getLabel = (path: string): string => {
   return labelMappings[lastPart] || camelToLabel(lastPart);
 };
 
-// Hàm lấy giá trị nested từ object
-const getNestedValue = (obj: any, path: string): any => {
+// Hàm lấy giá trị nested từ object (core implementation)
+const getNestedValueCore = (obj: any, path: string): any => {
   if (!obj || !path) return undefined;
 
   const parts = path.split('.');
@@ -647,6 +655,24 @@ const getNestedValue = (obj: any, path: string): any => {
   for (const part of parts) {
     if (value === null || value === undefined) return undefined;
     value = value[part];
+  }
+
+  return value;
+};
+
+// Hàm lấy giá trị nested từ object - có hỗ trợ path aliases
+const getNestedValue = (obj: any, path: string): any => {
+  // Thử path chính trước
+  let value = getNestedValueCore(obj, path);
+
+  // Nếu không có giá trị và có alias, thử các alias
+  if ((value === undefined || value === null) && pathAliases[path]) {
+    for (const aliasPath of pathAliases[path]) {
+      value = getNestedValueCore(obj, aliasPath);
+      if (value !== undefined && value !== null) {
+        break;
+      }
+    }
   }
 
   return value;
