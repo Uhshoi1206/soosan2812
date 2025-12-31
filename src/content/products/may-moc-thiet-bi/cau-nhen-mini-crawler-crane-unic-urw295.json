@@ -39,8 +39,6 @@
         "Thương hiệu UNIC Nhật Bản - Chất lượng hàng đầu"
     ],
     "craneSpec": {
-        "model": "URW-295",
-        "craneModelName": "UNIC URW-295 Mini Crawler Crane",
         "liftingCapacity": 2930,
         "liftingCapacityText": "2.93 tấn @ 1.4m (tối đa)",
         "maxLiftingMoment": "4.1 tấn.m",
