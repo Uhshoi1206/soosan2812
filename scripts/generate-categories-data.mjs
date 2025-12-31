@@ -10,7 +10,7 @@ import { join } from 'path';
 import { existsSync } from 'fs';
 
 const CATEGORIES_DIR = 'src/content/categories';
-const BOX_TYPES_FILE = 'src/content/settings/box-types.json';
+const BOX_TYPES_FILE = 'src/data/box-types.json';
 const OUTPUT_FILE = 'src/lib/generated/categories.ts';
 
 async function generateCategoriesData() {
