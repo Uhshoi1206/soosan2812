@@ -612,6 +612,8 @@ const excludedFields = new Set([
   'ratedLoadChart', 'detailedLiftingCapacity', 'boomLengths', 'data', 'values', 'radius', 'note', 'unit',
   // Các field tính năng - tránh trùng lặp với thông số chi tiết
   'optionalFeatures', 'cabinFeatures', 'specialFeatures', 'safetyFeatures', 'interiorFeatures',
+  // Các field cần cẩu trùng lặp - giữ lại boomLength là chính
+  'boomRetractedLength', 'boomExtendedLength', 'boomMinLength', 'boomMaxLength',
 ]);
 
 // Hàm chuyển camelCase thành tiếng Việt đọc được
@@ -849,12 +851,16 @@ const CompareTable: React.FC<CompareTableProps> = ({ trucks }) => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-sm text-left border-collapse">
+        <table className="w-full text-sm text-left border-collapse table-fixed">
           <thead>
             <tr className="bg-gray-100">
-              <th className="p-4 w-1/4 border-r-2">Thông tin</th>
+              <th className="p-4 border-r-2" style={{ width: '25%' }}>Thông tin</th>
               {trucks.map((truck) => (
-                <th key={truck.id} className="p-4 relative">
+                <th
+                  key={truck.id}
+                  className="p-4 relative"
+                  style={{ width: `${75 / trucks.length}%` }}
+                >
                   <Button
                     className="absolute top-2 right-2 h-6 w-6 p-0 rounded-full"
                     size="sm"
