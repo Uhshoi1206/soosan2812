@@ -1361,13 +1361,13 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
               </table>
 
               {/* THIẾT BỊ AN TOÀN (SAFETY DEVICES) */}
-              {truck.craneSpec.safetyFeatures && (
+              {(truck.craneSpec.safetyFeatures || truck.craneSpec.safetySystem) && (
                 <>
                   <h4 className="font-bold text-lg bg-gray-100 text-gray-800 p-2 rounded mb-3 border-l-4 border-rose-500">Thiết bị an toàn (Safety Devices)</h4>
                   <table className="w-full border-collapse border mb-6">
                     <tbody>
                       <tr className="border-b">
-                        <td className="py-2 px-3 font-medium">{truck.craneSpec.safetyFeatures}</td>
+                        <td className="py-2 px-3 font-medium">{truck.craneSpec.safetyFeatures || truck.craneSpec.safetySystem}</td>
                       </tr>
                     </tbody>
                   </table>
