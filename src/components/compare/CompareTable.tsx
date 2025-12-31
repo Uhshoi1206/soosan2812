@@ -201,6 +201,7 @@ const labelMappings: Record<string, string> = {
   boomLiftingAngle: 'Góc nâng cần',
   boomLiftingTime: 'Thời gian nâng cần',
   boomLoweringTime: 'Thời gian hạ cần',
+  jibBoom: 'Cần phụ (Jib)',
 
   // Crane - Hydraulic system
   hydraulicOilTankCapacity: 'Dung tích bình dầu thủy lực',
