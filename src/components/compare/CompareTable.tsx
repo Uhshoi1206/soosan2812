@@ -101,7 +101,7 @@ const labelMappings: Record<string, string> = {
   paintProcess: 'Quy trình sơn',
   paintColor: 'Màu sơn',
 
-  // Crane specs
+  // Crane specs - Basic
   liftingCapacity: 'Sức nâng',
   liftingCapacityText: 'Sức nâng',
   reachLength: 'Tầm với',
@@ -118,6 +118,60 @@ const labelMappings: Record<string, string> = {
   maxLiftingMoment: 'Mô-men nâng tối đa',
   maxLiftingHeight: 'Chiều cao nâng tối đa',
   maxWorkingRadius: 'Bán kính làm việc tối đa',
+  craneModelName: 'Model cẩu',
+  craneBrand: 'Thương hiệu cẩu',
+  maxHeightBelowGround: 'Chiều cao dưới mặt đất',
+  slewingAngle: 'Góc xoay',
+  slewingSpeed: 'Tốc độ xoay',
+  slewingTorque: 'Mô-men xoay',
+
+  // Crane - Boom specs
+  boomLength: 'Chiều dài cần',
+  boomMinLength: 'Chiều dài cần tối thiểu',
+  boomMaxLength: 'Chiều dài cần tối đa',
+  boomExtensionTime: 'Thời gian duỗi cần',
+  boomRetractionTime: 'Thời gian thu cần',
+  boomLiftingAngle: 'Góc nâng cần',
+  boomLiftingTime: 'Thời gian nâng cần',
+  boomLoweringTime: 'Thời gian hạ cần',
+
+  // Crane - Hydraulic system
+  hydraulicOilTankCapacity: 'Dung tích bình dầu thủy lực',
+  hydraulicPumpOutput: 'Công suất bơm thủy lực',
+  hydraulicPumpType: 'Loại bơm thủy lực',
+  hydraulicPressure: 'Áp suất thủy lực',
+  maxHydraulicPressure: 'Áp suất thủy lực tối đa',
+  hydraulicOilFlow: 'Lưu lượng dầu thủy lực',
+  hydraulicCylinder: 'Xi-lanh thủy lực',
+
+  // Crane - Outrigger/Stabilizer specs
+  outriggerSpan: 'Khoảng cách chân chống',
+  outriggerType: 'Loại chân chống',
+  outriggerExtension: 'Độ duỗi chân chống',
+  frontOutriggerSpan: 'Khoảng cách chân chống trước',
+  rearOutriggerSpan: 'Khoảng cách chân chống sau',
+  stabilizerForce: 'Lực chân chống',
+
+  // Crane - Winch specs
+  winchType: 'Loại tời',
+  winchSpeed: 'Tốc độ tời',
+  winchRopeLength: 'Chiều dài dây tời',
+  winchRopeDiameter: 'Đường kính dây tời',
+  hoistingSpeed: 'Tốc độ nâng',
+  loweringSpeed: 'Tốc độ hạ',
+
+  // Crane - Safety & Control
+  safetySystem: 'Hệ thống an toàn',
+  overloadProtection: 'Bảo vệ quá tải',
+  loadMomentLimiter: 'Giới hạn mô-men tải',
+  antiTwoBlockSystem: 'Hệ thống chống 2 block',
+  powerSource: 'Nguồn động lực',
+  foldedHeight: 'Chiều cao khi gập',
+
+  // Crane - Weight specs
+  craneWeight: 'Trọng lượng cẩu',
+  totalWeight: 'Tổng trọng lượng',
+  netWeight: 'Trọng lượng tịnh',
 
   // Tank specs
   compartments: 'Số ngăn',
@@ -128,9 +182,17 @@ const labelMappings: Record<string, string> = {
   dischargingSystem: 'Hệ thống xả',
   liningMaterial: 'Vật liệu lót trong',
   safetyEquipment: 'Thiết bị an toàn',
+  safetyFeatures: 'Tính năng an toàn',
   insulationPresent: 'Cách nhiệt',
   heatingSystem: 'Hệ thống làm nóng',
   measurementSystem: 'Hệ thống đo lường',
+  tankDimension: 'Kích thước bồn',
+  designPressure: 'Áp suất thiết kế',
+  pumpType: 'Loại bơm',
+  pumpFlowRate: 'Lưu lượng bơm',
+  flowMeter: 'Đồng hồ đo lưu lượng',
+  certifications: 'Chứng nhận',
+  capacityText: 'Dung tích',
 
   // Tractor specs
   clutchType: 'Loại ly hợp',
@@ -186,6 +248,23 @@ const labelMappings: Record<string, string> = {
   // Performance
   maxSpeed: 'Tốc độ tối đa',
   climbingAbility: 'Khả năng leo dốc',
+
+  // Man basket / Work platform
+  basketCapacity: 'Sức chứa giỏ',
+  basketDimensions: 'Kích thước giỏ',
+  platformHeight: 'Chiều cao sàn',
+  maxPlatformHeight: 'Chiều cao sàn tối đa',
+  workingRadius: 'Bán kính làm việc',
+
+  // General equipment
+  operatingWeight: 'Trọng lượng vận hành',
+  transportDimensions: 'Kích thước vận chuyển',
+  operatingDimensions: 'Kích thước vận hành',
+  engineBrand: 'Thương hiệu động cơ',
+  engineOutput: 'Công suất động cơ',
+  fuelType: 'Loại nhiên liệu',
+  travelSpeed: 'Tốc độ di chuyển',
+  gradability: 'Khả năng leo dốc',
 };
 
 // Nhóm thông số theo danh mục
