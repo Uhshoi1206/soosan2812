@@ -147,6 +147,10 @@ const labelMappings: Record<string, string> = {
   floorThickness: 'Độ dày sàn',
   sideHeight: 'Chiều cao thành bên',
 
+  // Specifications - Truck specific
+  wadingDepth: 'Khả năng lội nước',
+  airIntakePosition: 'Vị trí cổ hút gió',
+
   // Finishing
   paintProcess: 'Quy trình sơn',
   paintColor: 'Màu sơn',
