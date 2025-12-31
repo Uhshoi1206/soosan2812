@@ -1033,6 +1033,30 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                       <td className="py-2 px-3 font-medium">{truck.craneSpec.craneNetWeight}</td>
                     </tr>
                   )}
+                  {truck.craneSpec.craneOperatingWeightSTD && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Trọng lượng vận hành (STD)</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.craneOperatingWeightSTD}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.craneOperatingWeightTopSeat && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Trọng lượng vận hành (Top Seat)</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.craneOperatingWeightTopSeat}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.craneNetWeightSTD && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Trọng lượng thân cẩu (STD)</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.craneNetWeightSTD}</td>
+                    </tr>
+                  )}
+                  {truck.craneSpec.craneNetWeightTopSeat && (
+                    <tr className="border-b">
+                      <td className="py-2 px-3 text-gray-600 w-1/3">Trọng lượng thân cẩu (Top Seat)</td>
+                      <td className="py-2 px-3 font-medium">{truck.craneSpec.craneNetWeightTopSeat}</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
 
