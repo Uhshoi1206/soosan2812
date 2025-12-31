@@ -611,7 +611,7 @@ const excludedFields = new Set([
   // Các field từ bảng tải trọng - không hiển thị riêng lẻ
   'ratedLoadChart', 'detailedLiftingCapacity', 'boomLengths', 'data', 'values', 'radius', 'note', 'unit',
   // Các field tính năng - tránh trùng lặp với thông số chi tiết
-  'optionalFeatures', 'cabinFeatures', 'specialFeatures', 'safetyFeatures', 'interiorFeatures',
+  'optionalFeatures', 'cabinFeatures', 'specialFeatures', 'interiorFeatures',
   // Các field cần cẩu trùng lặp - giữ lại boomLength là chính
   'boomRetractedLength', 'boomExtendedLength', 'boomMinLength', 'boomMaxLength',
 ]);
