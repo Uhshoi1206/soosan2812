@@ -24,6 +24,9 @@ const labelMappings: Record<string, string> = {
   tires: 'Lốp xe',
   seats: 'Số chỗ ngồi',
   warranty: 'Bảo hành',
+  fuel: 'Nhiên liệu',
+  wheelbaseText: 'Chiều dài cơ sở',
+  stockStatus: 'Tình trạng kho',
 
   // Dimensions
   length: 'Chiều dài',
@@ -36,6 +39,10 @@ const labelMappings: Record<string, string> = {
   overallDimensions: 'Kích thước tổng thể',
   containerDimensions: 'Kích thước thùng hàng',
   capacity: 'Dung tích/Thể tích',
+  overallLength: 'Chiều dài tổng thể',
+  overallWidth: 'Chiều rộng tổng thể',
+  overallHeight: 'Chiều cao tổng thể',
+  aisleWidth: 'Chiều rộng lối đi',
 
   // Weight
   weight: 'Trọng lượng',
@@ -45,6 +52,7 @@ const labelMappings: Record<string, string> = {
   payload: 'Tải trọng cho phép',
   frontAxleLoad: 'Tải trọng cầu trước',
   rearAxleLoad: 'Tải trọng cầu sau',
+  counterweight: 'Đối trọng',
 
   // Engine
   engineType: 'Loại động cơ',
@@ -57,11 +65,23 @@ const labelMappings: Record<string, string> = {
   fuelConsumption: 'Mức tiêu thụ nhiên liệu',
   emissionStandard: 'Tiêu chuẩn khí thải',
   horsepower: 'Công suất',
+  horsepowerRange: 'Phạm vi công suất',
   torque: 'Mô-men xoắn',
+  boreStroke: 'Đường kính x Hành trình xi lanh',
+  compressionRatio: 'Tỷ số nén',
+  firingOrder: 'Thứ tự nổ',
+  valveTrain: 'Cơ cấu phân phối khí',
+  fuelInjection: 'Hệ thống phun nhiên liệu',
+  turbocharger: 'Tăng áp',
+  oilCapacity: 'Dung tích nhớt',
+  pistonCooling: 'Làm mát piston',
+  gearRatioRange: 'Phạm vi tỷ số truyền',
+  clutch: 'Ly hợp',
 
   // Chassis
   chassisMaterial: 'Vật liệu khung gầm',
   frameMaterial: 'Vật liệu khung',
+  frameSpec: 'Thông số khung',
   mainBeam: 'Dầm chính',
   frontSuspension: 'Hệ thống treo trước',
   rearSuspension: 'Hệ thống treo sau',
@@ -70,16 +90,25 @@ const labelMappings: Record<string, string> = {
   rearBrake: 'Phanh sau',
   parkingBrake: 'Phanh đỗ',
   brakeSystem: 'Hệ thống phanh',
+  brakeType: 'Loại phanh',
   steeringType: 'Hệ thống lái',
+  steeringSystem: 'Hệ thống lái',
 
   // Axle
   axleCount: 'Số trục',
   axleType: 'Loại trục',
   axleWeight: 'Tải trọng trục',
+  axleRatio: 'Tỷ số truyền cầu',
+  frontAxle: 'Cầu trước',
+  rearAxle: 'Cầu sau',
   springType: 'Loại nhíp',
   springDimension: 'Kích thước nhíp',
   tireSpec: 'Thông số lốp',
   axleConfiguration: 'Cấu hình trục',
+  differentialLock: 'Khóa vi sai',
+  trackWidth: 'Vết bánh xe',
+  frontTires: 'Lốp trước',
+  rearTires: 'Lốp sau',
 
   // Landing gear & Kingpin
   landingGear: 'Chân chống',
@@ -89,6 +118,7 @@ const labelMappings: Record<string, string> = {
   // Systems
   electricSystem: 'Hệ thống điện',
   hydraulicSystem: 'Hệ thống thủy lực',
+  alternator: 'Máy phát điện',
 
   // Body/Box
   floorMaterial: 'Vật liệu sàn',
@@ -118,33 +148,66 @@ const labelMappings: Record<string, string> = {
   maxLiftingMoment: 'Mô-men nâng tối đa',
   maxLiftingHeight: 'Chiều cao nâng tối đa',
   maxWorkingRadius: 'Bán kính làm việc tối đa',
+  minWorkingRadius: 'Bán kính làm việc tối thiểu',
   craneModelName: 'Model cẩu',
   craneBrand: 'Thương hiệu cẩu',
   maxHeightBelowGround: 'Chiều cao dưới mặt đất',
   slewingAngle: 'Góc xoay',
   slewingSpeed: 'Tốc độ xoay',
   slewingTorque: 'Mô-men xoay',
+  applicableTruckChassis: 'Khung xe phù hợp',
+  craneOperatingWeightSTD: 'Trọng lượng vận hành (STD)',
+  craneOperatingWeightTopSeat: 'Trọng lượng vận hành (Top Seat)',
+  craneNetWeightSTD: 'Trọng lượng tịnh (STD)',
+  craneNetWeightTopSeat: 'Trọng lượng tịnh (Top Seat)',
 
   // Crane - Boom specs
+  boomType: 'Loại cần',
   boomLength: 'Chiều dài cần',
   boomMinLength: 'Chiều dài cần tối thiểu',
   boomMaxLength: 'Chiều dài cần tối đa',
+  boomRetractedLength: 'Chiều dài cần thu gọn',
+  boomExtendedLength: 'Chiều dài cần duỗi ra',
+  boomExtensionSpeed: 'Tốc độ duỗi cần',
   boomExtensionTime: 'Thời gian duỗi cần',
   boomRetractionTime: 'Thời gian thu cần',
+  boomLuffingAngle: 'Góc nâng cần',
+  boomLuffingSpeed: 'Tốc độ nâng/hạ cần',
   boomLiftingAngle: 'Góc nâng cần',
   boomLiftingTime: 'Thời gian nâng cần',
   boomLoweringTime: 'Thời gian hạ cần',
 
   // Crane - Hydraulic system
   hydraulicOilTankCapacity: 'Dung tích bình dầu thủy lực',
+  hydraulicTankCapacity: 'Dung tích bình thủy lực',
   hydraulicPumpOutput: 'Công suất bơm thủy lực',
   hydraulicPumpType: 'Loại bơm thủy lực',
+  hydraulicPump: 'Bơm thủy lực',
+  hydraulicMotor: 'Mô tơ thủy lực',
   hydraulicPressure: 'Áp suất thủy lực',
+  hydraulicOperatingPressure: 'Áp suất vận hành thủy lực',
   maxHydraulicPressure: 'Áp suất thủy lực tối đa',
   hydraulicOilFlow: 'Lưu lượng dầu thủy lực',
+  hydraulicRatedRevolution: 'Vòng quay định mức thủy lực',
+  hydraulicControlValve: 'Van điều khiển thủy lực',
+  hydraulicReliefValvePressure: 'Áp suất van xả thủy lực',
+  hydraulicCounterBalanceValve: 'Van cân bằng thủy lực',
+  hydraulicPilotCheckValve: 'Van kiểm tra pilot thủy lực',
+  hydraulicMotorHoisting: 'Mô tơ thủy lực nâng',
+  hydraulicMotorSlewing: 'Mô tơ thủy lực xoay',
+  hydraulicCylinders: 'Xi lanh thủy lực',
   hydraulicCylinder: 'Xi-lanh thủy lực',
+  hydraulicOilCapacity: 'Dung tích dầu thủy lực',
 
   // Crane - Outrigger/Stabilizer specs
+  outriggersType: 'Loại chân chống',
+  outriggersVerticalJacks: 'Xi lanh chân chống dọc',
+  outriggersHorizontalBeamsFront: 'Dầm ngang chân chống trước',
+  outriggersHorizontalBeamsRear: 'Dầm ngang chân chống sau',
+  outriggersFrontRetracted: 'Chân chống trước thu gọn',
+  outriggersFrontExtension: 'Chân chống trước mở rộng',
+  outriggersRearRetracted: 'Chân chống sau thu gọn',
+  outriggersRearExtension: 'Chân chống sau mở rộng',
   outriggerSpan: 'Khoảng cách chân chống',
   outriggerType: 'Loại chân chống',
   outriggerExtension: 'Độ duỗi chân chống',
@@ -155,10 +218,23 @@ const labelMappings: Record<string, string> = {
   // Crane - Winch specs
   winchType: 'Loại tời',
   winchSpeed: 'Tốc độ tời',
+  winchSingleLinePull: 'Lực kéo đơn tời',
+  winchRatedSpeed: 'Tốc độ định mức tời',
+  winchHookSpeed: 'Tốc độ móc tời',
+  winchRopeType: 'Loại cáp tời',
+  winchRopeDimension: 'Kích thước cáp tời',
   winchRopeLength: 'Chiều dài dây tời',
   winchRopeDiameter: 'Đường kính dây tời',
+  winchBrakingStrength: 'Lực phanh tời',
+  sheaveBlockCapacity: 'Sức nâng khối ròng rọc',
+  sheaveBlockType: 'Loại khối ròng rọc',
   hoistingSpeed: 'Tốc độ nâng',
   loweringSpeed: 'Tốc độ hạ',
+
+  // Crane - Swing specs
+  swingType: 'Loại cơ cấu xoay',
+  swingAngle: 'Góc xoay',
+  swingSpeed: 'Tốc độ xoay',
 
   // Crane - Safety & Control
   safetySystem: 'Hệ thống an toàn',
@@ -197,14 +273,26 @@ const labelMappings: Record<string, string> = {
   // Tractor specs
   clutchType: 'Loại ly hợp',
   cabinType: 'Loại cabin',
+  cabinSafety: 'An toàn cabin',
+  driverSeat: 'Ghế tài xế',
   fuelTankCapacity: 'Dung tích bình nhiên liệu',
+  fuelTankCapacityText: 'Dung tích bình nhiên liệu',
   saddleHeight: 'Chiều cao bàn đỡ',
   fifthWheelType: 'Loại mâm kéo',
   maxTowingCapacity: 'Tải trọng kéo tối đa',
+  maxTowingCapacityText: 'Tải trọng kéo tối đa',
   brakingSystem: 'Hệ thống phanh',
+  autoSlackAdjuster: 'Tự động điều chỉnh khe hở phanh',
+  exhaustBrake: 'Phanh khí xả',
+  jakeBrake: 'Phanh động cơ',
+  abs: 'ABS',
   retarderSystem: 'Hệ thống hãm',
   sleepingBerth: 'Giường nằm',
   airConditioner: 'Điều hòa không khí',
+  rearAxleGear: 'Bánh răng cầu sau',
+  rearAxleRatio: 'Tỷ số truyền cầu sau',
+  fuelSavings: 'Tiết kiệm nhiên liệu',
+  tireSavings: 'Tiết kiệm lốp',
 
   // Box structures
   wallLayers: 'Số lớp vách',
@@ -248,6 +336,30 @@ const labelMappings: Record<string, string> = {
   // Performance
   maxSpeed: 'Tốc độ tối đa',
   climbingAbility: 'Khả năng leo dốc',
+  fuelSystem: 'Hệ thống nhiên liệu',
+
+  // Concrete mixer specs
+  drumVolume: 'Thể tích bồn trộn',
+  drumMaterial: 'Vật liệu bồn trộn',
+  gearReducer: 'Bộ giảm tốc',
+  rotationSpeed: 'Tốc độ quay',
+  waterTank: 'Bình nước',
+  dischargeTrough: 'Máng đổ',
+
+  // Forklift specs
+  liftCapacity: 'Sức nâng',
+  maxLiftHeight: 'Chiều cao nâng tối đa',
+  freeLift: 'Chiều cao tự do',
+  forkLength: 'Chiều dài càng',
+  forkWidth: 'Chiều rộng càng',
+  mastType: 'Loại khung nâng',
+  tiltAngle: 'Độ nghiêng khung',
+  liftSpeedLoaded: 'Tốc độ nâng có tải',
+  lowerSpeedLoaded: 'Tốc độ hạ có tải',
+  travelSpeedLoaded: 'Tốc độ di chuyển có tải',
+  travelSpeedUnloaded: 'Tốc độ di chuyển không tải',
+  gradability: 'Khả năng leo dốc',
+  attachments: 'Phụ kiện đính kèm',
 
   // Man basket / Work platform
   basketCapacity: 'Sức chứa giỏ',
@@ -264,7 +376,6 @@ const labelMappings: Record<string, string> = {
   engineOutput: 'Công suất động cơ',
   fuelType: 'Loại nhiên liệu',
   travelSpeed: 'Tốc độ di chuyển',
-  gradability: 'Khả năng leo dốc',
 };
 
 // Nhóm thông số theo danh mục
