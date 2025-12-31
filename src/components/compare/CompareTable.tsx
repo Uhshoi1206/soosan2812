@@ -515,13 +515,13 @@ const labelMappings: Record<string, string> = {
   suctionNozzleWidth: 'Chiều rộng đầu hút',
   waterSpraySystem: 'Hệ thống phun nước',
 
-  // Crane truck loading chart related
-  radius: 'Bán kính',
-  values: 'Giá trị',
-  boomLengths: 'Chiều dài cần',
+  // Crane truck loading chart related (mostly excluded but kept for reference)
+  radius: 'Bán kính tải',
+  values: 'Giá trị tải',
+  boomLengths: 'Các chiều dài cần (bảng tải)',
   note: 'Ghi chú',
   unit: 'Đơn vị',
-  data: 'Dữ liệu',
+  data: 'Dữ liệu bảng tải',
 
   // Vietnamese field names (from product JSON)
   thongSo: 'Thông số',
@@ -603,12 +603,15 @@ const specCategoryOrder = [
   { key: 'other', title: 'Thông tin khác' },
 ];
 
-// Fields không hiển thị trong bảng so sánh
+// Fields không hiển thị trong bảng so sánh (bao gồm các field trùng lặp)
 const excludedFields = new Set([
-  'id', 'slug', 'type', 'boxType', 'trailerType', 'isNew', 'isHot', 'isAvailable',
+  'id', 'slug', 'type', 'boxType', 'trailerType', 'isNew', 'isHot', 'isAvailable', 'isHidden', 'order',
   'thumbnailUrl', 'images', 'description', 'detailedDescription', 'features', 'faqs',
-  'name', 'relatedProducts', 'seoKeywords', 'metaDescription', 'ratedLoadChart',
-  'detailedLiftingCapacity', 'optionalFeatures', 'cabinFeatures', 'specialFeatures',
+  'name', 'relatedProducts', 'seoKeywords', 'metaDescription', 'craneType',
+  // Các field từ bảng tải trọng - không hiển thị riêng lẻ
+  'ratedLoadChart', 'detailedLiftingCapacity', 'boomLengths', 'data', 'values', 'radius', 'note', 'unit',
+  // Các field tính năng - tránh trùng lặp với thông số chi tiết
+  'optionalFeatures', 'cabinFeatures', 'specialFeatures', 'safetyFeatures', 'interiorFeatures',
 ]);
 
 // Hàm chuyển camelCase thành tiếng Việt đọc được
