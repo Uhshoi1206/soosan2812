@@ -100,8 +100,8 @@ export const CompareProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     let newUrl = '/so-sanh-xe';
     if (compareItems.length > 0) {
-      const ids = compareItems.map(item => item.id).join(',');
-      newUrl = `/so-sanh-xe?ids=${encodeURIComponent(ids)}`;
+      const ids = compareItems.map(item => item.id).join('-va-');
+      newUrl = `/so-sanh-xe?ids=${ids}`;
     }
 
     if (currentUrl.startsWith('/so-sanh-xe') && currentUrl !== newUrl) {
@@ -113,8 +113,8 @@ export const CompareProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (compareItems.length === 0) {
       return '/so-sanh-xe';
     }
-    const ids = compareItems.map(item => item.id).join(',');
-    return `/so-sanh-xe?ids=${encodeURIComponent(ids)}`;
+    const ids = compareItems.map(item => item.id).join('-va-');
+    return `/so-sanh-xe?ids=${ids}`;
   };
 
   const loadTrucksFromUrl = (trucks: Truck[]) => {
@@ -141,12 +141,12 @@ export const useCompare = () => {
   if (!context) {
     return {
       compareItems: [],
-      addToCompare: () => {},
-      removeFromCompare: () => {},
-      clearCompare: () => {},
+      addToCompare: () => { },
+      removeFromCompare: () => { },
+      clearCompare: () => { },
       isInCompare: () => false,
       generateCompareUrl: () => '/so-sanh-xe',
-      loadTrucksFromUrl: () => {}
+      loadTrucksFromUrl: () => { }
     };
   }
   return context;
