@@ -178,9 +178,9 @@ const labelMappings: Record<string, string> = {
   applicableTruckChassis: 'Khung xe phù hợp',
 
   // Crane Weight - IMPORTANT
-  craneOperatingWeight: 'Trọng lượng vận hành cẩu',
-  craneOperatingWeightSTD: 'Trọng lượng vận hành cẩu (STD)',
-  craneOperatingWeightTopSeat: 'Trọng lượng vận hành cẩu (Top Seat)',
+  craneOperatingWeight: 'Khối lượng bản thân cẩu',
+  craneOperatingWeightSTD: 'Khối lượng bản thân cẩu (STD)',
+  craneOperatingWeightTopSeat: 'Khối lượng bản thân cẩu (Top Seat)',
   craneNetWeight: 'Trọng lượng tịnh cẩu',
   craneNetWeightSTD: 'Trọng lượng tịnh cẩu (STD)',
   craneNetWeightTopSeat: 'Trọng lượng tịnh cẩu (Top Seat)',
