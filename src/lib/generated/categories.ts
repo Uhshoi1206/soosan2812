@@ -1,6 +1,6 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Generated from src/content/categories/*.json
+ * Generated from src/content/categories/*.json and src/content/settings/box-types.json
  * Run: npm run cms:sync
  */
 
@@ -14,6 +14,21 @@ export interface CategoryData {
   order: number;
 }
 
+export interface BoxTypeData {
+  id: string;
+  name: string;
+  order: number;
+}
+
+export interface TrailerTypeData {
+  id: string;
+  name: string;
+  order: number;
+}
+
+// ============================================
+// CATEGORIES (Loại xe: xe-tai, can-cau, mooc, dau-keo, may-moc-thiet-bi)
+// ============================================
 export const categories: CategoryData[] = [
   {
     "id": "xe-tai",
@@ -108,7 +123,196 @@ export const categories: CategoryData[] = [
   }
 ];
 
-// Helper functions for client-side use
+// ============================================
+// BOX TYPES (Loại thùng xe tải)
+// ============================================
+export const boxTypes: BoxTypeData[] = [
+  {
+    "id": "đông-lạnh",
+    "name": "Thùng Đông Lạnh",
+    "order": 1
+  },
+  {
+    "id": "bảo-ôn",
+    "name": "Thùng Bảo Ôn",
+    "order": 2
+  },
+  {
+    "id": "kín",
+    "name": "Thùng Kín",
+    "order": 3
+  },
+  {
+    "id": "bạt",
+    "name": "Thùng Bạt",
+    "order": 4
+  },
+  {
+    "id": "lửng",
+    "name": "Thùng Lửng",
+    "order": 5
+  },
+  {
+    "id": "bồn-xi-téc",
+    "name": "Xe Bồn Xi Téc",
+    "order": 6
+  },
+  {
+    "id": "cánh-dơi",
+    "name": "Thùng Cánh Dơi",
+    "order": 7
+  },
+  {
+    "id": "ben",
+    "name": "Xe Ben (Xe Tự Đổ)",
+    "order": 8
+  },
+  {
+    "id": "trộn-bê-tông",
+    "name": "Xe Trộn Bê Tông",
+    "order": 9
+  },
+  {
+    "id": "bơm-bê-tông",
+    "name": "Xe Bơm Bê Tông",
+    "order": 10
+  },
+  {
+    "id": "chở-gia-súc",
+    "name": "Thùng Chở Gia Súc",
+    "order": 11
+  },
+  {
+    "id": "chuyên-dùng",
+    "name": "Xe Chuyên Dùng",
+    "order": 12
+  },
+  {
+    "id": "xe-tải-gắn-cẩu",
+    "name": "Xe Tải Gắn Cẩu",
+    "order": 13
+  },
+  {
+    "id": "máy-xúc-đào",
+    "name": "Máy Xúc Đào",
+    "order": 14
+  }
+];
+
+// ============================================
+// TRAILER TYPES (Loại mooc)
+// ============================================
+export const trailerTypes: TrailerTypeData[] = [
+  {
+    "id": "ben",
+    "name": "Mooc Ben",
+    "order": 1
+  },
+  {
+    "id": "sàn",
+    "name": "Mooc Sàn",
+    "order": 2
+  },
+  {
+    "id": "sàn-rút",
+    "name": "Mooc Sàn Rút Dài",
+    "order": 3
+  },
+  {
+    "id": "lùn",
+    "name": "Mooc Lùn",
+    "order": 4
+  },
+  {
+    "id": "cổ-cò",
+    "name": "Mooc Cổ Cò",
+    "order": 5
+  },
+  {
+    "id": "xương",
+    "name": "Mooc Xương",
+    "order": 6
+  },
+  {
+    "id": "lửng",
+    "name": "Mooc Lửng",
+    "order": 7
+  },
+  {
+    "id": "lồng",
+    "name": "Mooc Lồng",
+    "order": 8
+  },
+  {
+    "id": "rào",
+    "name": "Mooc Rào",
+    "order": 9
+  },
+  {
+    "id": "xi-téc",
+    "name": "Mooc Xi Téc",
+    "order": 10
+  },
+  {
+    "id": "bồn-xi-măng",
+    "name": "Mooc Bồn Chở Xi Măng Rời",
+    "order": 11
+  },
+  {
+    "id": "bồn-sắt",
+    "name": "Mooc Bồn Chở Bụi Sắt",
+    "order": 12
+  },
+  {
+    "id": "bồn-bột-mì",
+    "name": "Mooc Bồn Chở Bột Mì",
+    "order": 13
+  },
+  {
+    "id": "đông-lạnh",
+    "name": "Mooc Đông Lạnh",
+    "order": 14
+  },
+  {
+    "id": "hút-chất-thải",
+    "name": "Mooc Hút Chất Thải",
+    "order": 15
+  },
+  {
+    "id": "bồn-nh3",
+    "name": "Mooc Bồn Chở NH3 Lỏng",
+    "order": 16
+  },
+  {
+    "id": "bồn-ni-tơ",
+    "name": "Mooc Bồn Chở Ni Tơ Lỏng",
+    "order": 17
+  },
+  {
+    "id": "bồn-hóa-chất",
+    "name": "Mooc Bồn Chở Hóa Chất",
+    "order": 18
+  },
+  {
+    "id": "bồn-bột-pvc",
+    "name": "Mooc Bồn Chở Bột Nhựa PVC",
+    "order": 19
+  },
+  {
+    "id": "bồn-nhựa-đường",
+    "name": "Mooc Bồn Chở Nhựa Đường",
+    "order": 20
+  },
+  {
+    "id": "bồn-thức-ăn",
+    "name": "Mooc Bồn Chở Thức Ăn Chăn Nuôi",
+    "order": 21
+  }
+];
+
+// ============================================
+// CATEGORY HELPER FUNCTIONS
+// ============================================
 export function getAllCategories(): CategoryData[] {
   return categories;
 }
@@ -137,4 +341,36 @@ export function getTypeKeywords(type: string): string[] {
 export function filterVisibleTrucks<T extends { type: string; isHidden?: boolean }>(trucks: T[]): T[] {
   const visibleTypes = new Set(getEnabledTypes());
   return trucks.filter(t => visibleTypes.has(t.type) && !t.isHidden);
+}
+
+// ============================================
+// BOX TYPE HELPER FUNCTIONS
+// ============================================
+export function getAllBoxTypes(): BoxTypeData[] {
+  return boxTypes;
+}
+
+export function getBoxTypeById(id: string): BoxTypeData | undefined {
+  return boxTypes.find(b => b.id === id);
+}
+
+export function getBoxTypeName(id?: string): string {
+  if (!id) return '';
+  return getBoxTypeById(id)?.name || '';
+}
+
+// ============================================
+// TRAILER TYPE HELPER FUNCTIONS
+// ============================================
+export function getAllTrailerTypes(): TrailerTypeData[] {
+  return trailerTypes;
+}
+
+export function getTrailerTypeById(id: string): TrailerTypeData | undefined {
+  return trailerTypes.find(t => t.id === id);
+}
+
+export function getTrailerTypeName(id?: string): string {
+  if (!id) return '';
+  return getTrailerTypeById(id)?.name || '';
 }

@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { Truck, getBoxTypeName, getTrailerTypeName } from '@/models/TruckTypes';
-import { getCategoryName } from '@/lib/generated/categories';
+import { Truck } from '@/models/TruckTypes';
+import { getCategoryName, getBoxTypeName, getTrailerTypeName, categories, boxTypes } from '@/lib/generated/categories';
 import { Button } from '@/components/ui/button';
 import { useCompare } from '@/contexts/CompareContextAstro';
 import { X, Trash2 } from 'lucide-react';
@@ -183,34 +183,21 @@ const specGroups = [
   {
     id: 'craneSpec',
     title: 'Thông số cẩu',
-    showForType: 'can-cau',
+    showForType: 'xe-cau',
     specs: [
-      { id: 'craneSpec.model', label: 'Model cẩu' },
-      { id: 'craneSpec.liftingCapacityText', label: 'Sức nâng tối đa' },
-      { id: 'craneSpec.maxLiftingMoment', label: 'Momen nâng tối đa' },
-      { id: 'craneSpec.boomSections', label: 'Số đốt cần' },
-      { id: 'craneSpec.boomLength', label: 'Chiều dài cần' },
-      { id: 'craneSpec.boomType', label: 'Loại cần' },
-      { id: 'craneSpec.maxLiftingHeight', label: 'Chiều cao nâng tối đa' },
-      { id: 'craneSpec.maxWorkingRadius', label: 'Tầm với tối đa' },
-      { id: 'craneSpec.minWorkingRadius', label: 'Tầm với tối thiểu' },
-      { id: 'craneSpec.swingAngle', label: 'Góc quay' },
-      { id: 'craneSpec.swingSpeed', label: 'Tốc độ quay' },
-      { id: 'craneSpec.craneOperatingWeight', label: 'Trọng lượng vận hành' },
-      { id: 'craneSpec.craneNetWeight', label: 'Trọng lượng thân cẩu' },
-      { id: 'craneSpec.winchSingleLinePull', label: 'Lực kéo tời' },
-      { id: 'craneSpec.winchRatedSpeed', label: 'Tốc độ tời' },
-      { id: 'craneSpec.winchRopeDimension', label: 'Cáp tời' },
-      { id: 'craneSpec.sheaveBlockCapacity', label: 'Sức nâng ròng rọc' },
-      { id: 'craneSpec.hydraulicPumpType', label: 'Bơm thủy lực' },
-      { id: 'craneSpec.hydraulicOperatingPressure', label: 'Áp suất thủy lực' },
-      { id: 'craneSpec.hydraulicOilFlow', label: 'Lưu lượng dầu' },
-      { id: 'craneSpec.hydraulicTankCapacity', label: 'Dung tích bình dầu' },
-      { id: 'craneSpec.outriggersFrontExtension', label: 'Chân chống trước (mở)' },
-      { id: 'craneSpec.outriggersRearExtension', label: 'Chân chống sau (mở)' },
+      { id: 'craneSpec.liftingCapacity', label: 'Sức nâng' },
+      { id: 'craneSpec.reachLength', label: 'Tầm với' },
+      { id: 'craneSpec.rotationAngle', label: 'Góc quay' },
+      { id: 'craneSpec.stabilizers', label: 'Chân chống' },
       { id: 'craneSpec.controlSystem', label: 'Hệ thống điều khiển' },
-      { id: 'craneSpec.safetyFeatures', label: 'Tính năng an toàn' },
-      { id: 'craneSpec.applicableTruckChassis', label: 'Xe tải phù hợp' },
+      { id: 'craneSpec.boomSections', label: 'Số đốt cần' },
+      { id: 'craneSpec.hydraulicSystem', label: 'Hệ thống thủy lực' },
+      { id: 'craneSpec.operatingPressure', label: 'Áp suất vận hành' },
+      { id: 'craneSpec.mountingType', label: 'Kiểu gắn cẩu' },
+      { id: 'craneSpec.cabinPresent', label: 'Cabin điều khiển' },
+      { id: 'craneSpec.remoteControl', label: 'Điều khiển từ xa' },
+      { id: 'craneSpec.maxWorkingHeight', label: 'Chiều cao làm việc tối đa' },
+      { id: 'craneSpec.winchCapacity', label: 'Sức nâng tời' },
     ]
   },
   {

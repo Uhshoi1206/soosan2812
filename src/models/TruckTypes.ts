@@ -1,3 +1,5 @@
+import { getBoxTypeName as getBoxTypeNameFromGenerated, getTrailerTypeName as getTrailerTypeNameFromGenerated } from '@/lib/generated/categories';
+
 export type VehicleType = string;
 
 export interface TruckBrand {
@@ -980,7 +982,14 @@ export function getVehicleTypeName(type: VehicleType): string {
   return pretty || '';
 }
 
+
 export function getBoxTypeName(type?: string): string {
+  if (!type) return '';
+  // First try from generated data, fallback to switch case
+  const fromGenerated = getBoxTypeNameFromGenerated(type);
+  if (fromGenerated) return fromGenerated;
+
+  // Fallback for any types not yet in box-types.json
   switch (type) {
     case 'đông-lạnh':
       return 'Thùng Đông Lạnh';
@@ -1016,6 +1025,12 @@ export function getBoxTypeName(type?: string): string {
 }
 
 export function getTrailerTypeName(type?: string): string {
+  if (!type) return '';
+  // First try from generated data, fallback to switch case
+  const fromGenerated = getTrailerTypeNameFromGenerated(type);
+  if (fromGenerated) return fromGenerated;
+
+  // Fallback for any types not yet in box-types.json
   switch (type) {
     case 'ben':
       return 'Mooc Ben';
