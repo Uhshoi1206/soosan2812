@@ -130,7 +130,7 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                 <td className="py-2 px-3 font-medium">{Array.isArray(truck.brand) ? truck.brand.join(', ') : truck.brand}</td>
               </tr>
               <tr className="border-b">
-                <td className="py-2 px-3 text-gray-600">Tải trọng</td>
+                <td className="py-2 px-3 text-gray-600">{truck.type === 'may-moc-thiet-bi' || truck.type === 'can-cau' ? 'Khối lượng bản thân' : 'Tải trọng'}</td>
                 <td className="py-2 px-3 font-medium">{truck.weightText}</td>
               </tr>
               {/* CHỈ hiển thị nếu KHÔNG có trailerSpec.dimensions để tránh duplicate */}
