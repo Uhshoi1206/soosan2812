@@ -1,7 +1,7 @@
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Truck } from '@/models/TruckTypes';
-import { getCategoryName, getBoxTypeName, getTrailerTypeName, categories, boxTypes } from '@/lib/generated/categories';
+import { getCategoryName, getBoxTypeName, getTrailerTypeName } from '@/lib/generated/categories';
 import { Button } from '@/components/ui/button';
 import { useCompare } from '@/contexts/CompareContextAstro';
 import { X, Trash2 } from 'lucide-react';
@@ -11,352 +11,403 @@ interface CompareTableProps {
   trucks: Truck[];
 }
 
-// Định nghĩa các nhóm thông số kỹ thuật và thứ tự hiển thị
-const specGroups = [
-  {
-    id: 'basic',
-    title: 'Thông số cơ bản',
-    specs: [
-      { id: 'brand', label: 'Thương hiệu' },
-      { id: 'weightText', label: 'Tải trọng' },
-      { id: 'dimensions', label: 'Kích thước tổng thể' },
-      { id: 'price', label: 'Giá bán', isPrice: true },
-      { id: 'origin', label: 'Xuất xứ' },
-    ]
-  },
-  {
-    id: 'engine',
-    title: 'Động cơ & Vận hành',
-    specs: [
-      { id: 'engineType', label: 'Loại động cơ' },
-      { id: 'engineModel', label: 'Model động cơ' },
-      { id: 'engineCapacity', label: 'Dung tích động cơ' },
-      { id: 'enginePower', label: 'Công suất' },
-      { id: 'engineTorque', label: 'Mô-men xoắn' },
-      { id: 'transmission', label: 'Hộp số' },
-      { id: 'fuelConsumption', label: 'Mức tiêu thụ nhiên liệu' },
-      { id: 'emissionStandard', label: 'Tiêu chuẩn khí thải' },
-    ]
-  },
-  {
-    id: 'chassis',
-    title: 'Khung gầm & Hệ thống',
-    specs: [
-      { id: 'wheelbase', label: 'Chiều dài cơ sở', unit: 'm' },
-      { id: 'chassisMaterial', label: 'Vật liệu khung gầm' },
-      { id: 'frontSuspension', label: 'Hệ thống treo trước' },
-      { id: 'rearSuspension', label: 'Hệ thống treo sau' },
-      { id: 'frontBrake', label: 'Phanh trước' },
-      { id: 'rearBrake', label: 'Phanh sau' },
-      { id: 'parkingBrake', label: 'Phanh đỗ' },
-      { id: 'steeringType', label: 'Hệ thống lái' },
-      { id: 'tires', label: 'Lốp xe' },
-    ]
-  },
-  {
-    id: 'dimensions',
-    title: 'Kích thước & Trọng lượng',
-    specs: [
-      { id: 'length', label: 'Chiều dài', unit: 'm' },
-      { id: 'width', label: 'Chiều rộng', unit: 'm' },
-      { id: 'height', label: 'Chiều cao', unit: 'm' },
-      { id: 'insideDimension', label: 'Kích thước thùng trong' },
-      { id: 'groundClearance', label: 'Khoảng sáng gầm', unit: 'mm' },
-      { id: 'wheelTrack', label: 'Vết bánh xe' },
-      { id: 'turningRadius', label: 'Bán kính quay vòng', unit: 'm' },
-      { id: 'grossWeight', label: 'Tổng tải' },
-      { id: 'kerbWeight', label: 'Trọng lượng không tải' },
-      { id: 'frontAxleLoad', label: 'Tải trọng cầu trước' },
-      { id: 'rearAxleLoad', label: 'Tải trọng cầu sau' },
-    ]
-  },
-  {
-    id: 'performance',
-    title: 'Hiệu suất',
-    specs: [
-      { id: 'maxSpeed', label: 'Tốc độ tối đa' },
-      { id: 'climbingAbility', label: 'Khả năng leo dốc' },
-    ]
-  },
-  {
-    id: 'coolingBox',
-    title: 'Thông số thùng đông lạnh',
-    boxType: 'đông-lạnh',
-    specs: [
-      { id: 'coolingBox.wallLayers', label: 'Số lớp vách' },
-      { id: 'coolingBox.wallMaterials', label: 'Vật liệu vách', isArray: true },
-      { id: 'coolingBox.floorLayers', label: 'Số lớp sàn' },
-      { id: 'coolingBox.floorMaterials', label: 'Vật liệu sàn', isArray: true },
-      { id: 'coolingBox.roofLayers', label: 'Số lớp mái' },
-      { id: 'coolingBox.roofMaterials', label: 'Vật liệu mái', isArray: true },
-      { id: 'coolingBox.doorType', label: 'Loại cửa' },
-      { id: 'coolingBox.insulationThickness', label: 'Độ dày cách nhiệt' },
-      { id: 'coolingBox.refrigerationSystem', label: 'Hệ thống làm lạnh' },
-      { id: 'coolingBox.temperatureRange', label: 'Phạm vi nhiệt độ' },
-      { id: 'coolingBox.coolingUnit', label: 'Đơn vị làm lạnh' },
-      { id: 'coolingBox.compressorType', label: 'Loại máy nén' },
-      { id: 'coolingBox.refrigerantType', label: 'Loại môi chất lạnh' },
-      { id: 'coolingBox.temperatureControl', label: 'Hệ thống điều khiển nhiệt độ' },
-    ]
-  },
-  {
-    id: 'insulatedBox',
-    title: 'Thông số thùng bảo ôn',
-    boxType: 'bảo-ôn',
-    specs: [
-      { id: 'insulatedBox.wallThickness', label: 'Độ dày vách' },
-      { id: 'insulatedBox.floorThickness', label: 'Độ dày sàn' },
-      { id: 'insulatedBox.roofThickness', label: 'Độ dày mái' },
-      { id: 'insulatedBox.insulationMaterial', label: 'Vật liệu cách nhiệt' },
-      { id: 'insulatedBox.outerMaterial', label: 'Vật liệu bên ngoài' },
-      { id: 'insulatedBox.innerMaterial', label: 'Vật liệu bên trong' },
-      { id: 'insulatedBox.doorType', label: 'Loại cửa' },
-      { id: 'insulatedBox.doorCount', label: 'Số lượng cửa' },
-      { id: 'insulatedBox.temperatureRange', label: 'Phạm vi nhiệt độ duy trì' },
-      { id: 'insulatedBox.insideDimension', label: 'Kích thước bên trong' },
-      { id: 'insulatedBox.loadingCapacity', label: 'Khả năng chịu tải' },
-    ]
-  },
-  {
-    id: 'closedBox',
-    title: 'Thông số thùng kín',
-    boxType: 'kín',
-    specs: [
-      { id: 'closedBox.frameStructure', label: 'Cấu trúc khung' },
-      { id: 'closedBox.panelMaterial', label: 'Vật liệu panel' },
-      { id: 'closedBox.thickness', label: 'Độ dày' },
-      { id: 'closedBox.doorType', label: 'Loại cửa' },
-      { id: 'closedBox.doorCount', label: 'Số lượng cửa' },
-      { id: 'closedBox.roofType', label: 'Loại mái' },
-      { id: 'closedBox.floorMaterial', label: 'Vật liệu sàn' },
-      { id: 'closedBox.loadingSecurity', label: 'Hệ thống an toàn hàng hóa' },
-      { id: 'closedBox.reinforcement', label: 'Gia cường' },
-      { id: 'closedBox.waterproofing', label: 'Chống thấm nước' },
-    ]
-  },
-  {
-    id: 'tarpaulinBox',
-    title: 'Thông số thùng bạt',
-    boxType: 'bạt',
-    specs: [
-      { id: 'tarpaulinBox.frameStructure', label: 'Cấu trúc khung' },
-      { id: 'tarpaulinBox.tarpaulinMaterial', label: 'Vật liệu bạt' },
-      { id: 'tarpaulinBox.tarpaulinThickness', label: 'Độ dày bạt' },
-      { id: 'tarpaulinBox.frameType', label: 'Loại khung' },
-      { id: 'tarpaulinBox.sideAccess', label: 'Khả năng tiếp cận từ bên hông' },
-      { id: 'tarpaulinBox.coverType', label: 'Loại mui phủ' },
-      { id: 'tarpaulinBox.floorMaterial', label: 'Vật liệu sàn' },
-    ]
-  },
-  {
-    id: 'flatbedBox',
-    title: 'Thông số thùng lửng',
-    boxType: 'lửng',
-    specs: [
-      { id: 'flatbedBox.floorMaterial', label: 'Vật liệu sàn' },
-      { id: 'flatbedBox.sideHeight', label: 'Chiều cao thành bên' },
-      { id: 'flatbedBox.sideType', label: 'Loại thành bên' },
-      { id: 'flatbedBox.sideAccess', label: 'Khả năng tiếp cận bên hông' },
-      { id: 'flatbedBox.floorThickness', label: 'Độ dày sàn' },
-      { id: 'flatbedBox.reinforcement', label: 'Gia cường' },
-    ]
-  },
-  {
-    id: 'tankSpec',
-    title: 'Thông số bồn xi téc',
-    boxType: 'xi-téc',
-    specs: [
-      { id: 'tankSpec.capacity', label: 'Dung tích' },
-      { id: 'tankSpec.compartments', label: 'Số ngăn' },
-      { id: 'tankSpec.material', label: 'Vật liệu' },
-      { id: 'tankSpec.thickness', label: 'Độ dày vỏ' },
-      { id: 'tankSpec.valveSystem', label: 'Hệ thống van' },
-      { id: 'tankSpec.pressureRating', label: 'Áp suất định mức' },
-      { id: 'tankSpec.dischargingSystem', label: 'Hệ thống xả' },
-      { id: 'tankSpec.liningMaterial', label: 'Vật liệu lót trong' },
-      { id: 'tankSpec.safetyEquipment', label: 'Thiết bị an toàn' },
-      { id: 'tankSpec.insulationPresent', label: 'Cách nhiệt' },
-      { id: 'tankSpec.heatingSystem', label: 'Hệ thống làm nóng' },
-      { id: 'tankSpec.measurementSystem', label: 'Hệ thống đo lường' },
-    ]
-  },
-  {
-    id: 'craneSpec',
-    title: 'Thông số cẩu',
-    showForType: 'xe-cau',
-    specs: [
-      { id: 'craneSpec.liftingCapacity', label: 'Sức nâng' },
-      { id: 'craneSpec.reachLength', label: 'Tầm với' },
-      { id: 'craneSpec.rotationAngle', label: 'Góc quay' },
-      { id: 'craneSpec.stabilizers', label: 'Chân chống' },
-      { id: 'craneSpec.controlSystem', label: 'Hệ thống điều khiển' },
-      { id: 'craneSpec.boomSections', label: 'Số đốt cần' },
-      { id: 'craneSpec.hydraulicSystem', label: 'Hệ thống thủy lực' },
-      { id: 'craneSpec.operatingPressure', label: 'Áp suất vận hành' },
-      { id: 'craneSpec.mountingType', label: 'Kiểu gắn cẩu' },
-      { id: 'craneSpec.cabinPresent', label: 'Cabin điều khiển' },
-      { id: 'craneSpec.remoteControl', label: 'Điều khiển từ xa' },
-      { id: 'craneSpec.maxWorkingHeight', label: 'Chiều cao làm việc tối đa' },
-      { id: 'craneSpec.winchCapacity', label: 'Sức nâng tời' },
-    ]
-  },
-  {
-    id: 'trailerSpec',
-    title: 'Thông số sơ mi rơ mooc',
-    showForType: 'mooc',
-    specs: [
-      { id: 'trailerSpec.axleCount', label: 'Số trục' },
-      { id: 'trailerSpec.axleType', label: 'Loại trục' },
-      { id: 'trailerSpec.axleWeight', label: 'Tải trọng trục' },
-      { id: 'trailerSpec.kingpinLoad', label: 'Tải trọng chân chốt' },
-      { id: 'trailerSpec.suspensionType', label: 'Loại hệ thống treo' },
-      { id: 'trailerSpec.brakeSystem', label: 'Hệ thống phanh' },
-      { id: 'trailerSpec.floorType', label: 'Loại sàn' },
-      { id: 'trailerSpec.floorThickness', label: 'Độ dày sàn' },
-      { id: 'trailerSpec.sideHeight', label: 'Chiều cao thành bên' },
-      { id: 'trailerSpec.rampType', label: 'Loại dốc' },
-      { id: 'trailerSpec.totalLength', label: 'Chiều dài tổng thể' },
-      { id: 'trailerSpec.wheelbase', label: 'Khoảng cách trục bánh' },
-      { id: 'trailerSpec.loadingHeight', label: 'Chiều cao sàn' },
-      { id: 'trailerSpec.turningRadius', label: 'Bán kính quay vòng' },
-      { id: 'trailerSpec.hydraulicSystem', label: 'Hệ thống thủy lực' },
-      { id: 'trailerSpec.containerLock', label: 'Khóa container' },
-    ]
-  },
-  {
-    id: 'tractorSpec',
-    title: 'Thông số đầu kéo',
-    showForType: 'dau-keo',
-    specs: [
-      { id: 'tractorSpec.horsepower', label: 'Công suất' },
-      { id: 'tractorSpec.torque', label: 'Mô-men xoắn' },
-      { id: 'tractorSpec.transmission', label: 'Hộp số' },
-      { id: 'tractorSpec.transmissionType', label: 'Loại hộp số' },
-      { id: 'tractorSpec.clutchType', label: 'Loại ly hợp' },
-      { id: 'tractorSpec.cabinType', label: 'Loại cabin' },
-      { id: 'tractorSpec.wheelbase', label: 'Chiều dài cơ sở' },
-      { id: 'tractorSpec.fuelTankCapacity', label: 'Dung tích bình nhiên liệu' },
-      { id: 'tractorSpec.saddleHeight', label: 'Chiều cao bàn đỡ' },
-      { id: 'tractorSpec.fifthWheelType', label: 'Loại mâm kéo' },
-      { id: 'tractorSpec.maxTowingCapacity', label: 'Tải trọng kéo tối đa' },
-      { id: 'tractorSpec.brakingSystem', label: 'Hệ thống phanh' },
-      { id: 'tractorSpec.retarderSystem', label: 'Hệ thống hãm' },
-      { id: 'tractorSpec.sleepingBerth', label: 'Giường nằm' },
-      { id: 'tractorSpec.axleConfiguration', label: 'Cấu hình trục' },
-      { id: 'tractorSpec.airConditioner', label: 'Điều hòa không khí' },
-      { id: 'tractorSpec.electricSystem', label: 'Hệ thống điện' },
-    ]
-  },
-  {
-    id: 'other',
-    title: 'Thông tin khác',
-    specs: [
-      { id: 'seats', label: 'Số chỗ ngồi' },
-      { id: 'warranty', label: 'Bảo hành' },
-      { id: 'cabinFeatures', label: 'Tính năng cabin', isArray: true },
-    ]
-  }
+// Label mappings cho các field phổ biến
+const labelMappings: Record<string, string> = {
+  // Basic info
+  brand: 'Thương hiệu',
+  model: 'Model',
+  weightText: 'Tải trọng',
+  dimensions: 'Kích thước tổng thể',
+  price: 'Giá bán',
+  priceText: 'Giá bán',
+  origin: 'Xuất xứ',
+  tires: 'Lốp xe',
+  seats: 'Số chỗ ngồi',
+  warranty: 'Bảo hành',
+
+  // Dimensions
+  length: 'Chiều dài',
+  width: 'Chiều rộng',
+  height: 'Chiều cao',
+  wheelbase: 'Chiều dài cơ sở',
+  groundClearance: 'Khoảng sáng gầm',
+  turningRadius: 'Bán kính quay vòng',
+  insideDimension: 'Kích thước thùng trong',
+  overallDimensions: 'Kích thước tổng thể',
+  containerDimensions: 'Kích thước thùng hàng',
+  capacity: 'Dung tích/Thể tích',
+
+  // Weight
+  weight: 'Trọng lượng',
+  grossWeight: 'Tổng tải',
+  kerbWeight: 'Trọng lượng không tải',
+  curbWeight: 'Khối lượng bản thân',
+  payload: 'Tải trọng cho phép',
+  frontAxleLoad: 'Tải trọng cầu trước',
+  rearAxleLoad: 'Tải trọng cầu sau',
+
+  // Engine
+  engineType: 'Loại động cơ',
+  engineModel: 'Model động cơ',
+  engineCapacity: 'Dung tích động cơ',
+  enginePower: 'Công suất',
+  engineTorque: 'Mô-men xoắn',
+  transmission: 'Hộp số',
+  transmissionType: 'Loại hộp số',
+  fuelConsumption: 'Mức tiêu thụ nhiên liệu',
+  emissionStandard: 'Tiêu chuẩn khí thải',
+  horsepower: 'Công suất',
+  torque: 'Mô-men xoắn',
+
+  // Chassis
+  chassisMaterial: 'Vật liệu khung gầm',
+  frameMaterial: 'Vật liệu khung',
+  mainBeam: 'Dầm chính',
+  frontSuspension: 'Hệ thống treo trước',
+  rearSuspension: 'Hệ thống treo sau',
+  suspensionType: 'Loại hệ thống treo',
+  frontBrake: 'Phanh trước',
+  rearBrake: 'Phanh sau',
+  parkingBrake: 'Phanh đỗ',
+  brakeSystem: 'Hệ thống phanh',
+  steeringType: 'Hệ thống lái',
+
+  // Axle
+  axleCount: 'Số trục',
+  axleType: 'Loại trục',
+  axleWeight: 'Tải trọng trục',
+  springType: 'Loại nhíp',
+  springDimension: 'Kích thước nhíp',
+  tireSpec: 'Thông số lốp',
+  axleConfiguration: 'Cấu hình trục',
+
+  // Landing gear & Kingpin
+  landingGear: 'Chân chống',
+  kingpin: 'Đinh kéo',
+  kingpinLoad: 'Tải trọng chân chốt',
+
+  // Systems
+  electricSystem: 'Hệ thống điện',
+  hydraulicSystem: 'Hệ thống thủy lực',
+
+  // Body/Box
+  floorMaterial: 'Vật liệu sàn',
+  sideWallMaterial: 'Vật liệu thành bên',
+  floorType: 'Loại sàn',
+  floorThickness: 'Độ dày sàn',
+  sideHeight: 'Chiều cao thành bên',
+
+  // Finishing
+  paintProcess: 'Quy trình sơn',
+  paintColor: 'Màu sơn',
+
+  // Crane specs
+  liftingCapacity: 'Sức nâng',
+  liftingCapacityText: 'Sức nâng',
+  reachLength: 'Tầm với',
+  rotationAngle: 'Góc quay',
+  stabilizers: 'Chân chống',
+  controlSystem: 'Hệ thống điều khiển',
+  boomSections: 'Số đốt cần',
+  operatingPressure: 'Áp suất vận hành',
+  mountingType: 'Kiểu gắn cẩu',
+  cabinPresent: 'Cabin điều khiển',
+  remoteControl: 'Điều khiển từ xa',
+  maxWorkingHeight: 'Chiều cao làm việc tối đa',
+  winchCapacity: 'Sức nâng tời',
+  maxLiftingMoment: 'Mô-men nâng tối đa',
+  maxLiftingHeight: 'Chiều cao nâng tối đa',
+  maxWorkingRadius: 'Bán kính làm việc tối đa',
+
+  // Tank specs
+  compartments: 'Số ngăn',
+  material: 'Vật liệu',
+  thickness: 'Độ dày',
+  valveSystem: 'Hệ thống van',
+  pressureRating: 'Áp suất định mức',
+  dischargingSystem: 'Hệ thống xả',
+  liningMaterial: 'Vật liệu lót trong',
+  safetyEquipment: 'Thiết bị an toàn',
+  insulationPresent: 'Cách nhiệt',
+  heatingSystem: 'Hệ thống làm nóng',
+  measurementSystem: 'Hệ thống đo lường',
+
+  // Tractor specs
+  clutchType: 'Loại ly hợp',
+  cabinType: 'Loại cabin',
+  fuelTankCapacity: 'Dung tích bình nhiên liệu',
+  saddleHeight: 'Chiều cao bàn đỡ',
+  fifthWheelType: 'Loại mâm kéo',
+  maxTowingCapacity: 'Tải trọng kéo tối đa',
+  brakingSystem: 'Hệ thống phanh',
+  retarderSystem: 'Hệ thống hãm',
+  sleepingBerth: 'Giường nằm',
+  airConditioner: 'Điều hòa không khí',
+
+  // Box structures
+  wallLayers: 'Số lớp vách',
+  wallMaterials: 'Vật liệu vách',
+  floorLayers: 'Số lớp sàn',
+  floorMaterials: 'Vật liệu sàn',
+  roofLayers: 'Số lớp mái',
+  roofMaterials: 'Vật liệu mái',
+  doorType: 'Loại cửa',
+  doorCount: 'Số lượng cửa',
+  insulationThickness: 'Độ dày cách nhiệt',
+  refrigerationSystem: 'Hệ thống làm lạnh',
+  temperatureRange: 'Phạm vi nhiệt độ',
+  coolingUnit: 'Đơn vị làm lạnh',
+  compressorType: 'Loại máy nén',
+  refrigerantType: 'Loại môi chất lạnh',
+  temperatureControl: 'Hệ thống điều khiển nhiệt độ',
+  insulationMaterial: 'Vật liệu cách nhiệt',
+  outerMaterial: 'Vật liệu bên ngoài',
+  innerMaterial: 'Vật liệu bên trong',
+  loadingCapacity: 'Khả năng chịu tải',
+  frameStructure: 'Cấu trúc khung',
+  panelMaterial: 'Vật liệu panel',
+  roofType: 'Loại mái',
+  loadingSecurity: 'Hệ thống an toàn hàng hóa',
+  reinforcement: 'Gia cường',
+  waterproofing: 'Chống thấm nước',
+  tarpaulinMaterial: 'Vật liệu bạt',
+  tarpaulinThickness: 'Độ dày bạt',
+  frameType: 'Loại khung',
+  sideAccess: 'Khả năng tiếp cận bên hông',
+  coverType: 'Loại mui phủ',
+  sideType: 'Loại thành bên',
+
+  // Trailer specs
+  rampType: 'Loại dốc',
+  totalLength: 'Chiều dài tổng thể',
+  loadingHeight: 'Chiều cao sàn',
+  containerLock: 'Khóa container',
+
+  // Performance
+  maxSpeed: 'Tốc độ tối đa',
+  climbingAbility: 'Khả năng leo dốc',
+};
+
+// Nhóm thông số theo danh mục
+const specCategoryOrder = [
+  { key: 'basic', title: 'Thông số cơ bản' },
+  { key: 'dimensions', title: 'Kích thước' },
+  { key: 'weight', title: 'Trọng lượng' },
+  { key: 'chassis', title: 'Khung gầm' },
+  { key: 'axleAndSuspension', title: 'Trục & Hệ thống treo' },
+  { key: 'systems', title: 'Hệ thống' },
+  { key: 'body', title: 'Thùng/Thân xe' },
+  { key: 'finishing', title: 'Hoàn thiện' },
+  { key: 'engine', title: 'Động cơ & Vận hành' },
+  { key: 'craneSpec', title: 'Thông số cẩu' },
+  { key: 'trailerSpec', title: 'Thông số sơ mi rơ mooc' },
+  { key: 'tractorSpec', title: 'Thông số đầu kéo' },
+  { key: 'tankSpec', title: 'Thông số bồn xi téc' },
+  { key: 'coolingBox', title: 'Thông số thùng đông lạnh' },
+  { key: 'insulatedBox', title: 'Thông số thùng bảo ôn' },
+  { key: 'closedBox', title: 'Thông số thùng kín' },
+  { key: 'tarpaulinBox', title: 'Thông số thùng bạt' },
+  { key: 'flatbedBox', title: 'Thông số thùng lửng' },
+  { key: 'specifications', title: 'Thông số kỹ thuật' },
+  { key: 'other', title: 'Thông tin khác' },
 ];
+
+// Fields không hiển thị trong bảng so sánh
+const excludedFields = new Set([
+  'id', 'slug', 'type', 'boxType', 'trailerType', 'isNew', 'isHot', 'isAvailable',
+  'thumbnailUrl', 'images', 'description', 'detailedDescription', 'features', 'faqs',
+  'name', 'relatedProducts', 'seoKeywords', 'metaDescription', 'ratedLoadChart',
+  'detailedLiftingCapacity', 'optionalFeatures', 'cabinFeatures', 'specialFeatures',
+]);
+
+// Hàm chuyển camelCase thành tiếng Việt đọc được
+const camelToLabel = (str: string): string => {
+  // Kiểm tra mapping trước
+  if (labelMappings[str]) return labelMappings[str];
+
+  // Chuyển camelCase thành words
+  const result = str
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, (s) => s.toUpperCase())
+    .trim();
+
+  return result;
+};
+
+// Hàm lấy label cho một path
+const getLabel = (path: string): string => {
+  const parts = path.split('.');
+  const lastPart = parts[parts.length - 1];
+  return labelMappings[lastPart] || camelToLabel(lastPart);
+};
+
+// Hàm lấy giá trị nested từ object
+const getNestedValue = (obj: any, path: string): any => {
+  if (!obj || !path) return undefined;
+
+  const parts = path.split('.');
+  let value = obj;
+
+  for (const part of parts) {
+    if (value === null || value === undefined) return undefined;
+    value = value[part];
+  }
+
+  return value;
+};
+
+// Hàm format giá trị để hiển thị
+const formatValue = (value: any): string => {
+  if (value === undefined || value === null) return '-';
+  if (typeof value === 'boolean') return value ? 'Có' : 'Không';
+  if (Array.isArray(value)) return value.join(', ');
+  if (typeof value === 'object') return JSON.stringify(value);
+  return String(value);
+};
+
+// Hàm format giá tiền
+const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+    maximumFractionDigits: 0
+  }).format(price);
+};
+
+// Hàm thu thập tất cả specs từ một object nested
+const collectSpecs = (
+  obj: any,
+  prefix: string,
+  result: Map<string, { category: string; path: string; label: string }>
+) => {
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return;
+
+  for (const key of Object.keys(obj)) {
+    if (excludedFields.has(key)) continue;
+
+    const fullPath = prefix ? `${prefix}.${key}` : key;
+    const value = obj[key];
+
+    if (value !== null && value !== undefined && typeof value === 'object' && !Array.isArray(value)) {
+      // Nested object - recurse into it
+      collectSpecs(value, fullPath, result);
+    } else {
+      // Leaf value - add to result
+      const category = prefix.split('.')[0] || 'basic';
+      result.set(fullPath, {
+        category,
+        path: fullPath,
+        label: getLabel(fullPath),
+      });
+    }
+  }
+};
 
 const CompareTable: React.FC<CompareTableProps> = ({ trucks }) => {
   const { removeFromCompare, clearCompare } = useCompare();
 
-  // Hàm format giá tiền
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
-      maximumFractionDigits: 0
-    }).format(price);
+  // Thu thập tất cả specs từ tất cả trucks
+  const allSpecs = useMemo(() => {
+    const specsMap = new Map<string, { category: string; path: string; label: string }>();
+
+    for (const truck of trucks) {
+      // Thu thập các field top-level
+      const topLevelFields = ['brand', 'model', 'weightText', 'dimensions', 'priceText', 'origin', 'tires', 'seats', 'warranty'];
+      for (const field of topLevelFields) {
+        if (truck[field as keyof Truck] !== undefined && truck[field as keyof Truck] !== null) {
+          specsMap.set(field, {
+            category: 'basic',
+            path: field,
+            label: labelMappings[field] || field,
+          });
+        }
+      }
+
+      // Thu thập từ specifications
+      if (truck.specifications) {
+        for (const key of Object.keys(truck.specifications)) {
+          if (!excludedFields.has(key)) {
+            specsMap.set(`specifications.${key}`, {
+              category: 'specifications',
+              path: `specifications.${key}`,
+              label: getLabel(key),
+            });
+          }
+        }
+      }
+
+      // Thu thập từ các spec objects
+      const specObjects = [
+        'trailerSpec', 'craneSpec', 'tractorSpec', 'tankSpec',
+        'coolingBox', 'insulatedBox', 'closedBox', 'tarpaulinBox', 'flatbedBox'
+      ];
+
+      for (const specKey of specObjects) {
+        const specObj = truck[specKey as keyof Truck];
+        if (specObj && typeof specObj === 'object') {
+          collectSpecs(specObj, specKey, specsMap);
+        }
+      }
+    }
+
+    return specsMap;
+  }, [trucks]);
+
+  // Nhóm specs theo category
+  const groupedSpecs = useMemo(() => {
+    const groups = new Map<string, Array<{ path: string; label: string }>>();
+
+    for (const [, spec] of allSpecs) {
+      const category = spec.category;
+      if (!groups.has(category)) {
+        groups.set(category, []);
+      }
+      groups.get(category)!.push({ path: spec.path, label: spec.label });
+    }
+
+    // Sắp xếp theo thứ tự đã định nghĩa
+    const orderedGroups: Array<{ title: string; specs: Array<{ path: string; label: string }> }> = [];
+
+    for (const { key, title } of specCategoryOrder) {
+      const specs = groups.get(key);
+      if (specs && specs.length > 0) {
+        orderedGroups.push({ title, specs });
+      }
+    }
+
+    // Thêm các category không nằm trong order list
+    for (const [category, specs] of groups) {
+      if (!specCategoryOrder.find(c => c.key === category) && specs.length > 0) {
+        orderedGroups.push({ title: category, specs });
+      }
+    }
+
+    return orderedGroups;
+  }, [allSpecs]);
+
+  // Hàm lấy giá trị cho một truck và path
+  const getValue = (truck: Truck, path: string): string => {
+    // Handle special cases
+    if (path === 'priceText') {
+      return truck.priceText || (typeof truck.price === 'number' ? formatPrice(truck.price) : '-');
+    }
+    if (path === 'brand') {
+      const brand = truck.brand;
+      if (!brand) return '-';
+      if (Array.isArray(brand)) return brand.join(' & ');
+      return String(brand);
+    }
+
+    const value = getNestedValue(truck, path);
+    return formatValue(value);
   };
 
-  // Hàm lấy giá trị của thuộc tính theo đường dẫn sâu
-  const getNestedProperty = (obj: any, path: string) => {
-    if (!obj || !path) return undefined;
-
-    const parts = path.split('.');
-    let value = obj;
-
-    for (const part of parts) {
-      if (value === null || value === undefined) return undefined;
-      value = value[part];
-    }
-
-    return value;
-  };
-
-  // Hàm định dạng giá trị của thuộc tính
-  const formatValue = (value: any, isArray?: boolean) => {
-    if (value === undefined || value === null) return '-';
-
-    if (isArray && Array.isArray(value)) {
-      return value.join(', ');
-    }
-
-    if (typeof value === 'boolean') {
-      return value ? 'Có' : 'Không';
-    }
-
-    return value.toString();
-  };
-
-  // Hàm format thương hiệu - sửa để hiển thị đẹp hơn
-  const formatBrand = (brand: string | string[]) => {
-    if (!brand) return '-';
-
-    if (Array.isArray(brand)) {
-      // Nếu là mảng, nối bằng " & " để trông tinh tế hơn
-      return brand.join(' & ');
-    }
-
-    return brand.toString();
-  };
-
-  // Hàm lấy giá trị của thuộc tính
-  const getPropertyValue = (truck: Truck, propId: string, isPrice?: boolean, unit?: string, isArray?: boolean) => {
-    if (!truck) return '-';
-
-    if (propId === 'brand') return formatBrand(truck.brand);
-    if (propId === 'weightText') return truck.weightText || '-';
-    if (propId === 'dimensions') return truck.dimensions || `${truck.length} x ${truck.width} x ${truck.height} m`;
-    if (propId === 'price' && isPrice) return truck.priceText || (typeof truck.price === 'number' ? formatPrice(truck.price) : '-') || '-';
-
-    // Nếu là kích thước có đơn vị
-    if ((propId === 'length' || propId === 'width' || propId === 'height' || propId === 'wheelbase') && truck[propId]) {
-      return `${truck[propId]} ${unit || 'm'}`;
-    }
-
-    // Các thuộc tính lồng nhau (nested properties)
-    if (propId.includes('.')) {
-      const value = getNestedProperty(truck, propId);
-      return formatValue(value, isArray);
-    }
-
-    // Các thuộc tính khác trong specifications
-    if (truck.specifications && truck.specifications[propId]) {
-      return truck.specifications[propId];
-    }
-
-    // Các thuộc tính khác
-    return formatValue(truck[propId as keyof Truck], isArray);
-  };
-
-  // Hàm kiểm tra xem có hiển thị nhóm thông số không
-  const shouldShowSpecGroup = (group: any, truckList: Truck[]) => {
-    // Hiển thị các nhóm thông số cơ bản
-    if (!group.boxType && !group.showForType) return true;
-
-    // Hiển thị nhóm thông số theo loại xe
-    if (group.showForType) {
-      return truckList.some(truck => truck.type === group.showForType);
-    }
-
-    // Hiển thị nhóm thông số theo loại thùng
-    if (group.boxType) {
-      return truckList.some(truck => truck.boxType === group.boxType);
-    }
-
-    return false;
+  // Kiểm tra xem có ít nhất 1 truck có giá trị cho path không
+  const hasAnyValue = (path: string): boolean => {
+    return trucks.some(truck => {
+      const value = getNestedValue(truck, path);
+      return value !== undefined && value !== null && value !== '';
+    });
   };
 
   return (
@@ -416,21 +467,21 @@ const CompareTable: React.FC<CompareTableProps> = ({ trucks }) => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {specGroups.filter(group => shouldShowSpecGroup(group, trucks)).map((group) => (
-              <React.Fragment key={group.id}>
+            {groupedSpecs.map((group) => (
+              <React.Fragment key={group.title}>
                 <tr className="bg-gray-50">
                   <td colSpan={trucks.length + 1} className="p-3 font-semibold text-base">
                     {group.title}
                   </td>
                 </tr>
 
-                {group.specs.map((spec) => (
-                  <tr key={spec.id} className="border-b">
+                {group.specs.filter(spec => hasAnyValue(spec.path)).map((spec) => (
+                  <tr key={spec.path} className="border-b">
                     <td className="p-3 font-medium border-r-2">{spec.label}</td>
 
                     {trucks.map((truck) => (
-                      <td key={`${truck.id}-${spec.id}`} className="p-3 text-center">
-                        {getPropertyValue(truck, spec.id, spec.isPrice, spec.unit, spec.isArray)}
+                      <td key={`${truck.id}-${spec.path}`} className="p-3 text-center">
+                        {getValue(truck, spec.path)}
                       </td>
                     ))}
                   </tr>
