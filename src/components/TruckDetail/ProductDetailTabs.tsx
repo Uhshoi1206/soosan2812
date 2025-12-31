@@ -1426,7 +1426,7 @@ const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ truck }) => {
                           <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                             <td className="py-2 px-2 border text-center font-medium bg-gray-50">{row.radius}</td>
                             {row.values.map((val: string | null, valIdx: number) => (
-                              <td key={valIdx} className={`py-2 px-2 border text-center ${val ? '' : 'bg-gray-200'}`}>
+                              <td key={valIdx} className={`py-2 px-2 border text-center ${val ? '' : 'bg-gray-200'}`} style={{ whiteSpace: 'pre-line' }}>
                                 {val || '-'}
                               </td>
                             ))}
