@@ -32,16 +32,20 @@ export const categories: CategoryData[] = [
     "order": 1
   },
   {
-    "id": "xe-cau",
-    "name": "Xe Cẩu",
-    "slug": "xe-cau",
-    "description": "Xe cẩu chuyên dụng cho công trình xây dựng và vận chuyển hàng nặng",
+    "id": "can-cau",
+    "name": "Cần Cẩu",
+    "slug": "can-cau",
+    "description": "Cần cẩu chuyên dụng cho công trình xây dựng và vận chuyển hàng nặng",
     "keywords": [
       "cẩu",
       "crane",
       "nâng",
       "cần cẩu",
       "xe cẩu",
+      "tải cẩu",
+      "xe tải gắn cẩu",
+      "tải gắn cẩu",
+      "nâng hạ",
       "lifting"
     ],
     "isHidden": false,
@@ -76,6 +80,31 @@ export const categories: CategoryData[] = [
     ],
     "isHidden": false,
     "order": 4
+  },
+  {
+    "id": "may-moc-thiet-bi",
+    "name": "Máy Móc & Thiết Bị",
+    "slug": "may-moc-thiet-bi",
+    "description": "Máy móc và thiết bị công nghiệp: máy khoan cọc nhồi, máy đóng cọc, máy ép cọc, xe nâng, xe lu, và các loại thiết bị chuyên dụng cho xây dựng, kho vận, sản xuất công nghiệp",
+    "keywords": [
+      "máy móc thiết bị",
+      "thiết bị công nghiệp",
+      "máy công trình",
+      "máy khoan cọc nhồi",
+      "máy đóng cọc",
+      "máy ép cọc",
+      "xe nâng",
+      "xe lu",
+      "thiết bị xây dựng",
+      "construction equipment",
+      "industrial equipment",
+      "forklift",
+      "road roller",
+      "piling machine",
+      "foundation equipment"
+    ],
+    "isHidden": false,
+    "order": 5
   }
 ];
 
