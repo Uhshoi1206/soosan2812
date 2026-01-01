@@ -854,6 +854,24 @@ const CompareTable: React.FC<CompareTableProps> = ({ trucks }) => {
             'craneNetWeightSTD',
             'craneNetWeightTopSeat',
             'craneWeight',
+            // Sức nâng & Tầm vươn
+            'maxLiftingMoment',
+            'liftingCapacity',
+            'liftingCapacityText',
+            'maxLiftingHeight',
+            'maxHeightBelowGround',
+            'minWorkingRadius',
+            'maxWorkingRadius',
+            // Cần chính
+            'boomType',
+            'boomSections',
+            'boomLength',
+            'boomExtensionSpeed',
+            'boomLuffingAngle',
+            'boomLuffingSpeed',
+            // Cần phụ (Jib) - đặt gần nhau
+            'jibBoom',
+            'totalReachWithJib',
           ];
 
           specs.sort((a, b) => {
