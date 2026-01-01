@@ -253,8 +253,8 @@ const labelMappings: Record<string, string> = {
   winchType: 'Loại tời',
   winchSpeed: 'Tốc độ tời',
   winchSingleLinePull: 'Lực kéo đơn tời',
-  winchSingleLineSpeed: 'Tốc độ đơn tời',
-  winchRatedSpeed: 'Tốc độ định mức tời',
+  winchSingleLineSpeed: 'Tốc độ tời',  // Gộp với winchRatedSpeed - cùng thông số
+  winchRatedSpeed: 'Tốc độ tời',  // Gộp với winchSingleLineSpeed - cùng thông số
   winchHookSpeed: 'Tốc độ móc tời',
   winchRopeType: 'Loại cáp tời',
   winchRopeDimension: 'Kích thước cáp tời',
@@ -637,6 +637,11 @@ const pathAliases: Record<string, string[]> = {
   // craneNetWeight và craneNetWeightSTD là cùng 1 thông số (trọng lượng tịnh)
   'craneSpec.craneNetWeight': ['craneSpec.craneNetWeightSTD'],
   'craneSpec.craneNetWeightSTD': ['craneSpec.craneNetWeight'],
+
+  // Tốc độ tời - winchRatedSpeed và winchSingleLineSpeed là cùng 1 thông số
+  // SCS1015LS dùng winchRatedSpeed, các cẩu khác dùng winchSingleLineSpeed
+  'craneSpec.winchRatedSpeed': ['craneSpec.winchSingleLineSpeed'],
+  'craneSpec.winchSingleLineSpeed': ['craneSpec.winchRatedSpeed'],
 };
 
 // Hàm chuyển camelCase thành tiếng Việt đọc được
