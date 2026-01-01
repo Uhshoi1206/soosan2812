@@ -837,6 +837,36 @@ const CompareTable: React.FC<CompareTableProps> = ({ trucks }) => {
     for (const { key, title } of specCategoryOrder) {
       const specs = groups.get(key);
       if (specs && specs.length > 0) {
+        // Sắp xếp specs bên trong craneSpec để các field trọng lượng lên đầu
+        if (key === 'craneSpec') {
+          const priorityFields = [
+            'applicableTruckChassis',
+            'craneOperatingWeight',
+            'craneOperatingWeightSTD',
+            'craneOperatingWeightTopSeat',
+            'craneNetWeight',
+            'craneNetWeightSTD',
+            'craneNetWeightTopSeat',
+            'craneWeight',
+          ];
+
+          specs.sort((a, b) => {
+            const fieldA = a.path.split('.').pop() || '';
+            const fieldB = b.path.split('.').pop() || '';
+            const indexA = priorityFields.indexOf(fieldA);
+            const indexB = priorityFields.indexOf(fieldB);
+
+            // Nếu cả 2 đều trong priority list, sắp theo thứ tự priority
+            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+            // Nếu chỉ A trong priority → A lên trước
+            if (indexA !== -1) return -1;
+            // Nếu chỉ B trong priority → B lên trước
+            if (indexB !== -1) return 1;
+            // Còn lại giữ nguyên
+            return 0;
+          });
+        }
+
         orderedGroups.push({ title, specs });
       }
     }
