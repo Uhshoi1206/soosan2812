@@ -872,6 +872,15 @@ const CompareTable: React.FC<CompareTableProps> = ({ trucks }) => {
             // Cần phụ (Jib) - đặt gần nhau
             'jibBoom',
             'totalReachWithJib',
+            // Tời (Winch) - đặt tất cả các field tời gần nhau
+            'winchType',
+            'winchSingleLinePull',
+            'winchSingleLineSpeed',  // Gộp với winchRatedSpeed
+            'winchRatedSpeed',  // Gộp với winchSingleLineSpeed
+            'winchHookSpeed',
+            'winchRopeType',
+            'winchRopeDimension',
+            'winchBrakingStrength',
           ];
 
           specs.sort((a, b) => {
