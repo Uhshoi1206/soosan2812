@@ -182,12 +182,14 @@ const labelMappings: Record<string, string> = {
   applicableTruckChassis: 'Khung xe phù hợp',
 
   // Crane Weight - IMPORTANT
+  // STD = phiên bản tiêu chuẩn = bản thường (không ghế làm việc trên cao)
+  // TopSeat = phiên bản có ghế làm việc trên cao
   craneOperatingWeight: 'Khối lượng bản thân cẩu',
-  craneOperatingWeightSTD: 'Khối lượng bản thân cẩu (STD)',
-  craneOperatingWeightTopSeat: 'Khối lượng bản thân cẩu (Top Seat)',
+  craneOperatingWeightSTD: 'Khối lượng bản thân cẩu',  // STD = bản thường, gộp với craneOperatingWeight
+  craneOperatingWeightTopSeat: 'Khối lượng bản thân cẩu (có ghế làm việc)',
   craneNetWeight: 'Trọng lượng tịnh cẩu',
-  craneNetWeightSTD: 'Trọng lượng tịnh cẩu (STD)',
-  craneNetWeightTopSeat: 'Trọng lượng tịnh cẩu (Top Seat)',
+  craneNetWeightSTD: 'Trọng lượng tịnh cẩu',  // STD = bản thường, gộp với craneNetWeight
+  craneNetWeightTopSeat: 'Trọng lượng tịnh cẩu (có ghế làm việc)',
   craneWeight: 'Trọng lượng cẩu',
 
   // Crane - Boom specs
@@ -626,7 +628,15 @@ const pathAliases: Record<string, string[]> = {
   // An toàn - safetySystem và safetyFeatures là cùng 1 thông số
   'craneSpec.safetySystem': ['craneSpec.safetyFeatures'],
   'craneSpec.safetyFeatures': ['craneSpec.safetySystem'],
-  // Có thể thêm các alias khác nếu cần
+
+  // Trọng lượng cẩu - STD là phiên bản tiêu chuẩn = bản thường (không có ghế làm việc trên cao)
+  // craneOperatingWeight và craneOperatingWeightSTD là cùng 1 thông số
+  'craneSpec.craneOperatingWeight': ['craneSpec.craneOperatingWeightSTD'],
+  'craneSpec.craneOperatingWeightSTD': ['craneSpec.craneOperatingWeight'],
+
+  // craneNetWeight và craneNetWeightSTD là cùng 1 thông số (trọng lượng tịnh)
+  'craneSpec.craneNetWeight': ['craneSpec.craneNetWeightSTD'],
+  'craneSpec.craneNetWeightSTD': ['craneSpec.craneNetWeight'],
 };
 
 // Hàm chuyển camelCase thành tiếng Việt đọc được
