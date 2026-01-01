@@ -840,6 +840,7 @@ const CompareTable: React.FC<CompareTableProps> = ({ trucks }) => {
         // Sắp xếp specs bên trong craneSpec để các field trọng lượng lên đầu
         if (key === 'craneSpec') {
           const priorityFields = [
+            'model',  // Model đầu tiên để người dùng biết đang xem thông số sản phẩm nào
             'applicableTruckChassis',
             'craneOperatingWeight',
             'craneOperatingWeightSTD',
